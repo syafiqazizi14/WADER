@@ -1,0 +1,44 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Page;
+use App\Models\ServiceLink;
+use App\Models\Setting;
+use Illuminate\Database\QueryException;
+
+class SiteController extends Controller
+{
+    public function home()
+    {
+        return $this->show('beranda');
+    }
+
+    public function show(string $slug)
+    {
+        try {
+            $page = Page::query()
+                ->where('slug', $slug)
+                ->where('is_published', true)
+                ->with(['sections' => function ($query) {
+                    $query->where('is_active', true)->orderBy('sort_order');
+                }, 'sections.media'])
+                ->first();
+        } catch (QueryException) {
+            return view('welcome');
+        }
+
+        if (! $page) {
+            return view('welcome');
+        }
+
+        return view('site.page', [
+            'page' => $page,
+            'serviceLinks' => ServiceLink::query()
+                ->where('is_active', true)
+                ->orderBy('sort_order')
+                ->get(),
+            'settings' => Setting::query()->pluck('value', 'key'),
+        ]);
+    }
+}
