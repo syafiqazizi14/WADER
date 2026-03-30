@@ -64,12 +64,6 @@
             </div>
         </section>
 
-        <section class="menu-sign-wrap reveal-card" style="--delay: 80ms;">
-            <div class="menu-sign-hanger" aria-hidden="true"></div>
-            <img src="{{ $menuSignImage }}" alt="Menu" class="menu-sign-image">
-            <div class="menu-sign-track"></div>
-        </section>
-
         <section class="service-blue-zone reveal-card" style="--delay: 140ms;">
             <span class="sparkle sparkle-left">✦</span>
             <span class="sparkle sparkle-left-sm">✦</span>
