@@ -82,9 +82,13 @@ class DatabaseSeeder extends Seeder
         Setting::updateOrCreate(['key' => 'contact_facebook'], ['group' => 'contact', 'value' => 'https://www.facebook.com/BPSMojokertoKab']);
         Setting::updateOrCreate(['key' => 'instansi_link'], ['group' => 'contact', 'value' => 'https://mojokertokab.bps.go.id']);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        User::firstOrCreate(
+            ['email' => 'test@example.com'],
+            [
+                'name' => 'Test User',
+                'password' => Hash::make('password'),
+                'email_verified_at' => now(),
+            ],
+        );
     }
 }
