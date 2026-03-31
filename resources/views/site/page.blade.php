@@ -21,10 +21,10 @@
         $menuIcon4 = asset('asset/stimo.png');
 
         $menuCards = [
-            ['label' => 'Jenis Layanan', 'url' => route('site.page', 'pst-center'), 'icon' => $menuIcon1],
-            ['label' => 'Pengaduan', 'url' => 'https://tripetto.app/run/P0HWPTK3JJ', 'icon' => $menuIcon2],
-            ['label' => 'Pembinaan Statistik Sektoral', 'url' => route('site.page', 'pst-center'), 'icon' => $menuIcon3],
-            ['label' => 'Statistik Mojokerto', 'url' => route('site.page', 'stimo-2-0'), 'icon' => $menuIcon4],
+            ['label' => 'Jenis Layanan', 'url' => route('site.chat'), 'icon' => $menuIcon1, 'external' => false],
+            ['label' => 'Pengaduan', 'url' => 'https://tripetto.app/run/P0HWPTK3JJ', 'icon' => $menuIcon2, 'external' => true],
+            ['label' => 'Pembinaan Statistik Sektoral', 'url' => route('site.page', 'pst-center'), 'icon' => $menuIcon3, 'external' => false],
+            ['label' => 'Statistik Mojokerto', 'url' => route('site.page', 'stimo-2-0'), 'icon' => $menuIcon4, 'external' => false],
         ];
     @endphp
 
@@ -71,7 +71,7 @@
             <span class="sparkle sparkle-right-sm">✦</span>
             <div class="service-grid-reference">
                 @foreach ($menuCards as $card)
-                    <a href="{{ $card['url'] }}" target="_blank" class="service-ref-card">
+                    <a href="{{ $card['url'] }}" @if($card['external']) target="_blank" rel="noopener noreferrer" @endif class="service-ref-card">
                         <span class="service-ref-icon-wrap">
                             <img src="{{ $card['icon'] }}" alt="{{ $card['label'] }}" class="service-ref-icon">
                         </span>
@@ -129,5 +129,6 @@
             </div>
         </div>
     </footer>
+
 </body>
 </html>

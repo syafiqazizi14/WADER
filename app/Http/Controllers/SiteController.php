@@ -14,6 +14,13 @@ class SiteController extends Controller
         return $this->show('beranda');
     }
 
+    public function chat()
+    {
+        return view('site.chat', [
+            'settings' => Setting::query()->pluck('value', 'key'),
+        ]);
+    }
+
     public function show(string $slug)
     {
         try {
