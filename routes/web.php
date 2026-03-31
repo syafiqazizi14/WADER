@@ -1,16 +1,20 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ChatRequestController as AdminChatRequestController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PageSectionController;
 use App\Http\Controllers\Admin\ServiceLinkController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\ChatRequestController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [SiteController::class, 'home'])->name('site.home');
+Route::get('/jenis-pelayanan', [SiteController::class, 'chat'])->name('site.chat');
+Route::post('/chat-requests', [ChatRequestController::class, 'store'])->name('chat-requests.store');
 
 Route::get('/dashboard', function () {
     return redirect()->route('admin.dashboard');
@@ -22,6 +26,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:superadmin,edi
     Route::resource('sections', PageSectionController::class)->except(['show']);
     Route::resource('service-links', ServiceLinkController::class)->except(['show']);
     Route::resource('media', MediaController::class)->only(['index', 'store', 'destroy']);
+    Route::get('/chat-requests/export', [AdminChatRequestController::class, 'export'])->name('chat-requests.export');
+    Route::resource('chat-requests', AdminChatRequestController::class)->only(['index', 'show']);
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::put('/settings', [SettingController::class, 'update'])->name('settings.update');
 });
