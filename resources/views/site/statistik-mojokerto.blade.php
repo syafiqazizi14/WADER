@@ -84,13 +84,27 @@
         <div class="statistik-info-inner">
             <p class="statistik-info-title">Jangan Lewatkan Informasi Terbaru Kami</p>
             <div class="statistik-social-row">
-                <a href="{{ $settings['instansi_link'] ?? '#' }}" target="_blank" class="social-dot social-web" aria-label="Website">W</a>
-                <a href="mailto:{{ $settings['contact_email'] ?? '' }}" class="social-dot social-mail" aria-label="Email">M</a>
-                <a href="{{ $settings['contact_whatsapp'] ?? '#' }}" target="_blank" class="social-dot social-wa" aria-label="WhatsApp">WA</a>
-                <a href="{{ $settings['contact_instagram'] ?? '#' }}" target="_blank" class="social-dot social-ig" aria-label="Instagram">IG</a>
-                <a href="{{ $settings['contact_facebook'] ?? '#' }}" target="_blank" class="social-dot social-fb" aria-label="Facebook">f</a>
-                <a href="#" class="social-dot social-x" aria-label="X">X</a>
-                <a href="#" class="social-dot social-yt" aria-label="YouTube">YT</a>
+                <a href="{{ $settings['instansi_link'] ?? '#' }}" target="_blank" class="social-icon-link" aria-label="Website">
+                    <img src="{{ asset('asset/www.png') }}" alt="Website" class="social-icon">
+                </a>
+                <a href="mailto:{{ $settings['contact_email'] ?? '' }}" class="social-icon-link" aria-label="Email">
+                    <img src="{{ asset('asset/email.png') }}" alt="Email" class="social-icon">
+                </a>
+                <a href="{{ $settings['contact_whatsapp'] ?? '#' }}" target="_blank" class="social-icon-link" aria-label="WhatsApp">
+                    <img src="{{ asset('asset/whatapp.png') }}" alt="WhatsApp" class="social-icon">
+                </a>
+                <a href="{{ $settings['contact_instagram'] ?? '#' }}" target="_blank" class="social-icon-link" aria-label="Instagram">
+                    <img src="{{ asset('asset/instagram.png') }}" alt="Instagram" class="social-icon">
+                </a>
+                <a href="#" class="social-icon-link" aria-label="X">
+                    <img src="{{ asset('asset/x.png') }}" alt="X" class="social-icon">
+                </a>
+                <a href="{{ $settings['contact_facebook'] ?? '#' }}" target="_blank" class="social-icon-link" aria-label="Facebook">
+                    <img src="{{ asset('asset/facebook.png') }}" alt="Facebook" class="social-icon">
+                </a>
+                <a href="#" class="social-icon-link" aria-label="YouTube">
+                    <img src="{{ asset('asset/yt.png') }}" alt="YouTube" class="social-icon">
+                </a>
             </div>
         </div>
     </footer>
@@ -218,41 +232,45 @@
         .statistik-info-title {
             margin: 0;
             color: #f6f7f3;
-            font-size: clamp(34px, 4.6vw, 54px);
-            line-height: 1.05;
+            font-size: clamp(24px, 3.5vw, 42px);
+            line-height: 1.2;
             letter-spacing: 0.2px;
             font-family: "Brush Script MT", cursive;
+            white-space: nowrap;
         }
 
         .statistik-social-row {
             display: flex;
             align-items: center;
-            gap: 14px;
-            flex-wrap: wrap;
+            gap: 10px;
+            flex-wrap: nowrap;
             justify-content: flex-end;
         }
 
-        .social-dot {
-            width: clamp(52px, 6vw, 72px);
-            height: clamp(52px, 6vw, 72px);
+        .social-icon-link {
+            width: clamp(48px, 5.5vw, 65px);
+            height: clamp(48px, 5.5vw, 65px);
             border-radius: 999px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            color: #fff;
             text-decoration: none;
-            font-weight: 800;
-            font-size: clamp(18px, 2.2vw, 24px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            background: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex-shrink: 0;
         }
 
-        .social-web { background: #222831; }
-        .social-mail { background: #ececec; color: #de4b39; }
-        .social-wa { background: #24d366; font-size: 18px; }
-        .social-ig { background: linear-gradient(135deg, #feda75, #d62976, #4f5bd5); font-size: 18px; }
-        .social-fb { background: #1877f2; font-size: 32px; }
-        .social-x { background: #111; }
-        .social-yt { background: #ff0000; font-size: 20px; }
+        .social-icon-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-icon {
+            width: 60%;
+            height: 60%;
+            object-fit: contain;
+        }
 
         /* === RESPONSIVE === */
         @media (max-width: 768px) {
@@ -276,16 +294,17 @@
             .statistik-info-inner {
                 flex-direction: column;
                 align-items: flex-start;
+                gap: 12px;
             }
 
             .statistik-info-title {
-                font-size: 44px;
+                font-size: 24px;
+                white-space: normal;
             }
 
-            .social-dot {
+            .social-icon-link {
                 width: 58px;
                 height: 58px;
-                font-size: 20px;
             }
         }
     </style>
