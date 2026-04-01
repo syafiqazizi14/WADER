@@ -19,6 +19,20 @@
         $menuIcon2 = asset('asset/pengaduan.png');
         $menuIcon3 = asset('asset/pss.png');
         $menuIcon4 = asset('asset/stimo.png');
+        $iconWebsite = asset('asset/web.png');
+        $logoZonaIntegritas = asset('asset/logo-WBK.png');
+        $supportLogo1 = asset('asset/logo bps.png');
+        $supportLogo2 = asset('asset/pss.png');
+        $supportLogo3 = asset('asset/pojok statistik.png');
+        $supportLogo4 = asset('asset/RB-removebg-preview.png');
+        $familyBanner = asset('asset/keluarga-bps.png');
+        $iconWeb = asset('asset/www.png');
+        $iconEmail = asset('asset/email.png');
+        $iconWhatsapp = asset('asset/whatapp.png');
+        $iconInstagram = asset('asset/instagram.png');
+        $iconFacebook = asset('asset/facebook.png');
+        $iconX = asset('asset/x.png');
+        $iconYoutube = asset('asset/yt.png');
 
         $menuCards = [
             ['label' => 'Jenis Layanan', 'url' => route('site.page', 'pst-center'), 'icon' => $menuIcon1, 'external' => false],
@@ -64,6 +78,11 @@
             </div>
         </section>
 
+        <section class="flex justify-center mt-10">
+            <img src="{{ asset('asset/menu.png') }}" 
+                 class="w-[50px] h-auto rounded-2xl">
+        </section>
+
         <section class="service-blue-zone reveal-card" style="--delay: 140ms;">
             <span class="sparkle sparkle-left">✦</span>
             <span class="sparkle sparkle-left-sm">✦</span>
@@ -81,54 +100,94 @@
             </div>
         </section>
 
-        <section class="content-followup-wrap">
-            <div class="content-followup-head">
-                <h1 class="content-followup-title">{{ $page->title }}</h1>
-                @if ($page->meta_description)
-                    <p class="content-followup-meta">{{ $page->meta_description }}</p>
-                @endif
-            </div>
+        <div class="h-8"></div>
+        <section class="max-w-7xl mx-auto px-4 mt-10">
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-            @forelse ($page->sections as $section)
-                <article class="content-followup-card reveal-card" style="--delay: {{ ($loop->index + 2) * 70 }}ms;">
-                    <div class="content-followup-body">
-                        <p class="content-tag">{{ strtoupper($section->type) }}</p>
-                        @if ($section->title)
-                            <h2 class="content-title">{{ $section->title }}</h2>
-                        @endif
-                        @if ($section->content)
-                            <div class="content-text">{!! nl2br(e($section->content)) !!}</div>
-                        @endif
-                        @if ($section->button_label && $section->button_url)
-                            <a href="{{ $section->button_url }}" target="_blank" class="content-cta">{{ $section->button_label }}</a>
-                        @endif
-                    </div>
-                    @if ($section->media && str_starts_with((string) $section->media->mime_type, 'image/'))
-                        <div class="content-media-shell">
-                            <img src="{{ asset('storage/'.$section->media->file_path) }}" alt="{{ $section->media->alt_text }}" class="content-media-img">
-                        </div>
-                    @endif
-                </article>
-            @empty
-                <article class="content-followup-card reveal-card" style="--delay: 210ms;">
-                    <p class="content-empty">Belum ada section aktif untuk halaman ini. Silakan tambahkan dari panel admin.</p>
-                </article>
-            @endforelse
-        </section>
-    </main>
-
-    <footer class="site-footer-wrap">
-        <div class="site-footer-inner">
-            <p class="site-footer-title">WADER 3516</p>
-            <p class="site-footer-meta">Email: {{ $settings['contact_email'] ?? '-' }}</p>
-            <div class="site-footer-links">
-                @if (!empty($settings['contact_whatsapp']))<a href="{{ $settings['contact_whatsapp'] }}" target="_blank" class="footer-link-chip">WhatsApp</a>@endif
-                @if (!empty($settings['contact_instagram']))<a href="{{ $settings['contact_instagram'] }}" target="_blank" class="footer-link-chip">Instagram</a>@endif
-                @if (!empty($settings['contact_facebook']))<a href="{{ $settings['contact_facebook'] }}" target="_blank" class="footer-link-chip">Facebook</a>@endif
-                @if (!empty($settings['instansi_link']))<a href="{{ $settings['instansi_link'] }}" target="_blank" class="footer-link-chip">Website Instansi</a>@endif
-            </div>
+        <!-- CARD 1 -->
+        <div class="bg-orange-500 rounded-2xl overflow-hidden h-[350px] shadow-lg">
+            <img src="{{ asset('asset/poster1.png') }}" class="w-full h-full object-cover">
         </div>
-    </footer>
 
+        <!-- CARD 2 -->
+        <div class="bg-orange-500 rounded-2xl overflow-hidden h-[350px] shadow-lg">
+            <img src="{{ asset('asset/poster2.jpeg') }}" class="w-full h-full object-cover">
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="bg-orange-500 rounded-2xl overflow-hidden h-[350px] shadow-lg">
+            <img src="{{ asset('asset/poster3.jpeg') }}" class="w-full h-full object-cover">
+        </div>
+
+    </div>
+
+        </section>
+
+        <section class="support-banner-wrap" style="margin-top: 1.25rem;">
+            <div class="support-banner-top" style="background: #8dc64f; padding: 1.45rem 1rem;">
+                <div class="support-banner-top-inner" style="max-width: 1220px; margin: 0 auto; display: flex; justify-content: space-around; align-items: center; gap: 4.3rem; flex-wrap: wrap;">
+                    <div class="support-head-item" style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
+                        <img src="{{ $iconWebsite }}" alt="Data Website" class="support-head-icon" style="width: clamp(255px, 32vw, 500px); height: auto; object-fit: contain;">
+                    </div>
+                    <div class="support-head-item" style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
+                        <img src="{{ $logoZonaIntegritas }}" alt="Zona Integritas" class="support-head-icon support-head-icon-badge" style="width: clamp(245px, 31vw, 485px); height: auto; object-fit: contain; transform: translateY(8px);">
+                    </div>
+                </div>
+            </div>
+
+            <div class="support-banner-bottom" style="background: #f39a34; padding: 1.1rem 1rem;">
+                <div class="support-banner-bottom-inner" style="max-width: 1280px; margin: 0 auto; display: flex; justify-content: center; align-items: center; gap: 1.4rem; flex-wrap: wrap;">
+                    <p class="support-by-text" style="margin: 0; color: #ffffff; font-family: 'Brush Script MT', 'Segoe Script', cursive; font-style: normal; font-size: clamp(2.1rem, 2.35vw, 2.6rem); font-weight: 400; line-height: 1;">Supported by :</p>
+                    <div class="support-logo-row" style="display: flex; align-items: center; justify-content: center; gap: 0.85rem; flex-wrap: wrap;">
+                        <img src="{{ $supportLogo1 }}" alt="BPS" class="support-logo-item" style="width: 62px; height: 62px; border-radius: 999px; object-fit: contain; background: #ffffff; padding: 0.24rem;">
+                        <img src="{{ $supportLogo2 }}" alt="PSS" class="support-logo-item" style="width: 62px; height: 62px; border-radius: 999px; object-fit: contain; background: #ffffff; padding: 0.24rem;">
+                        <img src="{{ $supportLogo3 }}" alt="Pojok Statistik" class="support-logo-item" style="width: 62px; height: 62px; border-radius: 999px; object-fit: contain; background: #ffffff; padding: 0.24rem;">
+                        <img src="{{ $supportLogo4 }}" alt="Reformasi Birokrasi" class="support-logo-item" style="width: 62px; height: 62px; border-radius: 999px; object-fit: contain; background: #ffffff; padding: 0.24rem;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section style="background: #466633; padding: 1.2rem 0 0;">
+            <div style="max-width: 1280px; margin: 0 auto; padding: 0 1rem;">
+                <div style="background: #466633;">
+                    <img src="{{ $familyBanner }}" alt="Keluarga BPS Kabupaten Mojokerto" style="display: block; width: 93%; height: auto; object-fit: cover; margin: 0 auto;">
+                </div>
+            </div>
+
+            <div style="margin-top: 1rem;">
+                <div style="max-width: 1280px; margin: 0 auto; padding: 0.9rem 1rem 1rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                    <p style="margin: 0; color: #ffffff; font-family: 'Brush Script MT', 'Segoe Script', cursive; font-size: clamp(1.9rem, 2.8vw, 3rem); font-weight: 400;">Jangan Lewatkan Informasi Terbaru Kami</p>
+
+                    <div style="display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap;">
+                        <a href="{{ $settings['instansi_link'] ?? '#' }}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+                            <img src="{{ $iconWeb }}" alt="Website" style="width: 42px; height: 42px; object-fit: contain;">
+                        </a>
+                        <a href="mailto:{{ $settings['contact_email'] ?? '' }}" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+                            <img src="{{ $iconEmail }}" alt="Email" style="width: 42px; height: 42px; object-fit: contain;">
+                        </a>
+                        <a href="{{ $settings['contact_whatsapp'] ?? '#' }}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+                            <img src="{{ $iconWhatsapp }}" alt="WhatsApp" style="width: 42px; height: 42px; object-fit: contain;">
+                        </a>
+                        <a href="{{ $settings['contact_instagram'] ?? '#' }}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+                            <img src="{{ $iconInstagram }}" alt="Instagram" style="width: 42px; height: 42px; object-fit: contain;">
+                        </a>
+                        <a href="{{ $settings['contact_facebook'] ?? '#' }}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+                            <img src="{{ $iconFacebook }}" alt="Facebook" style="width: 42px; height: 42px; object-fit: contain;">
+                        </a>
+                        <a href="#" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+                            <img src="{{ $iconX }}" alt="X" style="width: 42px; height: 42px; object-fit: contain;">
+                        </a>
+                        <a href="#" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+                            <img src="{{ $iconYoutube }}" alt="YouTube" style="width: 42px; height: 42px; object-fit: contain;">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
 </body>
 </html>
