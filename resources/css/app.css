@@ -630,6 +630,95 @@ body.site-shell {
     height: min(68vh, 760px);
 }
 
+.support-banner-wrap {
+    margin-top: 1.25rem;
+}
+
+.support-banner-top {
+    background: #8dc64f;
+    padding: 1.45rem 1rem;
+}
+
+.support-banner-top-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.support-head-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.support-head-icon {
+    width: 74px;
+    height: 74px;
+    object-fit: contain;
+}
+
+.support-head-icon-badge {
+    width: 86px;
+    height: 86px;
+}
+
+.support-head-text {
+    margin: 0;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: clamp(2rem, 3vw, 3.45rem);
+    color: #ffffff;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+.support-banner-bottom {
+    background: #f39a34;
+    padding: 1.1rem 1rem;
+}
+
+.support-banner-bottom-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.4rem;
+    flex-wrap: wrap;
+}
+
+.support-by-text {
+    margin: 0;
+    color: #ffffff;
+    font-family: 'Brush Script MT', 'Segoe Script', cursive;
+    font-size: clamp(2.2rem, 2.6vw, 3rem);
+    font-weight: 600;
+    line-height: 1;
+}
+
+.support-logo-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+}
+
+.support-logo-item {
+    width: 78px;
+    height: 78px;
+    border-radius: 999px;
+    object-fit: contain;
+    background: #ffffff;
+    padding: 0.3rem;
+}
+
+.support-banner-gap-bottom {
+    height: 2rem;
+}
+
 .site-footer-wrap {
     border-top: 1px solid rgba(11, 95, 174, 0.2);
     background: #ffffff;
@@ -842,6 +931,16 @@ body.site-shell {
     .sparkle-right-sm {
         right: 1.2rem;
     }
+
+    .support-banner-top-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .support-head-item {
+        width: 100%;
+        justify-content: flex-start;
+    }
 }
 
 @media (max-width: 620px) {
@@ -900,6 +999,33 @@ body.site-shell {
 
     .chatbot-send {
         width: 100%;
+    }
+
+    .support-head-icon {
+        width: 56px;
+        height: 56px;
+    }
+
+    .support-head-icon-badge {
+        width: 66px;
+        height: 66px;
+    }
+
+    .support-head-text {
+        font-size: 1.9rem;
+    }
+
+    .support-by-text {
+        font-size: 1.9rem;
+    }
+
+    .support-logo-item {
+        width: 62px;
+        height: 62px;
+    }
+
+    .support-banner-gap-bottom {
+        height: 1.5rem;
     }
 }
 
