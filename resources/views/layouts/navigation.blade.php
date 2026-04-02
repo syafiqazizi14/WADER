@@ -37,7 +37,7 @@
                 <span class="sidebar-menu-icon">💬</span>
                 <span class="sidebar-menu-label">Histori Chat</span>
             </a>
-            <a href="{{ route('admin.Pengaturan (Segera).index') }}" :class="{'sidebar-menu-item-active': request()->routeIs('admin.Pengaturan (Segera).*')}" class="sidebar-menu-item">
+            <a href="{{ route('admin.settings.index') }}" :class="{'sidebar-menu-item-active': request()->routeIs('admin.settings.*')}" class="sidebar-menu-item">
                 <span class="sidebar-menu-icon">⚙️</span>
                 <span class="sidebar-menu-label">Pengaturan (Segera)</span>
             </a>
