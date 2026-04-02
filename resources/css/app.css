@@ -1249,6 +1249,135 @@ body.auth-shell {
     }
 }
 
+.auth-minimal-shell {
+    min-height: 100vh;
+    position: relative;
+    display: grid;
+    place-items: center;
+    padding: 1.5rem;
+    background-image: url('/asset/beranda.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.auth-minimal-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(247, 239, 226, 0.55), rgba(237, 224, 197, 0.52));
+}
+
+.auth-minimal-card {
+    position: relative;
+    z-index: 1;
+    width: min(560px, 96%);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 18px 44px rgba(53, 42, 17, 0.22);
+    padding: clamp(1.1rem, 3.5vw, 2rem);
+}
+
+.auth-minimal-brand {
+    text-align: center;
+    margin-bottom: 1.25rem;
+}
+
+.auth-minimal-logo {
+    width: min(132px, 28vw);
+    height: auto;
+    object-fit: contain;
+    margin: 0 auto 0.35rem;
+}
+
+.auth-minimal-title {
+    margin: 0;
+    font-family: 'Sora', 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(1.7rem, 3.8vw, 2.15rem);
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.auth-minimal-form {
+    display: grid;
+    gap: 1rem;
+}
+
+.auth-minimal-field {
+    display: grid;
+    gap: 0.42rem;
+}
+
+.auth-minimal-field label {
+    font-size: 0.98rem;
+    color: #1f2937;
+    font-weight: 600;
+}
+
+.auth-minimal-field input {
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    background: rgba(244, 246, 249, 0.95);
+    border-radius: 0.72rem;
+    padding: 0.82rem 0.95rem;
+    font-size: 1rem;
+}
+
+.auth-minimal-field input:focus {
+    border-color: rgba(30, 64, 175, 0.45);
+    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.12);
+}
+
+.auth-minimal-remember {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: #334155;
+    font-size: 0.95rem;
+}
+
+.auth-minimal-remember input {
+    width: 16px;
+    height: 16px;
+    accent-color: #475569;
+}
+
+.auth-minimal-submit {
+    border: none;
+    border-radius: 0.72rem;
+    height: 48px;
+    background: #d8b980;
+    color: #ffffff;
+    font-size: 1.05rem;
+    font-weight: 700;
+    transition: background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.auth-minimal-submit:hover {
+    background: #c9a86b;
+    box-shadow: 0 8px 20px rgba(89, 62, 26, 0.2);
+}
+
+.auth-minimal-submit:active {
+    transform: translateY(1px);
+}
+
+@media (max-width: 640px) {
+    .auth-minimal-shell {
+        padding: 1rem;
+    }
+
+    .auth-minimal-card {
+        width: 100%;
+        border-radius: 0.9rem;
+        padding: 1rem;
+    }
+
+    .auth-minimal-title {
+        font-size: 1.5rem;
+    }
+}
+
 /* Dashboard Styles */
 .dashboard-header {
     padding: 2rem 0;
