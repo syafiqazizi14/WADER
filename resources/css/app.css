@@ -411,6 +411,150 @@ body.site-shell {
     gap: 1rem;
 }
 
+.service-spotlight-zone {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem 1.2rem;
+}
+
+.service-spotlight-head {
+    margin-bottom: 1rem;
+}
+
+.service-spotlight-kicker {
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #bd5f00;
+}
+
+.service-spotlight-title {
+    margin: 0.42rem 0 0;
+    font-size: clamp(1.25rem, 2.4vw, 2rem);
+    color: #1f2937;
+    line-height: 1.2;
+}
+
+.service-spotlight-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.service-spotlight-card {
+    position: relative;
+    isolation: isolate;
+    border-radius: 1rem;
+    overflow: hidden;
+    min-height: 380px;
+    padding: 1.2rem;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: 0.65rem;
+    background:
+        radial-gradient(circle at 85% 12%, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 36%),
+        radial-gradient(circle at 16% 92%, rgba(255, 241, 216, 0.24) 0%, rgba(255, 241, 216, 0) 42%),
+        linear-gradient(180deg, #d56d09 0%, #b95a03 66%, #a64f02 100%);
+    color: #fffaf0;
+    box-shadow: 0 20px 34px rgba(149, 75, 8, 0.24);
+    border: 1px solid rgba(255, 236, 206, 0.35);
+    transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.service-spotlight-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+    opacity: 0.34;
+    pointer-events: none;
+}
+
+.service-spotlight-card::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 28%;
+    background: linear-gradient(180deg, rgba(254, 248, 238, 0) 0%, rgba(254, 248, 238, 0.72) 100%);
+    pointer-events: none;
+}
+
+.service-spotlight-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 26px 44px rgba(149, 75, 8, 0.3);
+}
+
+.service-spotlight-lines {
+    position: absolute;
+    right: -18px;
+    bottom: 56px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 212, 132, 0.8);
+    box-shadow:
+        -14px -14px 0 -1px rgba(255, 212, 132, 0.72),
+        -28px -28px 0 -1px rgba(255, 212, 132, 0.64),
+        -42px -42px 0 -1px rgba(255, 212, 132, 0.56);
+    opacity: 0.85;
+    pointer-events: none;
+}
+
+.service-spotlight-label,
+.service-spotlight-card-title,
+.service-spotlight-text,
+.service-spotlight-cta {
+    position: relative;
+    z-index: 1;
+}
+
+.service-spotlight-label {
+    margin: 0;
+    display: inline-flex;
+    width: fit-content;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    background: rgba(255, 252, 245, 0.9);
+    color: #b65a00;
+    border-radius: 999px;
+    padding: 0.28rem 0.62rem;
+}
+
+.service-spotlight-card-title {
+    margin: 0;
+    font-size: clamp(1.35rem, 2.2vw, 2rem);
+    color: #fff8ef;
+    line-height: 1.14;
+}
+
+.service-spotlight-text {
+    margin: 0;
+    max-width: 30ch;
+    color: #fff4dd;
+    line-height: 1.55;
+    font-size: 0.95rem;
+}
+
+.service-spotlight-cta {
+    width: fit-content;
+    text-decoration: none;
+    color: #bf6100;
+    background: #fff5e2;
+    border-radius: 0.7rem;
+    padding: 0.5rem 0.82rem;
+    font-weight: 700;
+    transition: transform 180ms ease, filter 180ms ease;
+}
+
+.service-spotlight-cta:hover {
+    filter: brightness(1.03);
+    transform: translateY(-1px);
+}
+
 .content-followup-head {
     background: #ffffff;
     border-radius: 1.1rem;
@@ -952,6 +1096,7 @@ body.site-shell {
         right: 1.2rem;
     }
 
+
     .support-banner-top-inner {
         flex-direction: column;
         align-items: flex-start;
@@ -1006,6 +1151,25 @@ body.site-shell {
 
     .sparkle {
         display: none;
+    }
+
+    .service-spotlight-zone {
+        padding-top: 1.5rem;
+    }
+
+    .service-spotlight-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service-spotlight-card {
+        min-height: 320px;
+    }
+
+    .service-spotlight-lines {
+        width: 140px;
+        height: 140px;
+        right: -10px;
+        bottom: 50px;
     }
 
     .chat-bubble {

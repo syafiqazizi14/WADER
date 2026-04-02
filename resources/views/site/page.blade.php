@@ -187,6 +187,7 @@
                             <img src="{{ $iconFacebook }}" alt="Facebook" style="width: 42px; height: 42px; object-fit: contain;">
                         </a>
                         <a href="https://x.com/bpsmojokerto" target="_blank" rel="noopener noreferrer" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+
                             <img src="{{ $iconX }}" alt="X" style="width: 42px; height: 42px; object-fit: contain;">
                         </a>
                         <a href="#" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
