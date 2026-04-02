@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [SiteController::class, 'home'])->name('site.home');
 Route::get('/jenis-pelayanan', [SiteController::class, 'chat'])->name('site.chat');
+Route::get('/pst-center', [SiteController::class, 'pstCenter'])->name('site.pst-center');
 Route::post('/chat-requests', [ChatRequestController::class, 'store'])->name('chat-requests.store');
 
 Route::get('/dashboard', function () {

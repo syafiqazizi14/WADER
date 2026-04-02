@@ -180,6 +180,26 @@ body.site-shell {
     background: #eceff1;
 }
 
+.hero-layout-stage.hero-pst-center {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.hero-layout-stage.hero-pst-center .corner-band {
+    display: none;
+}
+
+.hero-center-title {
+    margin: 0;
+    font-family: 'Sora', 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: clamp(2rem, 6vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+    text-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
 .corner-band {
     position: absolute;
     width: min(52vw, 680px);
@@ -774,6 +794,95 @@ body.site-shell {
     height: min(68vh, 760px);
 }
 
+.support-banner-wrap {
+    margin-top: 1.25rem;
+}
+
+.support-banner-top {
+    background: #8dc64f;
+    padding: 1.45rem 1rem;
+}
+
+.support-banner-top-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.support-head-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.support-head-icon {
+    width: 74px;
+    height: 74px;
+    object-fit: contain;
+}
+
+.support-head-icon-badge {
+    width: 86px;
+    height: 86px;
+}
+
+.support-head-text {
+    margin: 0;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: clamp(2rem, 3vw, 3.45rem);
+    color: #ffffff;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+.support-banner-bottom {
+    background: #f39a34;
+    padding: 1.1rem 1rem;
+}
+
+.support-banner-bottom-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.4rem;
+    flex-wrap: wrap;
+}
+
+.support-by-text {
+    margin: 0;
+    color: #ffffff;
+    font-family: 'Brush Script MT', 'Segoe Script', cursive;
+    font-size: clamp(2.2rem, 2.6vw, 3rem);
+    font-weight: 600;
+    line-height: 1;
+}
+
+.support-logo-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+}
+
+.support-logo-item {
+    width: 78px;
+    height: 78px;
+    border-radius: 999px;
+    object-fit: contain;
+    background: #ffffff;
+    padding: 0.3rem;
+}
+
+.support-banner-gap-bottom {
+    height: 2rem;
+}
+
 .site-footer-wrap {
     border-top: 1px solid rgba(11, 95, 174, 0.2);
     background: #ffffff;
@@ -987,8 +1096,15 @@ body.site-shell {
         right: 1.2rem;
     }
 
-    .service-spotlight-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    .support-banner-top-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .support-head-item {
+        width: 100%;
+        justify-content: flex-start;
     }
 }
 
@@ -1067,6 +1183,33 @@ body.site-shell {
 
     .chatbot-send {
         width: 100%;
+    }
+
+    .support-head-icon {
+        width: 56px;
+        height: 56px;
+    }
+
+    .support-head-icon-badge {
+        width: 66px;
+        height: 66px;
+    }
+
+    .support-head-text {
+        font-size: 1.9rem;
+    }
+
+    .support-by-text {
+        font-size: 1.9rem;
+    }
+
+    .support-logo-item {
+        width: 62px;
+        height: 62px;
+    }
+
+    .support-banner-gap-bottom {
+        height: 1.5rem;
     }
 }
 
@@ -1413,6 +1556,135 @@ body.auth-shell {
 
     .auth-form-wrapper {
         max-width: 100%;
+    }
+}
+
+.auth-minimal-shell {
+    min-height: 100vh;
+    position: relative;
+    display: grid;
+    place-items: center;
+    padding: 1.5rem;
+    background-image: url('/asset/beranda.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.auth-minimal-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(247, 239, 226, 0.55), rgba(237, 224, 197, 0.52));
+}
+
+.auth-minimal-card {
+    position: relative;
+    z-index: 1;
+    width: min(560px, 96%);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 18px 44px rgba(53, 42, 17, 0.22);
+    padding: clamp(1.1rem, 3.5vw, 2rem);
+}
+
+.auth-minimal-brand {
+    text-align: center;
+    margin-bottom: 1.25rem;
+}
+
+.auth-minimal-logo {
+    width: min(132px, 28vw);
+    height: auto;
+    object-fit: contain;
+    margin: 0 auto 0.35rem;
+}
+
+.auth-minimal-title {
+    margin: 0;
+    font-family: 'Sora', 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(1.7rem, 3.8vw, 2.15rem);
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.auth-minimal-form {
+    display: grid;
+    gap: 1rem;
+}
+
+.auth-minimal-field {
+    display: grid;
+    gap: 0.42rem;
+}
+
+.auth-minimal-field label {
+    font-size: 0.98rem;
+    color: #1f2937;
+    font-weight: 600;
+}
+
+.auth-minimal-field input {
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    background: rgba(244, 246, 249, 0.95);
+    border-radius: 0.72rem;
+    padding: 0.82rem 0.95rem;
+    font-size: 1rem;
+}
+
+.auth-minimal-field input:focus {
+    border-color: rgba(30, 64, 175, 0.45);
+    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.12);
+}
+
+.auth-minimal-remember {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: #334155;
+    font-size: 0.95rem;
+}
+
+.auth-minimal-remember input {
+    width: 16px;
+    height: 16px;
+    accent-color: #475569;
+}
+
+.auth-minimal-submit {
+    border: none;
+    border-radius: 0.72rem;
+    height: 48px;
+    background: #d8b980;
+    color: #ffffff;
+    font-size: 1.05rem;
+    font-weight: 700;
+    transition: background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.auth-minimal-submit:hover {
+    background: #c9a86b;
+    box-shadow: 0 8px 20px rgba(89, 62, 26, 0.2);
+}
+
+.auth-minimal-submit:active {
+    transform: translateY(1px);
+}
+
+@media (max-width: 640px) {
+    .auth-minimal-shell {
+        padding: 1rem;
+    }
+
+    .auth-minimal-card {
+        width: 100%;
+        border-radius: 0.9rem;
+        padding: 1rem;
+    }
+
+    .auth-minimal-title {
+        font-size: 1.5rem;
     }
 }
 

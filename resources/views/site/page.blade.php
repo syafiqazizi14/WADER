@@ -34,10 +34,20 @@
         $iconX = asset('asset/x.png');
         $iconYoutube = asset('asset/yt.png');
 
+        $rawWhatsapp = (string) ($settings['contact_whatsapp'] ?? '');
+        $whatsappDigits = preg_replace('/\D+/', '', $rawWhatsapp);
+        if ($whatsappDigits && str_starts_with($whatsappDigits, '0')) {
+            $whatsappDigits = '62'.substr($whatsappDigits, 1);
+        }
+        $whatsappLink = $whatsappDigits
+            ? 'https://api.whatsapp.com/send/?phone='.$whatsappDigits.'&text&type=phone_number&app_absent=0'
+            : '#';
+
         $menuCards = [
-            ['label' => 'Jenis Layanan', 'url' => route('site.page', 'pst-center'), 'icon' => $menuIcon1, 'external' => false],
+
+            ['label' => 'Jenis Layanan', 'url' => route('site.pst-center'), 'icon' => $menuIcon1, 'external' => false],
             ['label' => 'Pengaduan', 'url' => 'https://tripetto.app/run/P0HWPTK3JJ', 'icon' => $menuIcon2, 'external' => true],
-            ['label' => 'Pembinaan Statistik Sektoral', 'url' => route('site.page', 'pst-center'), 'icon' => $menuIcon3, 'external' => false],
+            ['label' => 'Pembinaan Statistik Sektoral', 'url' => route('site.pst-center'), 'icon' => $menuIcon3, 'external' => false],
             ['label' => 'Statistik Mojokerto', 'url' => route('site.page', 'statistik-mojokerto'), 'icon' => $menuIcon4, 'external' => false],
         ];
     @endphp
@@ -50,7 +60,7 @@
 
             <nav class="layout-nav">
                 <a href="{{ route('site.page', 'beranda') }}" class="layout-nav-link {{ $page->slug === 'beranda' ? 'active' : '' }}">Beranda</a>
-                <a href="{{ route('site.page', 'pst-center') }}" class="layout-nav-link {{ $page->slug === 'pst-center' ? 'active' : '' }}">PST Center</a>
+                <a href="{{ route('site.pst-center') }}" class="layout-nav-link {{ $page->slug === 'pst-center' ? 'active' : '' }}">PST Center</a>
                 <a href="{{ route('site.page', 'stimo-2-0') }}" class="layout-nav-link {{ $page->slug === 'stimo-2-0' ? 'active' : '' }}">STIMO 2.0</a>
                 <a href="{{ route('site.page', 'backend') }}" class="layout-nav-link {{ $page->slug === 'backend' ? 'active' : '' }}">Backend</a>
                 @auth
@@ -80,7 +90,7 @@
 
         <section class="flex justify-center mt-10">
             <img src="{{ asset('asset/menu.png') }}" 
-                 class="w-[50px] h-auto rounded-2xl">
+                 class="w-[34px] h-auto rounded-2xl">
         </section>
 
         <section class="service-blue-zone reveal-card" style="--delay: 140ms;">
@@ -167,7 +177,7 @@
                         <a href="mailto:{{ $settings['contact_email'] ?? '' }}" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
                             <img src="{{ $iconEmail }}" alt="Email" style="width: 42px; height: 42px; object-fit: contain;">
                         </a>
-                        <a href="{{ $settings['contact_whatsapp'] ?? '#' }}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+                        <a href="{{ $whatsappLink }}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
                             <img src="{{ $iconWhatsapp }}" alt="WhatsApp" style="width: 42px; height: 42px; object-fit: contain;">
                         </a>
                         <a href="{{ $settings['contact_instagram'] ?? '#' }}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
@@ -176,7 +186,8 @@
                         <a href="{{ $settings['contact_facebook'] ?? '#' }}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
                             <img src="{{ $iconFacebook }}" alt="Facebook" style="width: 42px; height: 42px; object-fit: contain;">
                         </a>
-                        <a href="#" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+                        <a href="https://x.com/bpsmojokerto" target="_blank" rel="noopener noreferrer" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+
                             <img src="{{ $iconX }}" alt="X" style="width: 42px; height: 42px; object-fit: contain;">
                         </a>
                         <a href="#" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
