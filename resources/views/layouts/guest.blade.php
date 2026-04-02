@@ -13,5 +13,7 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class=\"auth-shell antialiased\">\n        {{ $slot }}\n    </body>
+    <body class="auth-shell antialiased">
+        {{ $slot }}
+    </body>
 </html>

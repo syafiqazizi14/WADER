@@ -21,7 +21,7 @@
         $menuIcon4 = asset('asset/stimo.png');
 
         $menuCards = [
-            ['label' => 'Jenis Layanan', 'url' => route('site.page', 'pst-center'), 'icon' => $menuIcon1, 'external' => false],
+            ['label' => 'Jenis Layanan', 'url' => route('site.chat'), 'icon' => $menuIcon1, 'external' => false],
             ['label' => 'Pengaduan', 'url' => 'https://tripetto.app/run/P0HWPTK3JJ', 'icon' => $menuIcon2, 'external' => true],
             ['label' => 'Pembinaan Statistik Sektoral', 'url' => route('site.page', 'pst-center'), 'icon' => $menuIcon3, 'external' => false],
             ['label' => 'Statistik Mojokerto', 'url' => route('site.page', 'statistik-mojokerto'), 'icon' => $menuIcon4, 'external' => false],
