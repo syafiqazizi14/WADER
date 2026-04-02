@@ -180,6 +180,26 @@ body.site-shell {
     background: #eceff1;
 }
 
+.hero-layout-stage.hero-pst-center {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.hero-layout-stage.hero-pst-center .corner-band {
+    display: none;
+}
+
+.hero-center-title {
+    margin: 0;
+    font-family: 'Sora', 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: clamp(2rem, 6vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+    text-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
 .corner-band {
     position: absolute;
     width: min(52vw, 680px);

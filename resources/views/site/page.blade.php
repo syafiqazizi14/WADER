@@ -44,9 +44,10 @@
             : '#';
 
         $menuCards = [
-            ['label' => 'Jenis Layanan', 'url' => route('site.chat'), 'icon' => $menuIcon1, 'external' => false],
+
+            ['label' => 'Jenis Layanan', 'url' => route('site.pst-center'), 'icon' => $menuIcon1, 'external' => false],
             ['label' => 'Pengaduan', 'url' => 'https://tripetto.app/run/P0HWPTK3JJ', 'icon' => $menuIcon2, 'external' => true],
-            ['label' => 'Pembinaan Statistik Sektoral', 'url' => route('site.page', 'pst-center'), 'icon' => $menuIcon3, 'external' => false],
+            ['label' => 'Pembinaan Statistik Sektoral', 'url' => route('site.pst-center'), 'icon' => $menuIcon3, 'external' => false],
             ['label' => 'Statistik Mojokerto', 'url' => route('site.page', 'statistik-mojokerto'), 'icon' => $menuIcon4, 'external' => false],
         ];
     @endphp
@@ -59,7 +60,7 @@
 
             <nav class="layout-nav">
                 <a href="{{ route('site.page', 'beranda') }}" class="layout-nav-link {{ $page->slug === 'beranda' ? 'active' : '' }}">Beranda</a>
-                <a href="{{ route('site.page', 'pst-center') }}" class="layout-nav-link {{ $page->slug === 'pst-center' ? 'active' : '' }}">PST Center</a>
+                <a href="{{ route('site.pst-center') }}" class="layout-nav-link {{ $page->slug === 'pst-center' ? 'active' : '' }}">PST Center</a>
                 <a href="{{ route('site.page', 'stimo-2-0') }}" class="layout-nav-link {{ $page->slug === 'stimo-2-0' ? 'active' : '' }}">STIMO 2.0</a>
                 <a href="{{ route('site.page', 'backend') }}" class="layout-nav-link {{ $page->slug === 'backend' ? 'active' : '' }}">Backend</a>
                 @auth
