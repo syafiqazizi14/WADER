@@ -64,6 +64,7 @@
                                     : asset($item->image_path);
                             @endphp
                             <img src="{{ $imageSrc }}" alt="{{ $item->title }}" class="stat-card-image">
+                            <button type="button" class="stat-card-zoom-btn" aria-label="Perbesar {{ $item->title }}">Perbesar</button>
                         </div>
                         <h3 class="stat-card-label">{{ $item->title }}</h3>
                     </div>
@@ -108,6 +109,15 @@
             </div>
         </div>
     </footer>
+
+    <div class="stat-lightbox" id="statLightbox" aria-hidden="true">
+        <div class="stat-lightbox-backdrop" data-close-lightbox></div>
+        <div class="stat-lightbox-dialog" role="dialog" aria-modal="true" aria-label="Gambar Statistik">
+            <button type="button" class="stat-lightbox-close" id="statLightboxClose" aria-label="Tutup">&times;</button>
+            <img src="" alt="" class="stat-lightbox-image" id="statLightboxImage">
+            <p class="stat-lightbox-title" id="statLightboxTitle"></p>
+        </div>
+    </div>
 
     <style>
         html,
@@ -165,23 +175,24 @@
 
         /* === STATISTICS CARDS SECTION === */
         .statistik-cards-section {
-            padding: 60px 20px;
+            padding: 56px 12px;
             background: #f5f5f5;
         }
 
         .statistik-cards-grid {
-            max-width: 1200px;
+            max-width: 1420px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
         }
 
         /* === STAT CARD === */
         .stat-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.65);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             cursor: pointer;
@@ -194,21 +205,102 @@
 
         .stat-card-inner {
             width: 100%;
-            height: 280px;
+            height: auto;
             overflow: hidden;
-            background: #e0e0e0;
+            background: #ffffff;
+            position: relative;
         }
 
         .stat-card-image {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
+            object-fit: contain;
+            display: block;
+            transform: scale(1.045);
+            transform-origin: center;
+        }
+
+        .stat-card-zoom-btn {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            border: none;
+            border-radius: 999px;
+            padding: 0.42rem 0.8rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #0f3f75;
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+            cursor: pointer;
+        }
+
+        .stat-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 130;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .stat-lightbox.is-open {
+            display: flex;
+        }
+
+        .stat-lightbox-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(8, 12, 20, 0.82);
+        }
+
+        .stat-lightbox-dialog {
+            position: relative;
+            z-index: 1;
+            width: min(1200px, 96vw);
+            max-height: 92vh;
+            border-radius: 12px;
+            background: #0d1119;
+            padding: 14px 14px 10px;
+            overflow: auto;
+        }
+
+        .stat-lightbox-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            background: #ffffff;
+        }
+
+        .stat-lightbox-title {
+            margin: 10px 0 2px;
+            color: #edf3ff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .stat-lightbox-close {
+            position: absolute;
+            top: 6px;
+            right: 8px;
+            width: 34px;
+            height: 34px;
+            border: none;
+            border-radius: 999px;
+            font-size: 1.4rem;
+            line-height: 1;
+            color: #0c1d3d;
+            background: rgba(255, 255, 255, 0.92);
+            cursor: pointer;
         }
 
         .stat-card-label {
-            padding: 20px;
+            padding: 22px;
             margin: 0;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 600;
             color: #333;
             text-align: center;
@@ -274,6 +366,11 @@
 
         /* === RESPONSIVE === */
         @media (max-width: 768px) {
+            .statistik-cards-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
             .statistik-hero-custom {
                 min-height: clamp(220px, 52vw, 300px) !important;
             }
@@ -281,10 +378,6 @@
             .statistik-hero-custom .hero-main-logo {
                 width: clamp(220px, 68vw, 320px) !important;
                 max-width: 320px;
-            }
-
-            .statistik-cards-grid {
-                grid-template-columns: 1fr;
             }
 
             .stat-card-label {
@@ -306,7 +399,78 @@
                 width: 58px;
                 height: 58px;
             }
+
+            .stat-card-zoom-btn {
+                right: 8px;
+                bottom: 8px;
+                padding: 0.36rem 0.66rem;
+                font-size: 0.76rem;
+            }
+        }
+
+        @media (max-width: 1100px) and (min-width: 769px) {
+            .statistik-cards-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 16px;
+            }
+
         }
     </style>
+
+    <script>
+        (() => {
+            const lightbox = document.getElementById('statLightbox');
+            const lightboxImage = document.getElementById('statLightboxImage');
+            const lightboxTitle = document.getElementById('statLightboxTitle');
+            const closeBtn = document.getElementById('statLightboxClose');
+
+            if (!lightbox || !lightboxImage || !lightboxTitle || !closeBtn) {
+                return;
+            }
+
+            const openLightbox = (src, title) => {
+                lightboxImage.src = src;
+                lightboxImage.alt = title || 'Gambar statistik';
+                lightboxTitle.textContent = title || '';
+                lightbox.classList.add('is-open');
+                lightbox.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            };
+
+            const closeLightbox = () => {
+                lightbox.classList.remove('is-open');
+                lightbox.setAttribute('aria-hidden', 'true');
+                lightboxImage.src = '';
+                document.body.style.overflow = '';
+            };
+
+            document.addEventListener('click', (event) => {
+                const zoomBtn = event.target.closest('.stat-card-zoom-btn');
+                if (zoomBtn) {
+                    const card = zoomBtn.closest('.stat-card');
+                    const image = card ? card.querySelector('.stat-card-image') : null;
+                    const title = card ? card.querySelector('.stat-card-label') : null;
+
+                    if (image) {
+                        openLightbox(image.src, title ? title.textContent.trim() : '');
+                    }
+
+                    return;
+                }
+
+                if (event.target.hasAttribute('data-close-lightbox')) {
+                    closeLightbox();
+                }
+            });
+
+            closeBtn.addEventListener('click', closeLightbox);
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && lightbox.classList.contains('is-open')) {
+                    closeLightbox();
+                }
+            });
+        })();
+    </script>
 </body>
 </html>

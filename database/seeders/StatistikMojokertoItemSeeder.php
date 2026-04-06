@@ -16,19 +16,16 @@ class StatistikMojokertoItemSeeder extends Seeder
             [
                 'title' => 'Kemiskinan',
                 'image_path' => 'asset/beranda.jpg',
-                'sort_order' => 1,
                 'is_active' => true,
             ],
             [
                 'title' => 'Tingkat Partisipasi Angkatan Kerja (TPAK)',
                 'image_path' => 'asset/beranda2.png',
-                'sort_order' => 2,
                 'is_active' => true,
             ],
             [
                 'title' => 'Tingkat Pengangguran Terbuka (TPT)',
                 'image_path' => 'asset/beranda2.png',
-                'sort_order' => 3,
                 'is_active' => true,
             ],
         ];
@@ -53,7 +50,6 @@ class StatistikMojokertoItemSeeder extends Seeder
                     'image_path' => $item['image_path'],
                     'image_base64' => $imageBase64,
                     'image_mime_type' => $imageMimeType,
-                    'sort_order' => $item['sort_order'],
                     'is_active' => $item['is_active'],
                 ]
             );

@@ -23,6 +23,20 @@ class SiteController extends Controller
 
     public function show(string $slug)
     {
+ fitur-pengaduan
+
+        // Halaman khusus untuk statistik-mojokerto
+        if ($slug === 'statistik-mojokerto') {
+            return view('site.statistik-mojokerto', [
+                'items' => StatistikMojokertoItem::query()
+                    ->where('is_active', true)
+                    ->latest()
+                    ->limit(12)
+                    ->get(),
+                'settings' => Setting::query()->pluck('value', 'key'),
+            ]);
+        }
+main
         try {
             $page = Page::query()
                 ->where('slug', $slug)

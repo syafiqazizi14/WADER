@@ -11,7 +11,6 @@ class StatistikMojokertoItem extends Model
         'image_path',
         'image_base64',
         'image_mime_type',
-        'sort_order',
         'is_active',
     ];
 
