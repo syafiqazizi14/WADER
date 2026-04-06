@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PageSectionController;
 use App\Http\Controllers\Admin\ServiceLinkController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\StatistikMojokertoItemController;
 use App\Http\Controllers\ChatRequestController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteController;
@@ -26,6 +27,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:superadmin,edi
     Route::resource('pages', PageController::class)->except(['show']);
     Route::resource('sections', PageSectionController::class)->except(['show']);
     Route::resource('service-links', ServiceLinkController::class)->except(['show']);
+    Route::resource('statistik-mojokerto', StatistikMojokertoItemController::class)
+        ->except(['show'])
+        ->parameters(['statistik-mojokerto' => 'item']);
     Route::resource('media', MediaController::class)->only(['index', 'store', 'destroy']);
     Route::get('/chat-requests/export', [AdminChatRequestController::class, 'export'])->name('chat-requests.export');
     Route::resource('chat-requests', AdminChatRequestController::class)->only(['index', 'show']);

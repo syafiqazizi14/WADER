@@ -40,7 +40,8 @@ class SiteController extends Controller
             return view('site.statistik-mojokerto', [
                 'items' => StatistikMojokertoItem::query()
                     ->where('is_active', true)
-                    ->orderBy('sort_order')
+                    ->latest()
+                    ->limit(12)
                     ->get(),
                 'settings' => Setting::query()->pluck('value', 'key'),
             ]);
