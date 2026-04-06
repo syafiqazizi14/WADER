@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [SiteController::class, 'home'])->name('site.home');
 Route::get('/jenis-pelayanan', [SiteController::class, 'chat'])->name('site.chat');
+Route::get('/pss', [SiteController::class, 'pss'])->name('site.pss');
 Route::get('/pengaduan', [SiteComplaintController::class, 'show'])->name('site.complaints');
 Route::post('/chat-requests', [ChatRequestController::class, 'store'])->name('chat-requests.store');
 
