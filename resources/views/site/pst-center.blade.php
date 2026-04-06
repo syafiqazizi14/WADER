@@ -37,8 +37,8 @@
             [
                 'title' => 'PST Form',
                 'image' => asset('asset/PST Form.png'),
-                'url' => route('site.complaints'),
-                'external' => false,
+                'url' => 'https://tripetto.app/run/P0HWPTK3JJ',
+                'external' => true,
             ],
         ];
     @endphp

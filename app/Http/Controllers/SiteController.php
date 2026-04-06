@@ -22,6 +22,17 @@ class SiteController extends Controller
         ]);
     }
 
+    public function pstCenter()
+    {
+        return view('site.pst-center', [
+            'serviceLinks' => ServiceLink::query()
+                ->where('is_active', true)
+                ->orderBy('sort_order')
+                ->get(),
+            'settings' => Setting::query()->pluck('value', 'key'),
+        ]);
+    }
+
     public function show(string $slug)
     {
         // Halaman khusus untuk statistik-mojokerto
