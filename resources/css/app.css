@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 @layer base {
   html, body {
@@ -375,6 +375,7 @@ body.site-shell {
     position: absolute;
     color: rgba(255, 255, 255, 0.95);
     filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.16));
+    -webkit-user-select: none;
     user-select: none;
     pointer-events: none;
 }
@@ -1497,6 +1498,7 @@ body.auth-shell {
     font-size: 0.9rem;
     color: var(--text-secondary);
     cursor: pointer;
+    -webkit-user-select: none;
     user-select: none;
 }
 
@@ -2554,7 +2556,7 @@ body.auth-shell {
         flex: 1;
         padding: 1rem 0;
         border-bottom: none;
-        min-height: auto;
+        min-height: 0;
     }
 
     .sidebar-toggle {
@@ -2744,6 +2746,7 @@ body.auth-shell {
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    -webkit-user-select: none;
     user-select: none;
 }
 
