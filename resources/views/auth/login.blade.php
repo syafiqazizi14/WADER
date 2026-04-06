@@ -34,9 +34,8 @@
 
                 <div class="auth-minimal-field">
                     <label for="password">Password</label>
-                    <x-text-input
+                    <x-password-input
                         id="password"
-                        type="password"
                         name="password"
                         required
                         autocomplete="current-password"
