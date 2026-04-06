@@ -15,7 +15,6 @@ class ChatRequest extends Model
         'age',
         'institution',
         'address',
-        'request_category',
         'service_type',
         'status',
         'form_data',
@@ -45,7 +44,6 @@ class ChatRequest extends Model
                 'address',
                 'email',
                 'phone',
-                'request_category',
                 'service',
             ])
             ->filter(function ($value) {
