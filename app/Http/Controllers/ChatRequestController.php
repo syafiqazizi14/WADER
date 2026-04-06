@@ -17,9 +17,6 @@ class ChatRequestController extends Controller
         ]);
 
         $form = $validated['form_data'];
-        $requestCategory = in_array($form['request_category'] ?? 'pelayanan', ['pelayanan', 'pengaduan'], true)
-            ? $form['request_category']
-            : 'pelayanan';
 
         $chatRequest = ChatRequest::create([
             'requester_name' => $form['name'] ?? null,
@@ -29,7 +26,6 @@ class ChatRequestController extends Controller
             'age' => isset($form['age']) && is_numeric($form['age']) ? (int) $form['age'] : null,
             'institution' => $form['institution'] ?? null,
             'address' => $form['address'] ?? null,
-            'request_category' => $requestCategory,
             'service_type' => $form['service'] ?? null,
             'status' => 'submitted',
             'form_data' => $form,
