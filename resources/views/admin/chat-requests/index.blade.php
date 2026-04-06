@@ -14,6 +14,22 @@
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="card">
+                <div class="p-4 border-b border-gray-100">
+                    <form method="GET" action="{{ route('admin.chat-requests.index') }}" class="flex flex-wrap items-end gap-3">
+                        <div>
+                            <label for="category" class="block text-xs font-semibold text-gray-500 uppercase mb-1">Kategori</label>
+                            <select id="category" name="category" class="border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500">
+                                <option value="">Semua</option>
+                                <option value="pelayanan" {{ ($selectedCategory ?? '') === 'pelayanan' ? 'selected' : '' }}>Pelayanan</option>
+                                <option value="pengaduan" {{ ($selectedCategory ?? '') === 'pengaduan' ? 'selected' : '' }}>Pengaduan</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all">
+                            Terapkan Filter
+                        </button>
+                        <a href="{{ route('admin.chat-requests.index') }}" class="inline-flex items-center text-sm text-gray-600 hover:text-gray-900">Reset</a>
+                    </form>
+                </div>
                 <div class="overflow-x-auto">
                     <table class="activity-table">
                         <thead>
@@ -22,6 +38,7 @@
                                 <th>👤 Nama</th>
                                 <th>📧 Email</th>
                                 <th>📱 HP</th>
+                                <th>🗂️ Kategori</th>
                                 <th>🎯 Layanan</th>
                                 <th>📊 Status</th>
                                 <th>⚙️ Aksi</th>
@@ -36,6 +53,13 @@
                                     <td class="font-semibold">{{ $item->requester_name ?? '-' }}</td>
                                     <td class="text-xs font-mono">{{ $item->email ?? '-' }}</td>
                                     <td>{{ $item->phone ?? '-' }}</td>
+                                    <td>
+                                        @if (($item->request_category ?? 'pelayanan') === 'pengaduan')
+                                            <span class="inline-block px-2 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold">Pengaduan</span>
+                                        @else
+                                            <span class="inline-block px-2 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold">Pelayanan</span>
+                                        @endif
+                                    </td>
                                     <td>
                                         <span class="inline-block px-2 py-1 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold">
                                             {{ $item->service_type ?? '-' }}
@@ -58,7 +82,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="py-8 text-center text-gray-400">
+                                    <td colspan="8" class="py-8 text-center text-gray-400">
                                         <p class="text-lg">📭 Belum ada histori chat.</p>
                                     </td>
                                 </tr>
