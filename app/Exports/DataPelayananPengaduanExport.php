@@ -9,7 +9,7 @@ class DataPelayananPengaduanExport implements WithMultipleSheets
     public function sheets(): array
     {
         return [
-            'Pelayanan' => new ChatRequestsExport('pelayanan'),
+            'Layanan' => new ChatRequestsExport('pelayanan'),
             'Pengaduan' => new ChatRequestsExport('pengaduan'),
         ];
     }

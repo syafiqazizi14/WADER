@@ -24,7 +24,7 @@ class ComplaintsExport implements FromCollection, WithHeadings, ShouldAutoSize
                     'Nama Instansi' => $item->nama_instansi,
                     'Isi Pengaduan' => $item->pengaduan,
                     'Status' => $this->statusLabel($item->status),
-                    'Waktu Diterima' => $item->created_at->format('Y-m-d H:i:s'),
+                    'Waktu Diterima' => $item->created_at->timezone('Asia/Jakarta')->format('Y-m-d H:i:s'),
                 ];
             });
     }

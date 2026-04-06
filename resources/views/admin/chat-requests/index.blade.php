@@ -34,21 +34,20 @@
                     <table class="activity-table">
                         <thead>
                             <tr>
-                                <th>⏰ Waktu</th>
-                                <th>👤 Nama</th>
-                                <th>📧 Email</th>
-                                <th>📱 HP</th>
-                                <th>🗂️ Kategori</th>
-                                <th>🎯 Layanan</th>
-                                <th>📊 Status</th>
-                                <th>⚙️ Aksi</th>
+                                <th>Waktu</th>
+                                <th>Nama</th>
+                                <th>Email</th>
+                                <th>HP</th>
+                                <th>Kategori</th>
+                                <th>Layanan</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($chatRequests as $item)
                                 <tr>
                                     <td>
-                                        <span class="text-xs">{{ optional($item->submitted_at)->format('d M H:i') ?? '-' }}</span>
+                                        <span class="text-xs">{{ optional($item->submitted_at)?->timezone('Asia/Jakarta')->format('d M H:i') ?? '-' }}</span>
                                     </td>
                                     <td class="font-semibold">{{ $item->requester_name ?? '-' }}</td>
                                     <td class="text-xs font-mono">{{ $item->email ?? '-' }}</td>
@@ -66,15 +65,6 @@
                                         </span>
                                     </td>
                                     <td>
-                                        @if($item->status === 'approved')
-                                            <span class="badge badge-success">✓ Approved</span>
-                                        @elseif($item->status === 'pending')
-                                            <span class="badge badge-primary">⏳ Pending</span>
-                                        @else
-                                            <span class="badge badge-danger">✕ {{ ucfirst($item->status) }}</span>
-                                        @endif
-                                    </td>
-                                    <td>
                                         <a href="{{ route('admin.chat-requests.show', $item) }}" class="text-blue-600 hover:text-blue-800 font-semibold transition-all hover:underline">
                                             👁️ Lihat Detail
                                         </a>
@@ -82,7 +72,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="8" class="py-8 text-center text-gray-400">
+                                    <td colspan="7" class="py-8 text-center text-gray-400">
                                         <p class="text-lg">📭 Belum ada histori chat.</p>
                                     </td>
                                 </tr>

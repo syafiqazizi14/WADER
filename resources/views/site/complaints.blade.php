@@ -12,7 +12,7 @@
 </head>
 <body class="site-shell page-pengaduan">
     @php
-        $logoHeader = asset('asset/logo bps.png');
+        $logoHeader = asset('asset/Wader.png');
     @endphp
 
     <header class="layout-header">
