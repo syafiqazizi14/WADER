@@ -21,17 +21,17 @@
             [
                 'label' => 'Materi PSS',
                 'image' => asset('asset/materi-PSS.png'),
-                'url' => '#',
+                'url' => 'https://drive.google.com/drive/folders/1az8mdEwijiyoF2eWal3yT5jbwMC4wfK4',
             ],
             [
-                'label' => 'Daftar LO PSS',
+                'label' => 'Daftar LO BPS',
                 'image' => asset('asset/daftar-LO-PSS.png'),
-                'url' => '#',
+                'url' => 'https://drive.bps.go.id/s/5FtR8ASNrHyydFZ',
             ],
             [
                 'label' => 'Jadwal Safari PSS',
                 'image' => asset('asset/jadwal-safari-pss.png'),
-                'url' => '#',
+                'url' => 'https://drive.google.com/file/d/1csrdLMOqkmWcF9klLDG9DTf4dIkzOrr6/view',
             ],
         ];
     @endphp
@@ -52,6 +52,11 @@
                 @else
                     <a href="{{ route('login') }}" class="layout-nav-link">Login</a>
                 @endauth
+                <a href="#" class="layout-search-btn" aria-label="Cari">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="layout-search-icon">
+                        <path d="M21 21L16.7 16.7M18 11C18 14.866 14.866 18 11 18C7.13401 18 4 14.866 4 11C4 7.13401 7.13401 4 11 4C14.866 4 18 7.13401 18 11Z" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
             </nav>
         </div>
     </header>
@@ -65,7 +70,7 @@
                 <img src="{{ $pssTitleGraphic }}" alt="Pembinaan Statistik Sektoral" class="pss-title-graphic">
                 <div class="pss-menu-grid">
                     @foreach ($menuCards as $card)
-                        <a href="{{ $card['url'] }}" class="pss-menu-link" aria-label="{{ $card['label'] }}">
+                        <a href="{{ $card['url'] }}" class="pss-menu-link" aria-label="{{ $card['label'] }}" @if(strpos($card['url'], 'http') === 0) target="_blank" rel="noopener noreferrer" @endif>
                             <img src="{{ $card['image'] }}" alt="{{ $card['label'] }}" class="pss-menu-image">
                         </a>
                     @endforeach
@@ -73,6 +78,55 @@
             </article>
         </section>
     </main>
+
+    <section class="pss-footer-strip">
+        <div class="pss-footer-inner">
+            <p class="pss-footer-tagline">Jangan Lewatkan Informasi Terbaru Kami</p>
+            <div class="pss-footer-icons">
+                @php
+                    $website = $settings['instansi_link'] ?? '#';
+                    $email = $settings['contact_email'] ?? '#';
+                    $whatsapp = $settings['contact_whatsapp'] ?? '';
+                    $instagram = $settings['contact_instagram'] ?? '#';
+                    $facebook = $settings['contact_facebook'] ?? '#';
+                    $twitter = $settings['twitter'] ?? '#';
+                    $youtube = $settings['youtube'] ?? '#';
+
+                    // Format WhatsApp number
+                    $rawWhatsapp = (string) $whatsapp;
+                    $whatsappDigits = preg_replace('/\D+/', '', $rawWhatsapp);
+                    if ($whatsappDigits && str_starts_with($whatsappDigits, '0')) {
+                        $whatsappDigits = '62'.substr($whatsappDigits, 1);
+                    }
+                    $whatsappLink = $whatsappDigits
+                        ? 'https://api.whatsapp.com/send/?phone='.$whatsappDigits.'&text&type=phone_number&app_absent=0'
+                        : '#';
+                @endphp
+
+                <a href="{{ $website }}" target="_blank" rel="noopener" class="pss-footer-icon-btn" aria-label="Website" title="Website">
+                    <img src="{{ asset('asset/www.png') }}" alt="Website" class="pss-footer-icon-img">
+                </a>
+                <a href="mailto:{{ str_replace('mailto:', '', $email) }}" class="pss-footer-icon-btn" aria-label="Email" title="Email">
+                    <img src="{{ asset('asset/email.png') }}" alt="Email" class="pss-footer-icon-img">
+                </a>
+                <a href="{{ $whatsappLink }}" target="_blank" rel="noopener" class="pss-footer-icon-btn" aria-label="WhatsApp" title="WhatsApp">
+                    <img src="{{ asset('asset/whatapp.png') }}" alt="WhatsApp" class="pss-footer-icon-img">
+                </a>
+                <a href="{{ $instagram }}" target="_blank" rel="noopener" class="pss-footer-icon-btn" aria-label="Instagram" title="Instagram">
+                    <img src="{{ asset('asset/instagram.png') }}" alt="Instagram" class="pss-footer-icon-img">
+                </a>
+                <a href="{{ $facebook }}" target="_blank" rel="noopener" class="pss-footer-icon-btn" aria-label="Facebook" title="Facebook">
+                    <img src="{{ asset('asset/facebook.png') }}" alt="Facebook" class="pss-footer-icon-img">
+                </a>
+                <a href="https://x.com/bpsmojokerto" target="_blank" rel="noopener" class="pss-footer-icon-btn" aria-label="X (Twitter)" title="X (Twitter)">
+                    <img src="{{ asset('asset/x.png') }}" alt="X" class="pss-footer-icon-img">
+                </a>
+                <a href="{{ $youtube }}" target="_blank" rel="noopener" class="pss-footer-icon-btn" aria-label="YouTube" title="YouTube">
+                    <img src="{{ asset('asset/yt.png') }}" alt="YouTube" class="pss-footer-icon-img">
+                </a>
+            </div>
+        </div>
+    </section>
 
     <style>
         .pss-main {
@@ -98,11 +152,18 @@
         .pss-bg-top {
             top: 0;
             z-index: 1;
+            background-position: center bottom;
+            background-size: 100% auto;
+            background-repeat: no-repeat;
         }
 
         .pss-bg-bottom {
             bottom: 0;
             z-index: 1;
+            background-position: center top;
+            background-size: 100% auto;
+            background-repeat: no-repeat;
+            margin-top: -1px;
         }
 
         .pss-stage {
@@ -177,6 +238,83 @@
             }
         }
 
+        /* Footer Styles */
+        .pss-footer-strip {
+            background: linear-gradient(135deg, #48642e 0%, #3d5225 100%);
+            padding: 28px 16px;
+            position: relative;
+            opacity: 0;
+            animation: slideUpReveal 0.8s ease-out 0.3s forwards;
+        }
+
+        .pss-footer-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .pss-footer-tagline {
+            font-family: 'Brush Script MT', 'Segoe Script', cursive;
+            color: white;
+            font-size: clamp(20px, 4.5vw, 28px);
+            font-weight: 400;
+            margin: 0;
+            flex: 0 0 auto;
+            font-style: normal;
+            letter-spacing: 0.5px;
+        }
+
+        .pss-footer-icons {
+            display: flex;
+            gap: clamp(10px, 2vw, 16px);
+            flex-wrap: wrap;
+            justify-content: center;
+            flex: 0 0 auto;
+        }
+
+        .pss-footer-icon-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: clamp(40px, 7vw, 52px);
+            height: clamp(40px, 7vw, 52px);
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            transition: all 300ms ease;
+            color: white;
+            text-decoration: none;
+            border: 2px solid transparent;
+            padding: 0;
+        }
+
+        .pss-footer-icon-img {
+            width: 65%;
+            height: 65%;
+            display: block;
+            object-fit: contain;
+        }
+
+        .pss-footer-icon-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-4px) scale(1.1);
+        }
+
+        @keyframes slideUpReveal {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         @media (max-width: 1024px) {
             .pss-stage {
                 transform: translateY(-32px);
@@ -190,6 +328,24 @@
             .pss-menu-image {
                 width: min(100%, 265px);
                 max-height: 265px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pss-footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .pss-footer-tagline {
+                width: 100%;
+                order: 1;
+            }
+
+            .pss-footer-icons {
+                width: 100%;
+                order: 2;
+                justify-content: center;
             }
         }
 
