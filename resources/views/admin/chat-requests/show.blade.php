@@ -33,6 +33,26 @@
                     @endforelse
                 </div>
             </div>
+
+            @php
+                $evidenceUploads = collect(data_get($chatRequest->form_data, 'evidence_uploads', []));
+            @endphp
+
+            @if ($evidenceUploads->isNotEmpty())
+                <div class="bg-white p-5 rounded border shadow-sm">
+                    <h3 class="font-semibold mb-3">Bukti Pendukung</h3>
+                    <div class="grid md:grid-cols-2 gap-3 text-sm">
+                        @foreach ($evidenceUploads as $upload)
+                            <div class="border rounded p-3">
+                                <p class="font-semibold">{{ $upload['original_name'] ?? '-' }}</p>
+                                @if (!empty($upload['path']))
+                                    <a href="{{ asset('storage/'.$upload['path']) }}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Lihat file</a>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </x-app-layout>

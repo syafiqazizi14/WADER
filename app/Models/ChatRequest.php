@@ -15,6 +15,7 @@ class ChatRequest extends Model
         'age',
         'institution',
         'address',
+        'request_category',
         'service_type',
         'status',
         'form_data',
@@ -45,6 +46,7 @@ class ChatRequest extends Model
                 'email',
                 'phone',
                 'service',
+                'evidence_uploads',
             ])
             ->filter(function ($value) {
                 return ! is_null($value) && $value !== '';
