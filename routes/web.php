@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [SiteController::class, 'home'])->name('site.home');
 Route::get('/jenis-pelayanan', [SiteController::class, 'chat'])->name('site.chat');
+Route::get('/jenis-layanan', [SiteController::class, 'chat'])->name('site.jenis-layanan');
 Route::post('/chat-requests', [ChatRequestController::class, 'store'])->name('chat-requests.store');
 
 Route::get('/dashboard', function () {
@@ -45,6 +46,10 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/pst-center', [SiteController::class, 'show'])
+    ->defaults('slug', 'pst-center')
+    ->name('site.pst-center');
 
 Route::get('/{slug}', [SiteController::class, 'show'])
     ->where('slug', '[A-Za-z0-9\-]+')
