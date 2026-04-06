@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ChatRequestController as AdminChatRequestControll
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PageSectionController;
+use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Admin\ServiceLinkController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\StatistikMojokertoItemController;
@@ -31,6 +32,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:superadmin,edi
         ->parameters(['statistik-mojokerto' => 'item']);
     Route::resource('media', MediaController::class)->only(['index', 'store', 'destroy']);
     Route::get('/chat-requests/export', [AdminChatRequestController::class, 'export'])->name('chat-requests.export');
+    Route::get('/export/pelayanan-pengaduan', [ExportController::class, 'pelayananPengaduan'])->name('export.pelayanan-pengaduan');
     Route::resource('chat-requests', AdminChatRequestController::class)->only(['index', 'show']);
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::put('/settings', [SettingController::class, 'update'])->name('settings.update');
