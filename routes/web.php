@@ -48,6 +48,10 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+Route::get('/pst-center', [SiteController::class, 'show'])
+    ->defaults('slug', 'pst-center')
+    ->name('site.pst-center');
+
 Route::get('/{slug}', [SiteController::class, 'show'])
     ->where('slug', '[A-Za-z0-9\-]+')
     ->name('site.page');
