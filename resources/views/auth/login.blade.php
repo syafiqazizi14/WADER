@@ -34,6 +34,7 @@
 
                 <div class="auth-minimal-field" x-data="{ showPassword: false }">
                     <label for="password">Password</label>
+
                     <div style="position: relative; display: block; width: 100%;">
                         <x-text-input
                             id="password"
@@ -59,6 +60,7 @@
                             </svg>
                         </button>
                     </div>
+
                     <x-input-error :messages="$errors->get('password')" class="form-error" />
                 </div>
 

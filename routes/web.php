@@ -53,6 +53,9 @@ Route::get('/pst-center', [SiteController::class, 'show'])
     ->defaults('slug', 'pst-center')
     ->name('site.pst-center');
 
+Route::get('/pss', [SiteController::class, 'pss'])
+    ->name('site.pss');
+
 Route::get('/{slug}', [SiteController::class, 'show'])
     ->where('slug', '[A-Za-z0-9\-]+')
     ->name('site.page');

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PSS - WADER</title>
+    <title>Pembinaan Statistik Sektoral - WADER</title>
     <meta name="description" content="Halaman Pembinaan Statistik Sektoral WADER Kabupaten Mojokerto.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,39 +13,23 @@
 <body class="site-shell page-pss">
     @php
         $logoHeader = asset('asset/logo bps.png');
-        $bgTop = asset('asset/bg atas.png');
-        $bgBottom = asset('asset/bg bawah.png');
-        $titleImage = asset('asset/tulisan-PSS.png');
-        $iconWeb = asset('asset/www.png');
-        $iconEmail = asset('asset/email.png');
-        $iconWhatsapp = asset('asset/whatapp.png');
-        $iconInstagram = asset('asset/instagram.png');
-        $iconFacebook = asset('asset/facebook.png');
-        $iconX = asset('asset/x.png');
-        $iconYoutube = asset('asset/yt.png');
+        $bgTop = asset('asset/bg-atas.png');
+        $bgBottom = asset('asset/bg-bawah.png');
+        $pssTitleGraphic = asset('asset/tulisan-PSS.png');
 
-        $rawWhatsapp = (string) ($settings['contact_whatsapp'] ?? '');
-        $whatsappDigits = preg_replace('/\D+/', '', $rawWhatsapp);
-        if ($whatsappDigits && str_starts_with($whatsappDigits, '0')) {
-            $whatsappDigits = '62'.substr($whatsappDigits, 1);
-        }
-        $whatsappLink = $whatsappDigits
-            ? 'https://api.whatsapp.com/send/?phone='.$whatsappDigits.'&text&type=phone_number&app_absent=0'
-            : '#';
-
-        $pssMenus = [
+        $menuCards = [
             [
-                'title' => 'Materi PSS',
+                'label' => 'Materi PSS',
                 'image' => asset('asset/materi-PSS.png'),
                 'url' => '#',
             ],
             [
-                'title' => 'Daftar LO BPS',
-                'image' => asset('asset/daftar LO PSS.png'),
+                'label' => 'Daftar LO PSS',
+                'image' => asset('asset/daftar-LO-PSS.png'),
                 'url' => '#',
             ],
             [
-                'title' => 'Jadwal Safari PSS',
+                'label' => 'Jadwal Safari PSS',
                 'image' => asset('asset/jadwal-safari-pss.png'),
                 'url' => '#',
             ],
@@ -68,202 +52,171 @@
                 @else
                     <a href="{{ route('login') }}" class="layout-nav-link">Login</a>
                 @endauth
-                <a href="#" class="layout-search-btn" aria-label="Cari">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="layout-search-icon">
-                        <path d="M21 21L16.7 16.7M18 11C18 14.866 14.866 18 11 18C7.13401 18 4 14.866 4 11C4 7.13401 7.13401 4 11 4C14.866 4 18 7.13401 18 11Z" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </a>
             </nav>
         </div>
     </header>
 
-    <main class="pss-main-wrap">
-        <section class="pss-hero" style="background-image: url('{{ $bgTop }}');">
-            <div class="pss-title-wrap reveal-card" style="--delay: 0ms;">
-                <img src="{{ $titleImage }}" alt="Pembinaan Statistik Sektoral" class="pss-title-image">
-            </div>
-        </section>
+    <main class="pss-main">
+        <img src="{{ $bgTop }}" alt="Latar atas PSS" class="pss-bg-top">
+        <img src="{{ $bgBottom }}" alt="Latar bawah PSS" class="pss-bg-bottom">
 
-        <section class="pss-menu-zone" style="background-image: url('{{ $bgBottom }}');">
-            <div class="pss-menu-grid">
-                @foreach ($pssMenus as $menu)
-                    <a href="{{ $menu['url'] }}" class="pss-menu-card reveal-card" style="--delay: {{ ($loop->index + 1) * 100 }}ms;" aria-label="{{ $menu['title'] }}">
-                        <img src="{{ $menu['image'] }}" alt="{{ $menu['title'] }}" class="pss-menu-image">
-                    </a>
-                @endforeach
-            </div>
-        </section>
-
-        <section class="pss-bottom-strip">
-            <div class="pss-bottom-inner">
-                <p class="pss-bottom-title">Jangan Lewatkan Informasi Terbaru Kami</p>
-
-                <div class="pss-social-row">
-                    <a href="{{ $settings['instansi_link'] ?? '#' }}" target="_blank" rel="noopener noreferrer" class="pss-social-link" aria-label="Website">
-                        <img src="{{ $iconWeb }}" alt="Website" class="pss-social-icon">
-                    </a>
-                    <a href="mailto:{{ $settings['contact_email'] ?? '' }}" class="pss-social-link" aria-label="Email">
-                        <img src="{{ $iconEmail }}" alt="Email" class="pss-social-icon">
-                    </a>
-                    <a href="{{ $whatsappLink }}" target="_blank" rel="noopener noreferrer" class="pss-social-link" aria-label="WhatsApp">
-                        <img src="{{ $iconWhatsapp }}" alt="WhatsApp" class="pss-social-icon">
-                    </a>
-                    <a href="{{ $settings['contact_instagram'] ?? '#' }}" target="_blank" rel="noopener noreferrer" class="pss-social-link" aria-label="Instagram">
-                        <img src="{{ $iconInstagram }}" alt="Instagram" class="pss-social-icon">
-                    </a>
-                    <a href="{{ $settings['contact_facebook'] ?? '#' }}" target="_blank" rel="noopener noreferrer" class="pss-social-link" aria-label="Facebook">
-                        <img src="{{ $iconFacebook }}" alt="Facebook" class="pss-social-icon">
-                    </a>
-                    <a href="https://x.com/bpsmojokerto" target="_blank" rel="noopener noreferrer" class="pss-social-link" aria-label="X">
-                        <img src="{{ $iconX }}" alt="X" class="pss-social-icon">
-                    </a>
-                    <a href="#" class="pss-social-link" aria-label="YouTube">
-                        <img src="{{ $iconYoutube }}" alt="YouTube" class="pss-social-icon">
-                    </a>
+        <section class="pss-stage">
+            <article class="pss-card reveal-card" style="--delay: 0ms;">
+                <img src="{{ $pssTitleGraphic }}" alt="Pembinaan Statistik Sektoral" class="pss-title-graphic">
+                <div class="pss-menu-grid">
+                    @foreach ($menuCards as $card)
+                        <a href="{{ $card['url'] }}" class="pss-menu-link" aria-label="{{ $card['label'] }}">
+                            <img src="{{ $card['image'] }}" alt="{{ $card['label'] }}" class="pss-menu-image">
+                        </a>
+                    @endforeach
                 </div>
-            </div>
+            </article>
         </section>
     </main>
 
     <style>
-        .pss-main-wrap {
-            background: #d4dce8;
-        }
-
-        .pss-hero {
-            min-height: clamp(220px, 28vw, 330px);
+        .pss-main {
+            min-height: calc(100vh - 82px);
+            background: #cfd5df;
+            padding: 20px 16px 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #d4dce8;
-            background-repeat: no-repeat;
-            background-position: center bottom;
-            background-size: 100% auto;
+            position: relative;
+            overflow: hidden;
         }
 
-        .pss-title-wrap {
+        .pss-bg-top,
+        .pss-bg-bottom {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .pss-bg-top {
+            top: 0;
+            z-index: 1;
+        }
+
+        .pss-bg-bottom {
+            bottom: 0;
+            z-index: 1;
+        }
+
+        .pss-stage {
+            width: 100%;
+            max-width: 1180px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1rem;
+            position: relative;
+            z-index: 2;
+            transform: translateY(-44px);
         }
 
-        .pss-title-image {
-            width: min(75vw, 560px);
+        .pss-card {
+            width: 100%;
+            background: transparent;
+            padding: 0;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .pss-title-graphic {
+            width: min(100%, 900px);
             height: auto;
-            object-fit: contain;
-        }
-
-        .pss-menu-zone {
-            min-height: calc(100vh - 285px);
-            background-color: #d4dce8;
-            background-repeat: no-repeat;
-            background-position: center top;
-            background-size: 100% auto;
-            margin-top: -1px;
-            padding: clamp(2rem, 4.5vw, 3.4rem) 1rem clamp(2.8rem, 7vw, 5.2rem);
+            display: block;
+            margin: 0 auto 12px;
         }
 
         .pss-menu-grid {
-            max-width: 1220px;
-            margin: 0 auto;
+            margin-top: clamp(8px, 2vh, 20px);
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: clamp(1.1rem, 2.8vw, 2.4rem);
-            align-items: end;
+            gap: clamp(12px, 1.7vw, 24px);
             justify-items: center;
-        }
-
-        .pss-menu-card {
-            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: transform 180ms ease;
         }
 
-        .pss-menu-card:hover {
-            transform: translateY(-5px);
+        .pss-menu-link {
+            display: inline-flex;
+            text-decoration: none;
+            border-radius: 999px;
+            transition: transform 220ms ease;
+            animation: pssFloat 4.2s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        .pss-menu-link:nth-child(2) {
+            animation-delay: 280ms;
+        }
+
+        .pss-menu-link:nth-child(3) {
+            animation-delay: 520ms;
+        }
+
+        .pss-menu-link:hover {
+            transform: translateY(-7px) scale(1.03);
         }
 
         .pss-menu-image {
-            width: min(30vw, 360px);
-            min-width: 230px;
-            height: auto;
+            width: min(100%, 300px);
+            max-height: 300px;
             object-fit: contain;
         }
 
-        .pss-bottom-strip {
-            background: #48642e;
-            padding: 1.35rem 1rem 1.4rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.14);
+        @keyframes pssFloat {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
         }
 
-        .pss-bottom-inner {
-            max-width: 1280px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
+        @media (max-width: 1024px) {
+            .pss-stage {
+                transform: translateY(-32px);
+            }
 
-        .pss-bottom-title {
-            margin: 0;
-            color: #ffffff;
-            font-family: 'Brush Script MT', 'Segoe Script', cursive;
-            font-size: clamp(2rem, 2.8vw, 3.1rem);
-            font-weight: 400;
-            line-height: 1;
-        }
-
-        .pss-social-row {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-        }
-
-        .pss-social-link {
-            display: inline-flex;
-            width: 54px;
-            height: 54px;
-            border-radius: 999px;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            background: rgba(255, 255, 255, 0.04);
-        }
-
-        .pss-social-icon {
-            width: 46px;
-            height: 46px;
-            object-fit: contain;
-        }
-
-        @media (max-width: 980px) {
             .pss-menu-grid {
+                margin-top: 8px;
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
-            .pss-bottom-inner {
-                justify-content: center;
-            }
-
-            .pss-bottom-title {
-                text-align: center;
+            .pss-menu-image {
+                width: min(100%, 265px);
+                max-height: 265px;
             }
         }
 
-        @media (max-width: 720px) {
+        @media (max-width: 740px) {
+            .pss-main {
+                min-height: calc(100vh - 72px);
+                padding: 14px 10px 24px;
+            }
+
+            .pss-stage {
+                transform: translateY(-18px);
+            }
+
+            .pss-title-graphic {
+                width: min(95%, 520px);
+                margin-bottom: 6px;
+            }
+
             .pss-menu-grid {
+                margin-top: 2px;
                 grid-template-columns: 1fr;
+                gap: 8px;
             }
 
             .pss-menu-image {
-                width: min(86vw, 350px);
-                min-width: 0;
+                width: min(68vw, 240px);
+                max-height: 240px;
             }
         }
     </style>
