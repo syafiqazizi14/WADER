@@ -19,6 +19,11 @@ class SiteController extends Controller
     {
         return view('site.chat', [
             'settings' => Setting::query()->pluck('value', 'key'),
+            'requestCategory' => 'pelayanan',
+            'pageTitle' => 'Jenis Pelayanan',
+            'pageDescription' => 'Layanan chatbot interaktif untuk memilih jenis pelayanan WADER.',
+            'headingTitle' => 'Jenis Pelayanan',
+            'headingDescription' => 'Silakan isi data singkat lalu pilih jenis pelayanan. Chat ini akan langsung diteruskan ke petugas BPS Kabupaten Mojokerto.',
         ]);
     }
 

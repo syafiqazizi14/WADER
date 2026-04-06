@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jenis Pelayanan - WADER</title>
-    <meta name="description" content="Layanan chatbot interaktif untuk memilih jenis pelayanan WADER.">
+    <title>{{ $pageTitle ?? 'Jenis Pelayanan' }} - WADER</title>
+    <meta name="description" content="{{ $pageDescription ?? 'Layanan chatbot interaktif untuk memilih jenis pelayanan WADER.' }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="site-shell page-jenis-pelayanan">
+<body class="site-shell page-{{ ($requestCategory ?? 'pelayanan') === 'pengaduan' ? 'pengaduan' : 'jenis-pelayanan' }}">
     @php
         $logoHeader = asset('asset/logo bps.png');
     @endphp
@@ -24,7 +24,8 @@
             <nav class="layout-nav">
                 <a href="{{ route('site.page', 'beranda') }}" class="layout-nav-link">Beranda</a>
                 <a href="{{ route('site.page', 'pst-center') }}" class="layout-nav-link">PST Center</a>
-                <a href="{{ route('site.chat') }}" class="layout-nav-link active">Jenis Pelayanan</a>
+                <a href="{{ route('site.chat') }}" class="layout-nav-link {{ ($requestCategory ?? 'pelayanan') === 'pelayanan' ? 'active' : '' }}">Jenis Pelayanan</a>
+                <a href="{{ route('site.complaints') }}" class="layout-nav-link {{ ($requestCategory ?? 'pelayanan') === 'pengaduan' ? 'active' : '' }}">Pengaduan</a>
                 <a href="{{ route('site.page', 'stimo-2-0') }}" class="layout-nav-link">STIMO 2.0</a>
                 <a href="{{ route('site.page', 'backend') }}" class="layout-nav-link">Backend</a>
                 @auth
@@ -39,20 +40,29 @@
     <main class="chat-full-main">
         <section class="chat-full-wrap reveal-card" style="--delay: 60ms;">
             <div class="chat-full-head">
-                <h1 class="content-followup-title">Jenis Pelayanan</h1>
-                <p class="content-followup-meta">Silakan isi data singkat lalu pilih jenis pelayanan. Chat ini akan langsung diteruskan ke petugas BPS Kabupaten Mojokerto.</p>
+                <h1 class="content-followup-title">{{ $headingTitle ?? 'Jenis Pelayanan' }}</h1>
+                <p class="content-followup-meta">{{ $headingDescription ?? 'Silakan isi data singkat lalu pilih jenis pelayanan. Chat ini akan langsung diteruskan ke petugas BPS Kabupaten Mojokerto.' }}</p>
             </div>
 
             <div class="chatbot-shell chat-full-shell" x-data="pstCenterChatbot()">
                 <div class="chatbot-log chat-full-log" x-ref="log">
                     <template x-for="(message, idx) in messages" :key="idx">
-                        <div class="chat-row" :class="message.from === 'bot' ? 'chat-row-bot' : 'chat-row-user'">
+                        <div class="chat-row" :class="message.from === 'bot' ? 'chat-row-bot' : 'chat-row-user'" :style="`--bubble-delay: ${idx * 70}ms`">
                             <template x-if="message.from === 'bot'">
                                 <span class="chat-avatar">🤖</span>
                             </template>
                             <div class="chat-bubble" :class="message.from === 'bot' ? 'chat-bubble-bot' : 'chat-bubble-user'" x-text="message.text"></div>
                         </div>
                     </template>
+
+                    <div class="chat-row chat-row-bot chat-row-typing" x-show="isTyping">
+                        <span class="chat-avatar">🤖</span>
+                        <div class="chat-bubble chat-bubble-bot chat-bubble-typing">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="chatbot-options" x-show="currentMode === 'options'">
@@ -65,6 +75,25 @@
                     <input type="text" x-model="inputText" class="chatbot-input" placeholder="Ketik jawabanmu..." autocomplete="off">
                     <button type="submit" class="chatbot-send">Kirim</button>
                 </form>
+
+                <div class="chatbot-file-wrap" x-show="currentMode === 'file'">
+                    <div>
+                        <label for="evidence-upload" class="chatbot-file-label">Unggah bukti pendukung</label>
+                        <p class="chatbot-file-hint">Format yang didukung: PDF, JPG, JPEG, PNG, WEBP, DOC, DOCX. Maksimal 10 MB per file.</p>
+                    </div>
+                    <input
+                        id="evidence-upload"
+                        type="file"
+                        x-ref="evidenceInput"
+                        class="chatbot-file-input"
+                        accept=".pdf,.jpg,.jpeg,.png,.webp,.doc,.docx,image/*,application/pdf"
+                        multiple
+                    >
+                    <div class="chatbot-file-actions">
+                        <button type="button" class="chatbot-file-upload" @click="submitFiles">Unggah Bukti</button>
+                        <span class="chatbot-file-name" x-show="evidenceFiles.length" x-text="evidenceFiles.map((file) => file.name).join(', ')"></span>
+                    </div>
+                </div>
 
                 <div class="chatbot-reset-wrap">
                     <button type="button" class="chatbot-reset" @click="restartChat">Mulai Ulang Chat</button>
@@ -90,6 +119,7 @@
         function pstCenterChatbot() {
             const storeUrl = '{{ route('chat-requests.store') }}';
             const csrfToken = '{{ csrf_token() }}';
+            const requestCategory = '{{ $requestCategory ?? 'pelayanan' }}';
 
             return {
                 messages: [],
@@ -99,6 +129,8 @@
                 currentStep: null,
                 dataForm: {},
                 branchSteps: [],
+                evidenceFiles: [],
+                isTyping: false,
                 isSaved: false,
                 saveFailed: false,
 
@@ -114,23 +146,31 @@
                     this.currentStep = 'name';
                     this.dataForm = {};
                     this.branchSteps = [];
+                    this.evidenceFiles = [];
+                    this.isTyping = false;
                     this.isSaved = false;
                     this.saveFailed = false;
                     this.botAsk('Halo #SahabatData, dengan Siapa ini?');
                 },
 
-                botAsk(text) {
-                    this.messages.push({ from: 'bot', text });
+                scrollLog() {
                     this.$nextTick(() => {
-                        this.$refs.log.scrollTop = this.$refs.log.scrollHeight;
+                        this.$refs.log?.scrollTo({ top: this.$refs.log.scrollHeight, behavior: 'smooth' });
                     });
+                },
+
+                botAsk(text) {
+                    this.isTyping = true;
+                    window.setTimeout(() => {
+                        this.messages.push({ from: 'bot', text });
+                        this.isTyping = false;
+                        this.scrollLog();
+                    }, 380);
                 },
 
                 userSay(text) {
                     this.messages.push({ from: 'user', text });
-                    this.$nextTick(() => {
-                        this.$refs.log.scrollTop = this.$refs.log.scrollHeight;
-                    });
+                    this.scrollLog();
                 },
 
                 submitText() {
@@ -161,6 +201,32 @@
                 setTextMode() {
                     this.currentMode = 'text';
                     this.currentOptions = [];
+                },
+
+                setFileMode() {
+                    this.currentMode = 'file';
+                    this.currentOptions = [];
+                },
+
+                submitFiles() {
+                    if (this.currentMode !== 'file') {
+                        return;
+                    }
+
+                    const input = this.$refs.evidenceInput;
+                    const files = input?.files ? Array.from(input.files) : [];
+                    if (!files.length) {
+                        return;
+                    }
+
+                    this.evidenceFiles = files;
+                    const fileNames = files.map((file) => file.name);
+                    this.userSay(`Unggah bukti: ${fileNames.join(', ')}`);
+                    this.dataForm.evidence_uploads = fileNames;
+                    if (input) {
+                        input.value = '';
+                    }
+                    this.advanceBranch(fileNames.join(', '));
                 },
 
                 advance(value) {
@@ -203,15 +269,21 @@
                             break;
                         case 'phone':
                             this.dataForm.phone = value;
-                            this.currentStep = 'service';
-                            this.botAsk('Apa yang bisa kami bantu?');
-                            this.setOptions([
-                                'Permintaan Data',
-                                'Rekomendasi Statistik',
-                                'Magang BPS',
-                                'Konsultasi Statistik',
-                                'Penjualan Produk Statistik Berbayar'
-                            ]);
+                            if (requestCategory === 'pengaduan') {
+                                this.dataForm.service = 'Pengaduan';
+                                this.setupBranch('Pengaduan');
+                                this.runBranchStep();
+                            } else {
+                                this.currentStep = 'service';
+                                this.botAsk('Apa yang bisa kami bantu?');
+                                this.setOptions([
+                                    'Permintaan Data',
+                                    'Rekomendasi Statistik',
+                                    'Magang BPS',
+                                    'Konsultasi Statistik',
+                                    'Penjualan Produk Statistik Berbayar'
+                                ]);
+                            }
                             break;
                         case 'service':
                             this.dataForm.service = value;
@@ -226,6 +298,15 @@
 
                 setupBranch(service) {
                     const branches = {
+                        'Pengaduan': [
+                            { key: 'complaint_type', ask: 'Jenis pengaduan apa yang ingin disampaikan?', mode: 'options', options: ['Pelanggaran Integritas', 'Pelanggaran Disiplin', 'Penyalahgunaan Wewenang', 'Lainnya'] },
+                            { key: 'complaint_detail', ask: 'Silakan jelaskan kronologi pengaduan secara ringkas dan jelas.', mode: 'text' },
+                            { key: 'incident_time', ask: 'Kapan kejadian tersebut terjadi?', mode: 'text' },
+                            { key: 'incident_location', ask: 'Di mana lokasi kejadian?', mode: 'text' },
+                            { key: 'has_evidence', ask: 'Apakah Anda memiliki bukti pendukung?', mode: 'options', options: ['Ada', 'Tidak Ada'] },
+                            { key: 'evidence_uploads', ask: 'Silakan unggah bukti pendukung dalam bentuk file.', mode: 'file' },
+                            { key: 'final', ask: 'Laporan pengaduan Anda sudah kami terima. Tim kami akan melakukan verifikasi dan menindaklanjuti sesuai prosedur.', mode: 'done' },
+                        ],
                         'Permintaan Data': [
                             { key: 'request_detail', ask: 'Tolong sebutkan data yang diminta', mode: 'text' },
                             { key: 'has_letter', ask: 'Apakah ada surat dari instansi?', mode: 'options', options: ['Ada', 'Tidak'] },
@@ -271,6 +352,8 @@
                         this.setOptions(step.options || []);
                     } else if (step.mode === 'text') {
                         this.setTextMode();
+                    } else if (step.mode === 'file') {
+                        this.setFileMode();
                     } else {
                         this.setTextMode();
                         this.branchSteps.shift();
@@ -287,6 +370,10 @@
 
                     if (step.mode !== 'done') {
                         this.dataForm[step.key] = value;
+                    }
+
+                    if (step.key === 'has_evidence' && value !== 'Ada') {
+                        this.branchSteps = this.branchSteps.filter((item) => item.key !== 'evidence_uploads');
                     }
 
                     if (!this.branchSteps.length) {
@@ -310,17 +397,22 @@
 
                 async saveConversation() {
                     try {
+                        const payload = new FormData();
+                        payload.append('request_category', requestCategory);
+                        payload.append('form_data', JSON.stringify(this.dataForm));
+                        payload.append('messages', JSON.stringify(this.messages));
+
+                        this.evidenceFiles.forEach((file) => {
+                            payload.append('evidence_files[]', file);
+                        });
+
                         const response = await fetch(storeUrl, {
                             method: 'POST',
                             headers: {
-                                'Content-Type': 'application/json',
                                 'Accept': 'application/json',
                                 'X-CSRF-TOKEN': csrfToken,
                             },
-                            body: JSON.stringify({
-                                form_data: this.dataForm,
-                                messages: this.messages,
-                            }),
+                            body: payload,
                         });
 
                         if (!response.ok) {

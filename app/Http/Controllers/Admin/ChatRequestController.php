@@ -5,14 +5,23 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\ChatRequestsExport;
 use App\Http\Controllers\Controller;
 use App\Models\ChatRequest;
+use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ChatRequestController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $selectedCategory = $request->string('category')->toString();
+
+        $query = ChatRequest::query();
+        if (in_array($selectedCategory, ['pelayanan', 'pengaduan'], true)) {
+            $query->where('request_category', $selectedCategory);
+        }
+
         return view('admin.chat-requests.index', [
-            'chatRequests' => ChatRequest::query()->latest('submitted_at')->paginate(15),
+            'chatRequests' => $query->latest('submitted_at')->paginate(15)->withQueryString(),
+            'selectedCategory' => $selectedCategory,
         ]);
     }
 
