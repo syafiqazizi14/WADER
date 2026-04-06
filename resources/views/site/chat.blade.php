@@ -23,7 +23,7 @@
 
             <nav class="layout-nav">
                 <a href="{{ route('site.page', 'beranda') }}" class="layout-nav-link">Beranda</a>
-                <a href="{{ route('site.page', 'pst-center') }}" class="layout-nav-link">PST Center</a>
+                <a href="{{ route('site.pst-center') }}" class="layout-nav-link">PST Center</a>
                 <a href="{{ route('site.chat') }}" class="layout-nav-link active">Jenis Pelayanan</a>
                 <a href="{{ route('site.page', 'stimo-2-0') }}" class="layout-nav-link">STIMO 2.0</a>
                 <a href="{{ route('site.page', 'backend') }}" class="layout-nav-link">Backend</a>

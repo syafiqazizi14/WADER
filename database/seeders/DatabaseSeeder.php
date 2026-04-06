@@ -69,7 +69,7 @@ class DatabaseSeeder extends Seeder
         ServiceLink::firstOrCreate(
             ['name' => 'Pengaduan'],
             [
-                'url' => '/pengaduan',
+                'url' => 'https://tripetto.app/run/P0HWPTK3JJ',
                 'category' => 'Layanan',
                 'sort_order' => 1,
                 'is_active' => true,

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Page;
 use App\Models\ServiceLink;
 use App\Models\Setting;
+use App\Models\StatistikMojokertoItem;
 use Illuminate\Database\QueryException;
 
 class SiteController extends Controller
@@ -21,10 +22,19 @@ class SiteController extends Controller
         ]);
     }
 
+    public function pstCenter()
+    {
+        return view('site.pst-center', [
+            'serviceLinks' => ServiceLink::query()
+                ->where('is_active', true)
+                ->orderBy('sort_order')
+                ->get(),
+            'settings' => Setting::query()->pluck('value', 'key'),
+        ]);
+    }
+
     public function show(string $slug)
     {
- fitur-pengaduan
-
         // Halaman khusus untuk statistik-mojokerto
         if ($slug === 'statistik-mojokerto') {
             return view('site.statistik-mojokerto', [
@@ -36,7 +46,7 @@ class SiteController extends Controller
                 'settings' => Setting::query()->pluck('value', 'key'),
             ]);
         }
-main
+
         try {
             $page = Page::query()
                 ->where('slug', $slug)
