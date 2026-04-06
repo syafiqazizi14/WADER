@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jenis Pelayanan - WADER</title>
-    <meta name="description" content="Layanan chatbot interaktif untuk memilih jenis pelayanan WADER.">
+    <title>{{ $pageTitle ?? 'Jenis Pelayanan' }} - WADER</title>
+    <meta name="description" content="{{ $pageDescription ?? 'Layanan chatbot interaktif untuk memilih jenis pelayanan WADER.' }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="site-shell page-jenis-pelayanan">
+<body class="site-shell page-{{ ($requestCategory ?? 'pelayanan') === 'pengaduan' ? 'pengaduan' : 'jenis-pelayanan' }}">
     @php
         $logoHeader = asset('asset/logo bps.png');
     @endphp
@@ -24,7 +24,8 @@
             <nav class="layout-nav">
                 <a href="{{ route('site.page', 'beranda') }}" class="layout-nav-link">Beranda</a>
                 <a href="{{ route('site.page', 'pst-center') }}" class="layout-nav-link">PST Center</a>
-                <a href="{{ route('site.chat') }}" class="layout-nav-link active">Jenis Pelayanan</a>
+                <a href="{{ route('site.chat') }}" class="layout-nav-link {{ ($requestCategory ?? 'pelayanan') === 'pelayanan' ? 'active' : '' }}">Jenis Pelayanan</a>
+                <a href="{{ route('site.complaints') }}" class="layout-nav-link {{ ($requestCategory ?? 'pelayanan') === 'pengaduan' ? 'active' : '' }}">Pengaduan</a>
                 <a href="{{ route('site.page', 'stimo-2-0') }}" class="layout-nav-link">STIMO 2.0</a>
                 <a href="{{ route('site.page', 'backend') }}" class="layout-nav-link">Backend</a>
                 @auth
@@ -39,11 +40,11 @@
     <main class="chat-full-main">
         <section class="chat-full-wrap reveal-card" style="--delay: 60ms;">
             <div class="chat-full-head">
-                <h1 class="content-followup-title">Jenis Pelayanan</h1>
-                <p class="content-followup-meta">Silakan isi data singkat lalu pilih jenis pelayanan. Chat ini akan langsung diteruskan ke petugas BPS Kabupaten Mojokerto.</p>
+                <h1 class="content-followup-title">{{ $headingTitle ?? 'Jenis Pelayanan' }}</h1>
+                <p class="content-followup-meta">{{ $headingDescription ?? 'Silakan isi data singkat lalu pilih jenis pelayanan. Chat ini akan langsung diteruskan ke petugas BPS Kabupaten Mojokerto.' }}</p>
             </div>
 
-            <div class="chatbot-shell chat-full-shell" x-data="pstCenterChatbot()">
+            <div class="chatbot-shell chat-full-shell" x-data="pstCenterChatbot('{{ $requestCategory ?? 'pelayanan' }}')">
                 <div class="chatbot-log chat-full-log" x-ref="log">
                     <template x-for="(message, idx) in messages" :key="idx">
                         <div class="chat-row" :class="message.from === 'bot' ? 'chat-row-bot' : 'chat-row-user'">
@@ -87,7 +88,7 @@
     </footer>
 
     <script>
-        function pstCenterChatbot() {
+        function pstCenterChatbot(requestCategory = 'pelayanan') {
             const storeUrl = '{{ route('chat-requests.store') }}';
             const csrfToken = '{{ csrf_token() }}';
 
@@ -113,10 +114,13 @@
                     this.currentOptions = [];
                     this.currentStep = 'name';
                     this.dataForm = {};
+                    this.dataForm.request_category = requestCategory;
                     this.branchSteps = [];
                     this.isSaved = false;
                     this.saveFailed = false;
-                    this.botAsk('Halo #SahabatData, dengan Siapa ini?');
+                    this.botAsk(requestCategory === 'pengaduan'
+                        ? 'Halo #SahabatData, kami siap menerima pengaduan Anda. Dengan siapa kami berbicara?'
+                        : 'Halo #SahabatData, dengan Siapa ini?');
                 },
 
                 botAsk(text) {
@@ -203,15 +207,41 @@
                             break;
                         case 'phone':
                             this.dataForm.phone = value;
-                            this.currentStep = 'service';
-                            this.botAsk('Apa yang bisa kami bantu?');
-                            this.setOptions([
-                                'Permintaan Data',
-                                'Rekomendasi Statistik',
-                                'Magang BPS',
-                                'Konsultasi Statistik',
-                                'Penjualan Produk Statistik Berbayar'
-                            ]);
+                            if (requestCategory === 'pengaduan') {
+                                this.currentStep = 'complaint_category';
+                                this.botAsk('Kategori pengaduan Anda?');
+                                this.setOptions([
+                                    'Pengaduan Pelayanan',
+                                    'Pengaduan Perilaku Petugas',
+                                    'Pengaduan Lainnya'
+                                ]);
+                            } else {
+                                this.currentStep = 'service';
+                                this.botAsk('Apa yang bisa kami bantu?');
+                                this.setOptions([
+                                    'Permintaan Data',
+                                    'Rekomendasi Statistik',
+                                    'Magang BPS',
+                                    'Konsultasi Statistik',
+                                    'Penjualan Produk Statistik Berbayar'
+                                ]);
+                            }
+                            break;
+                        case 'complaint_category':
+                            this.dataForm.service = value;
+                            this.currentStep = 'complaint_detail';
+                            this.botAsk('Silakan jelaskan pengaduan Anda secara ringkas dan jelas.');
+                            this.setTextMode();
+                            break;
+                        case 'complaint_detail':
+                            this.dataForm.complaint_detail = value;
+                            this.currentStep = 'complaint_expectation';
+                            this.botAsk('Apa tindak lanjut yang Anda harapkan dari kami?');
+                            this.setTextMode();
+                            break;
+                        case 'complaint_expectation':
+                            this.dataForm.complaint_expectation = value;
+                            this.finishConversation();
                             break;
                         case 'service':
                             this.dataForm.service = value;
@@ -301,7 +331,9 @@
                     this.currentStep = 'done';
                     this.currentMode = 'done';
                     this.currentOptions = [];
-                    this.botAsk('Terima kasih sudah menghubungi Badan Pusat Statistik Mojokerto. Keperluanmu akan segera kami proses sesuai antrian.');
+                    this.botAsk(requestCategory === 'pengaduan'
+                        ? 'Terima kasih, pengaduan Anda sudah kami terima dan akan ditindaklanjuti sesuai prosedur.'
+                        : 'Terima kasih sudah menghubungi Badan Pusat Statistik Mojokerto. Keperluanmu akan segera kami proses sesuai antrian.');
 
                     if (!this.isSaved) {
                         await this.saveConversation();
