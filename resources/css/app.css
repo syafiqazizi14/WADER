@@ -2421,6 +2421,24 @@ body.auth-shell {
     border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
+.badge-secondary {
+    background: rgba(100, 116, 139, 0.12);
+    color: #334155;
+    border: 1px solid rgba(100, 116, 139, 0.28);
+}
+
+.badge-warning {
+    background: rgba(245, 158, 11, 0.16);
+    color: #92400e;
+    border: 1px solid rgba(245, 158, 11, 0.34);
+}
+
+.badge-info {
+    background: rgba(14, 165, 233, 0.15);
+    color: #075985;
+    border: 1px solid rgba(14, 165, 233, 0.34);
+}
+
 /* Cards */
 .card {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.95) 100%);
@@ -2959,6 +2977,13 @@ body.auth-shell {
     user-select: none;
 }
 
+.admin-shell .btn-sm {
+    padding: 0.5rem 0.85rem;
+    font-size: 0.75rem;
+    border-radius: 0.6rem;
+    gap: 0.35rem;
+}
+
 /* Primary Button */
 .admin-shell button.bg-gray-900,
 .admin-shell a.bg-gray-900,
@@ -3059,6 +3084,14 @@ body.auth-shell {
 .admin-shell a.btn-danger:hover {
     transform: translateY(-3px);
     box-shadow: 0 12px 32px rgba(239, 68, 68, 0.4);
+}
+
+.admin-shell .form-error-message {
+    margin-top: 0.4rem;
+    margin-bottom: 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #b91c1c;
 }
 
 /* Edit/Destroy Links */

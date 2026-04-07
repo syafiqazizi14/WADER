@@ -26,6 +26,13 @@ class SiteController extends Controller
         ]);
     }
 
+    public function pss()
+    {
+        return view('site.pss', [
+            'settings' => Setting::query()->pluck('value', 'key'),
+        ]);
+    }
+
     public function show(string $slug)
     {
         // Halaman khusus untuk statistik-mojokerto
