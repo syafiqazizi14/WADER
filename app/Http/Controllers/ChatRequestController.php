@@ -65,7 +65,7 @@ class ChatRequestController extends Controller
             'status' => 'submitted',
             'form_data' => $form,
             'conversation_data' => $validated['messages'],
-            'submitted_at' => now(),
+            'submitted_at' => now('Asia/Jakarta'),
         ]);
 
         return response()->json([

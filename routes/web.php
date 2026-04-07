@@ -6,7 +6,6 @@ use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PageSectionController;
 use App\Http\Controllers\Admin\ExportController;
-use App\Http\Controllers\Admin\ServiceLinkController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\StatistikMojokertoItemController;
 use App\Http\Controllers\ChatRequestController;
@@ -28,7 +27,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:superadmin,edi
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
     Route::resource('pages', PageController::class)->except(['show']);
     Route::resource('sections', PageSectionController::class)->except(['show']);
-    Route::resource('service-links', ServiceLinkController::class)->except(['show']);
     Route::resource('statistik-mojokerto', StatistikMojokertoItemController::class)
         ->except(['show'])
         ->parameters(['statistik-mojokerto' => 'item']);

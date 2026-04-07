@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Exports\ChatRequestsExport;
+use App\Exports\DataPelayananPengaduanExport;
 use App\Http\Controllers\Controller;
 use App\Models\ChatRequest;
 use Illuminate\Http\Request;
@@ -34,7 +34,7 @@ class ChatRequestController extends Controller
 
     public function export()
     {
-        $filename = 'chat-requests-'.now()->format('Ymd-His').'.xlsx';
-        return Excel::download(new ChatRequestsExport(), $filename);
+        $filename = 'history-chat-'.now('Asia/Jakarta')->format('Ymd-His').'.xlsx';
+        return Excel::download(new DataPelayananPengaduanExport(), $filename);
     }
 }

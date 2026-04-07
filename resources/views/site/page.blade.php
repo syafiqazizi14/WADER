@@ -13,7 +13,7 @@
 <body class="site-shell page-{{ $page->slug }}">
     @php
         $logoMain = asset('asset/Wader.png');
-        $logoHeader = asset('asset/logo bps.png');
+        $logoHeader = asset('asset/Wader.png');
         $menuSignImage = asset('asset/menu.png');
         $menuIcon1 = asset('asset/jenis layanan.png');
         $menuIcon2 = asset('asset/pengaduan.png');

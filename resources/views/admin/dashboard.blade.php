@@ -30,34 +30,6 @@
             </div>
         @endif
 
-        <!-- Stats Grid -->
-        <div class="stats-grid">
-            <div class="stat-card stat-card-blue">
-                <div class="stat-icon opacity-80">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
-                </div>
-                <p class="stat-label">TOTAL HALAMAN</p>
-                <p class="stat-value">{{ $totalPages }}</p>
-                <p class="stat-desc">dari semua halaman</p>
-            </div>
-            <div class="stat-card stat-card-green">
-                <div class="stat-icon opacity-80">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-square"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 12 2 2 4-4"/></svg>
-                </div>
-                <p class="stat-label">HALAMAN PUBLISH</p>
-                <p class="stat-value">{{ $publishedPages }}</p>
-                <p class="stat-desc">sudah dipublikasi</p>
-            </div>
-            <div class="stat-card stat-card-purple">
-                <div class="stat-icon opacity-80">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-                </div>
-                <p class="stat-label">LINK LAYANAN</p>
-                <p class="stat-value">{{ $activeServiceLinks }}</p>
-                <p class="stat-desc">link aktif</p>
-            </div>
-        </div>
-
         <!-- Activity Section -->
         <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden mt-8">
                 <div class="card-header border-b border-gray-100 px-6 py-4">
@@ -109,18 +81,6 @@
 
             <!-- Quick Links -->
             <div class="quick-actions-grid mt-8">
-                <a href="{{ route('admin.pages.create') }}" class="quick-action-card">
-                    <div class="quick-action-icon text-blue-600 bg-blue-50">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-plus"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><line x1="9" x2="15" y1="15" y2="15"/><line x1="12" x2="12" y1="12" y2="18"/></svg>
-                    </div>
-                    <div>
-                        <h4 class="quick-action-title">Buat Halaman</h4>
-                        <p class="quick-action-desc">Tambah halaman baru</p>
-                    </div>
-                    <span class="quick-action-arrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-                    </span>
-                </a>
                 <a href="{{ route('admin.sections.create') }}" class="quick-action-card">
                     <div class="quick-action-icon text-indigo-600 bg-indigo-50">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-template"><rect width="18" height="7" x="3" y="3" rx="1"/><rect width="9" height="7" x="3" y="14" rx="1"/><rect width="5" height="7" x="16" y="14" rx="1"/></svg>

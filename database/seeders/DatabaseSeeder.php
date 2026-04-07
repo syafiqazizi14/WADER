@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Page;
 use App\Models\Role;
-use App\Models\ServiceLink;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -64,16 +63,6 @@ class DatabaseSeeder extends Seeder
         Page::firstOrCreate(
             ['slug' => 'backend'],
             ['title' => 'Backend', 'is_published' => true, 'published_at' => now()],
-        );
-
-        ServiceLink::firstOrCreate(
-            ['name' => 'Pengaduan'],
-            [
-                'url' => '/pengaduan',
-                'category' => 'Layanan',
-                'sort_order' => 1,
-                'is_active' => true,
-            ],
         );
 
         Setting::updateOrCreate(['key' => 'contact_email'], ['group' => 'contact', 'value' => 'bps3516@bps.go.id']);

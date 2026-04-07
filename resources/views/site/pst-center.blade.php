@@ -84,20 +84,6 @@
                     </a>
                 @endforeach
             </div>
-
-            @if (!empty($serviceLinks) && count($serviceLinks))
-                <article class="content-followup-card reveal-card" style="--delay: 360ms;">
-                    <div class="content-followup-body">
-                        <p class="content-tag">LINK LAYANAN</p>
-                        <h2 class="content-title">Referensi Layanan Terkait</h2>
-                        <div class="pst-center-links">
-                            @foreach ($serviceLinks as $link)
-                                <a href="{{ $link->url }}" target="_blank" rel="noopener noreferrer" class="footer-link-chip">{{ $link->name }}</a>
-                            @endforeach
-                        </div>
-                    </div>
-                </article>
-            @endif
         </section>
     </main>
 

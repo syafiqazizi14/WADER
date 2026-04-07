@@ -1,7 +1,7 @@
 <nav x-data="{ open: false }" class="sidebar-nav">
     <div class="sidebar-header">
         <a href="{{ route('dashboard') }}" class="sidebar-brand">
-            <span class="sidebar-brand-text">WADER</span>
+            <img src="{{ asset('asset/Wader.png') }}" alt="WADER" class="sidebar-brand-logo">
         </a>
         <button @click="open = !open" class="sidebar-toggle md:hidden">
             <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -17,17 +17,9 @@
                 <span class="sidebar-menu-icon">📊</span>
                 <span class="sidebar-menu-label">Dashboard</span>
             </a>
-            <a href="{{ route('admin.pages.index') }}" :class="{'sidebar-menu-item-active': request()->routeIs('admin.pages.*')}" class="sidebar-menu-item">
-                <span class="sidebar-menu-icon">📄</span>
-                <span class="sidebar-menu-label">Halaman</span>
-            </a>
             <a href="{{ route('admin.sections.index') }}" :class="{'sidebar-menu-item-active': request()->routeIs('admin.sections.*')}" class="sidebar-menu-item">
                 <span class="sidebar-menu-icon">🔲</span>
                 <span class="sidebar-menu-label">Section</span>
-            </a>
-            <a href="{{ route('admin.service-links.index') }}" :class="{'sidebar-menu-item-active': request()->routeIs('admin.service-links.*')}" class="sidebar-menu-item">
-                <span class="sidebar-menu-icon">🔗</span>
-                <span class="sidebar-menu-label">Link Layanan</span>
             </a>
             <a href="{{ route('admin.statistik-mojokerto.index') }}" :class="{'sidebar-menu-item-active': request()->routeIs('admin.statistik-mojokerto.*')}" class="sidebar-menu-item">
                 <span class="sidebar-menu-icon">📈</span>

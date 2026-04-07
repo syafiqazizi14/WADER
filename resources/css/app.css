@@ -2222,7 +2222,7 @@ body.auth-shell {
 }
 
 .activity-table thead th {
-    font-size: 0.7rem;
+    font-size: 2rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--text-secondary);
@@ -2591,6 +2591,12 @@ body.auth-shell {
     background-clip: text;
 }
 
+.sidebar-brand-logo {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
 .sidebar-toggle {
     display: none;
     width: 40px;
@@ -2868,7 +2874,7 @@ body.auth-shell {
 }
 
 .admin-shell table th {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--text-secondary);

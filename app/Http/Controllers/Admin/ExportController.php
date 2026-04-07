@@ -9,7 +9,7 @@ class ExportController extends Controller
 {
     public function pelayananPengaduan()
     {
-        $filename = 'pelayanan-pengaduan-'.now()->format('Ymd-His').'.xlsx';
+        $filename = 'history-chat-'.now('Asia/Jakarta')->format('Ymd-His').'.xlsx';
 
         return app('excel')->download(new DataPelayananPengaduanExport(), $filename);
     }

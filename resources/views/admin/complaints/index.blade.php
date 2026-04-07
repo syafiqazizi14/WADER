@@ -58,20 +58,20 @@
                     <table class="activity-table">
                         <thead>
                             <tr>
-                                <th>🕐 Waktu</th>
-                                <th>👤 Nama Lengkap</th>
-                                <th>📧 Email</th>
-                                <th>📱 Nomor Telp</th>
-                                <th>🏢 Instansi</th>
-                                <th>📊 Status</th>
-                                <th>⚙️ Aksi</th>
+                                <th>Waktu</th>
+                                <th>Nama Lengkap</th>
+                                <th>Email</th>
+                                <th>Nomor Telp</th>
+                                <th>Instansi</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($complaints as $complaint)
                                 <tr>
                                     <td>
-                                        <span class="text-xs">{{ $complaint->created_at->format('d M H:i') }}</span>
+                                        <span class="text-xs">{{ $complaint->created_at->timezone('Asia/Jakarta')->format('d M H:i') }}</span>
                                     </td>
                                     <td class="font-semibold">{{ $complaint->nama_lengkap }}</td>
                                     <td class="text-xs font-mono">{{ $complaint->email }}</td>

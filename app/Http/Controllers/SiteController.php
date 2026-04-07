@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
-use App\Models\ServiceLink;
 use App\Models\Setting;
 use App\Models\StatistikMojokertoItem;
 use Illuminate\Database\QueryException;
@@ -59,10 +58,6 @@ class SiteController extends Controller
 
         return view('site.page', [
             'page' => $page,
-            'serviceLinks' => ServiceLink::query()
-                ->where('is_active', true)
-                ->orderBy('sort_order')
-                ->get(),
             'settings' => Setting::query()->pluck('value', 'key'),
         ]);
     }

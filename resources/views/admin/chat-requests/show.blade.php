@@ -19,7 +19,7 @@
                     <p><span class="font-semibold">Instansi:</span> {{ $chatRequest->institution ?? '-' }}</p>
                     <p class="md:col-span-2"><span class="font-semibold">Alamat:</span> {{ $chatRequest->address ?? '-' }}</p>
                     <p><span class="font-semibold">Layanan:</span> {{ $chatRequest->service_type ?? '-' }}</p>
-                    <p><span class="font-semibold">Waktu Submit:</span> {{ optional($chatRequest->submitted_at)->format('d M Y H:i:s') }}</p>
+                    <p><span class="font-semibold">Waktu Submit:</span> {{ optional($chatRequest->submitted_at)?->timezone('Asia/Jakarta')->format('d M Y H:i:s') }}</p>
                 </div>
             </div>
 
