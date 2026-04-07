@@ -258,20 +258,27 @@
         .stat-lightbox-dialog {
             position: relative;
             z-index: 1;
-            width: min(1200px, 96vw);
+            width: fit-content;
+            max-width: 96vw;
             max-height: 92vh;
             border-radius: 12px;
             background: #0d1119;
             padding: 14px 14px 10px;
-            overflow: auto;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .stat-lightbox-image {
-            width: 100%;
+            width: auto;
+            max-width: calc(96vw - 28px);
             height: auto;
+            max-height: calc(92vh - 86px);
             display: block;
             border-radius: 8px;
             background: #ffffff;
+            object-fit: contain;
         }
 
         .stat-lightbox-title {
