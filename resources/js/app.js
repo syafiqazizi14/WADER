@@ -9,8 +9,15 @@ document.body.classList.add('js-ready');
 const header = document.querySelector('.layout-header');
 
 if (header) {
+	const needsTransparentTopbar = document.body.matches('.page-beranda, .page-pst-center, .page-backend, .page-statistik-mojokerto');
+
 	const syncHeaderState = () => {
-		header.classList.toggle('is-scrolled', window.scrollY > 8);
+		const isScrolled = window.scrollY > 8;
+		header.classList.toggle('is-scrolled', isScrolled);
+
+		if (needsTransparentTopbar) {
+			header.classList.toggle('is-at-top', !isScrolled);
+		}
 	};
 
 	syncHeaderState();
