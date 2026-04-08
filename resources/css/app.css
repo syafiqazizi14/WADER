@@ -50,6 +50,10 @@ body.site-shell {
     position: fixed;
     left: 0;
     right: 0;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    border-bottom-color: rgba(22, 22, 26, 0.08);
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
 }
 
 .layout-header.is-scrolled {
@@ -1194,6 +1198,26 @@ body.site-shell {
     transform: translateY(14px);
     animation: rise-in 680ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
     animation-delay: var(--delay, 0ms);
+}
+
+body.js-ready .scroll-reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 700ms ease, transform 700ms ease;
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+}
+
+body.js-ready .scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.js-ready .scroll-reveal {
+        transition: none;
+        transform: none;
+    }
 }
 
 @keyframes menu-card-in {

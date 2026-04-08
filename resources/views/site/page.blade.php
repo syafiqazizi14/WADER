@@ -14,6 +14,7 @@
     @php
         $logoMain = asset('asset/Wader.png');
         $logoHeader = asset('asset/logo bps.png');
+        $heroBg = asset('asset/beranda2.png');
         $menuSignImage = asset('asset/menu.png');
         $menuIcon1 = asset('asset/jenis layanan.png');
         $menuIcon2 = asset('asset/pengaduan.png');
@@ -79,22 +80,20 @@
     </header>
 
     <main>
-        <section class="hero-layout-stage" style="min-height: clamp(620px, 74vh, 900px); background-size: 118% auto;">
-            <div class="corner-band corner-band-top-right"></div>
-            <div class="corner-band corner-band-bottom-left"></div>
+        <section class="hero-layout-stage" style="min-height: calc(100vh - 88px); background: #ffffff url('{{ $heroBg }}') center top / cover no-repeat;">
 
             <div class="hero-layout-center reveal-card" style="--delay: 0ms;">
                 <img src="{{ $logoMain }}" alt="WADER" class="hero-main-logo">
             </div>
         </section>
-        <section class="relative -mt-72050 -mb-9 z-10 pointer-events-none">
+        <section class="scroll-reveal menu-preview-section">
             <div class="bg-white w-full py-0 shadow-sm flex justify-center leading-none">
                 <img src="{{ asset('asset/menuu.jpg') }}"
                      class="block w-[92vw] max-w-[1280px] h-auto">
             </div>
         </section>
 
-        <section class="service-blue-zone reveal-card" style="--delay: 140ms;">
+        <section class="service-blue-zone scroll-reveal" style="--reveal-delay: 80ms;">
             <span class="sparkle sparkle-left">✦</span>
             <span class="sparkle sparkle-left-sm">✦</span>
             <span class="sparkle sparkle-right">✦</span>
@@ -111,7 +110,7 @@
             </div>
         </section>
 
-        <div style="height: 110px; background: #8dc64f;"></div>
+        <div class="scroll-reveal" style="height: 110px; background: #8dc64f; --reveal-delay: 120ms;"></div>
 
         <style>
             .gallery-card {
@@ -136,7 +135,7 @@
             }
         </style>
 
-        <section class="w-full mt-0 pt-0 pb-8 md:pb-10" style="background: #8dc64f;">
+        <section class="scroll-reveal w-full mt-0 pt-0 pb-8 md:pb-10" style="background: #8dc64f; --reveal-delay: 160ms;">
             <div class="max-w-7xl mx-auto px-4 mt-0">
                 @php
                     $berandaGalleryItems = $page->sections
@@ -201,7 +200,7 @@
             </div>
         </div>
 
-        <section class="support-banner-wrap" style="margin-top: 0;">
+        <section class="support-banner-wrap scroll-reveal" style="margin-top: 0; --reveal-delay: 200ms;">
             <div class="support-banner-top" style="background: #8dc64f; padding: 1.45rem 1rem;">
                 <div class="support-banner-top-inner" style="max-width: 1220px; margin: 0 auto; display: flex; justify-content: space-around; align-items: center; gap: 4.3rem; flex-wrap: wrap;">
                     <div class="support-head-item" style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
@@ -226,7 +225,7 @@
             </div>
         </section>
 
-        <section style="background: #466633; padding: 1.2rem 0 0;">
+        <section class="scroll-reveal" style="background: #466633; padding: 1.2rem 0 0; --reveal-delay: 240ms;">
             <div style="max-width: 1280px; margin: 0 auto; padding: 0 1rem;">
                 <div style="background: #466633;">
                     <img src="{{ $familyBanner }}" alt="Keluarga BPS Kabupaten Mojokerto" style="display: block; width: 93%; height: auto; object-fit: cover; margin: 0 auto;">
