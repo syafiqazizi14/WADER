@@ -264,7 +264,6 @@
             </div>
         </section>
 
-
     </main>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
