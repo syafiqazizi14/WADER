@@ -21,14 +21,14 @@
 
     <header class="layout-header">
         <div class="layout-header-inner">
-            <a href="{{ route('site.home') }}" class="brand-lockup">
+            <a href="{{ route('site.home') }}" class="brand-lockup active">
                 <img src="{{ $logoHeader }}" alt="BPS Kabupaten Mojokerto" class="brand-logo-header">
             </a>
 
             <nav class="layout-nav">
                 <a href="{{ route('site.page', 'beranda') }}" class="layout-nav-link">Beranda</a>
                 <a href="{{ route('site.pst-center') }}" class="layout-nav-link">PST Center</a>
-                <a href="{{ route('site.page', 'stimo-2-0') }}" class="layout-nav-link">STIMO 2.0</a>
+                <a href="{{ route('site.page', 'statistik-mojokerto') }}" class="layout-nav-link active">STIMO 2.0</a>
                 <a href="{{ route('site.page', 'backend') }}" class="layout-nav-link">Backend</a>
                 @auth
                     <a href="{{ route('admin.dashboard') }}" class="layout-nav-link">Admin</a>
@@ -57,23 +57,31 @@
             <div class="statistik-cards-grid">
                 @forelse ($items as $item)
                     <div class="stat-card">
-                        <div class="stat-card-inner">
-                            @php
-                                $imageSrc = $item->image_base64 && $item->image_mime_type
-                                    ? 'data:'.$item->image_mime_type.';base64,'.$item->image_base64
-                                    : asset($item->image_path);
-                            @endphp
-                            <img src="{{ $imageSrc }}" alt="{{ $item->title }}" class="stat-card-image">
-                            <button type="button" class="stat-card-zoom-btn" aria-label="Perbesar {{ $item->title }}">Perbesar</button>
-                        </div>
-                        <h3 class="stat-card-label">{{ $item->title }}</h3>
+                        <button
+                            type="button"
+                            class="stat-card-trigger"
+                            data-main-image="{{ $item->main_image_url }}"
+                            data-main-title="{{ $item->title }}"
+                            aria-label="Lihat detail {{ $item->title }}"
+                        >
+                            <div class="stat-card-inner">
+                                <img src="{{ $item->thumbnail_url }}" alt="Thumbnail {{ $item->title }}" class="stat-card-image">
+                            </div>
+                            <div class="stat-card-body">
+                                <h3 class="stat-card-label">{{ $item->title }}</h3>
+                                <p class="stat-card-spotlight">{{ $item->spotlight_text }}</p>
+                            </div>
+                        </button>
                     </div>
                 @empty
                     <div class="stat-card">
                         <div class="stat-card-inner">
                             <img src="{{ asset('asset/beranda.jpg') }}" alt="Belum ada data" class="stat-card-image">
                         </div>
-                        <h3 class="stat-card-label">Belum ada data statistik aktif</h3>
+                        <div class="stat-card-body">
+                            <h3 class="stat-card-label">Belum ada data statistik aktif</h3>
+                            <p class="stat-card-spotlight">Silakan cek kembali setelah admin menambahkan konten.</p>
+                        </div>
                     </div>
                 @endforelse
             </div>
@@ -120,6 +128,19 @@
     </div>
 
     <style>
+        /* Override navbar STIMO 2.0 styling */
+        .page-statistik-mojokerto .layout-nav-link:nth-child(3) {
+            background: rgba(29, 167, 217, 0.2) !important;
+            color: #0f172a !important;
+            font-weight: 600 !important;
+            box-shadow: inset 0 0 0 1px rgba(11, 95, 174, 0.2) !important;
+        }
+
+        .page-statistik-mojokerto .layout-nav-link:nth-child(3)::after {
+            background: linear-gradient(90deg, #0b5fae, #1da7d9) !important;
+            transform: scaleX(1) !important;
+        }
+
         html,
         body {
             min-height: 100%;
@@ -190,17 +211,17 @@
         /* === STAT CARD === */
         .stat-card {
             background: white;
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.65);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(15, 63, 117, 0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
-            cursor: pointer;
         }
 
         .stat-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+            border-color: rgba(15, 63, 117, 0.2);
         }
 
         .stat-card-inner {
@@ -211,28 +232,33 @@
             position: relative;
         }
 
+        .stat-card-trigger {
+            display: block;
+            width: 100%;
+            border: none;
+            background: transparent;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+            cursor: pointer;
+            font: inherit;
+            color: inherit;
+        }
+
         .stat-card-image {
             width: 100%;
-            height: auto;
-            object-fit: contain;
+            height: 450px;
+            object-fit: cover;
             display: block;
-            transform: scale(1.045);
+            transform: scale(1.02);
             transform-origin: center;
         }
 
-        .stat-card-zoom-btn {
-            position: absolute;
-            right: 10px;
-            bottom: 10px;
-            border: none;
-            border-radius: 999px;
-            padding: 0.42rem 0.8rem;
-            font-size: 0.82rem;
-            font-weight: 700;
-            color: #0f3f75;
-            background: rgba(255, 255, 255, 0.92);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
-            cursor: pointer;
+        .stat-card-body {
+            padding: 24px;
+            display: grid;
+            gap: 10px;
+            background: linear-gradient(135deg, rgba(15, 63, 117, 0.02) 0%, rgba(31, 158, 89, 0.02) 100%);
         }
 
         .stat-lightbox {
@@ -305,13 +331,21 @@
         }
 
         .stat-card-label {
-            padding: 22px;
             margin: 0;
-            font-size: 20px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #0f3f75;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+
+        .stat-card-spotlight {
+            margin: 0;
+            color: #1f9e59;
+            font-size: 0.9rem;
+            line-height: 1.6;
             font-weight: 600;
-            color: #333;
-            text-align: center;
-            line-height: 1.4;
+            letter-spacing: 0.2px;
         }
 
         .statistik-info-strip {
@@ -391,6 +425,10 @@
                 font-size: 16px;
             }
 
+            .stat-card-image {
+                height: 340px;
+            }
+
             .statistik-info-inner {
                 flex-direction: column;
                 align-items: flex-start;
@@ -407,11 +445,8 @@
                 height: 58px;
             }
 
-            .stat-card-zoom-btn {
-                right: 8px;
-                bottom: 8px;
-                padding: 0.36rem 0.66rem;
-                font-size: 0.76rem;
+            .stat-card-body {
+                padding: 16px;
             }
         }
 
@@ -452,14 +487,13 @@
             };
 
             document.addEventListener('click', (event) => {
-                const zoomBtn = event.target.closest('.stat-card-zoom-btn');
-                if (zoomBtn) {
-                    const card = zoomBtn.closest('.stat-card');
-                    const image = card ? card.querySelector('.stat-card-image') : null;
-                    const title = card ? card.querySelector('.stat-card-label') : null;
+                const cardTrigger = event.target.closest('.stat-card-trigger');
+                if (cardTrigger) {
+                    const imageUrl = cardTrigger.getAttribute('data-main-image') || '';
+                    const title = cardTrigger.getAttribute('data-main-title') || '';
 
-                    if (image) {
-                        openLightbox(image.src, title ? title.textContent.trim() : '');
+                    if (imageUrl) {
+                        openLightbox(imageUrl, title);
                     }
 
                     return;

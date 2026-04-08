@@ -60,6 +60,12 @@ body.site-shell {
     height: 58px;
     width: auto;
     object-fit: contain;
+    transition: all 180ms ease;
+}
+
+.brand-lockup.active .brand-logo-header {
+    filter: drop-shadow(0 0 6px rgba(239, 125, 0, 0.35));
+    transform: scale(1.05);
 }
 
 .layout-nav {
@@ -127,6 +133,17 @@ body.site-shell {
 }
 
 .page-pst-center .layout-nav-link.active::after {
+    background: linear-gradient(90deg, #1f9e59, #66bb6a);
+}
+
+.page-statistik-mojokerto .layout-nav-link.active {
+    background: rgba(31, 158, 89, 0.22);
+    color: #1f9e59;
+    font-weight: 600;
+    box-shadow: inset 0 0 0 1px rgba(31, 158, 89, 0.3);
+}
+
+.page-statistik-mojokerto .layout-nav-link.active::after {
     background: linear-gradient(90deg, #1f9e59, #66bb6a);
 }
 
@@ -330,10 +347,10 @@ body.site-shell {
 }
 
 .service-ref-icon-wrap {
-    width: min(23vw, 248px);
-    height: min(23vw, 248px);
-    min-width: 168px;
-    min-height: 168px;
+    width: min(25vw, 288px);
+    height: min(25vw, 288px);
+    min-width: 188px;
+    min-height: 188px;
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.9);
     border: 4px solid rgba(255, 255, 255, 0.4);
@@ -345,8 +362,8 @@ body.site-shell {
 }
 
 .service-ref-icon {
-    width: 78%;
-    height: 78%;
+    width: 84%;
+    height: 84%;
     object-fit: contain;
 }
 

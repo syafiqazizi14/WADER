@@ -9,6 +9,7 @@ use App\Models\Page;
 use App\Models\PageSection;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 
 class PageSectionController extends Controller
 {
@@ -33,6 +34,8 @@ class PageSectionController extends Controller
         $validated = $this->validated($request);
         $section = PageSection::create($validated);
 
+        $this->enforceMaxActiveStatistikItems($section->page_id);
+
         ActivityLog::create([
             'user_id' => $request->user()->id,
             'module' => 'page_sections',
@@ -55,7 +58,9 @@ class PageSectionController extends Controller
 
     public function update(Request $request, PageSection $section)
     {
-        $section->update($this->validated($request));
+        $section->update($this->validated($request, $section));
+
+        $this->enforceMaxActiveStatistikItems($section->page_id);
 
         ActivityLog::create([
             'user_id' => $request->user()->id,
@@ -82,19 +87,77 @@ class PageSectionController extends Controller
         return redirect()->route('admin.sections.index')->with('status', 'Section berhasil dihapus.');
     }
 
-    private function validated(Request $request): array
+    private function validated(Request $request, ?PageSection $section = null): array
     {
+        $pageId = (int) $request->input('page_id');
+        $page = Page::query()->find($pageId);
+        $isStatistikPage = $page && $page->slug === 'statistik-mojokerto';
+
         $validated = $request->validate([
             'page_id' => ['required', 'exists:pages,id'],
-            'type' => ['required', Rule::in($this->types())],
-            'title' => ['nullable', 'string', 'max:255'],
+            'type' => [$isStatistikPage ? 'nullable' : 'required', Rule::in($this->types())],
+            'title' => [$isStatistikPage ? 'required' : 'nullable', 'string', 'max:255'],
+            'spotlight_text' => [$isStatistikPage ? 'required' : 'nullable', 'string', 'max:255'],
             'content' => ['nullable', 'string'],
             'media_id' => ['nullable', 'exists:media,id'],
+            'thumbnail_media_id' => ['nullable', 'exists:media,id'],
+            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
+            'thumbnail_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
             'button_label' => ['nullable', 'string', 'max:120'],
             'button_url' => ['nullable', 'url', 'max:255'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
             'is_active' => ['nullable', 'boolean'],
         ]);
+
+        if ($isStatistikPage) {
+            $validated['type'] = 'image';
+            $validated['content'] = null;
+            $validated['button_label'] = null;
+            $validated['button_url'] = null;
+
+            if ($request->hasFile('image')) {
+                $path = $request->file('image')->store('media', 'public');
+                $media = Medium::create([
+                    'file_name' => $request->file('image')->getClientOriginalName(),
+                    'file_path' => $path,
+                    'mime_type' => $request->file('image')->getClientMimeType(),
+                    'alt_text' => $validated['title'] ?? null,
+                    'uploaded_by' => $request->user()->id,
+                ]);
+
+                $validated['media_id'] = $media->id;
+            }
+
+            if ($request->hasFile('thumbnail_image')) {
+                $path = $request->file('thumbnail_image')->store('media', 'public');
+                $thumbnailMedia = Medium::create([
+                    'file_name' => $request->file('thumbnail_image')->getClientOriginalName(),
+                    'file_path' => $path,
+                    'mime_type' => $request->file('thumbnail_image')->getClientMimeType(),
+                    'alt_text' => ($validated['title'] ?? null) ? 'Thumbnail '.$validated['title'] : null,
+                    'uploaded_by' => $request->user()->id,
+                ]);
+
+                $validated['thumbnail_media_id'] = $thumbnailMedia->id;
+            }
+
+            $effectiveMediaId = $validated['media_id'] ?? $section?->media_id;
+            if (! $effectiveMediaId) {
+                throw ValidationException::withMessages([
+                    'image' => 'Foto wajib diunggah untuk Section Statistik Mojokerto.',
+                ]);
+            }
+
+            $effectiveThumbnailMediaId = $validated['thumbnail_media_id'] ?? $section?->thumbnail_media_id;
+            if (! $effectiveThumbnailMediaId) {
+                throw ValidationException::withMessages([
+                    'thumbnail_image' => 'Thumbnail wajib diunggah untuk Section Statistik Mojokerto.',
+                ]);
+            }
+        } else {
+            $validated['spotlight_text'] = null;
+            $validated['thumbnail_media_id'] = null;
+        }
 
         $validated['is_active'] = $request->boolean('is_active');
 
@@ -104,5 +167,30 @@ class PageSectionController extends Controller
     private function types(): array
     {
         return ['hero', 'text', 'image', 'cta', 'links', 'embed'];
+    }
+
+    private function enforceMaxActiveStatistikItems(int $pageId): void
+    {
+        $page = Page::query()->find($pageId);
+        if (! $page || $page->slug !== 'statistik-mojokerto') {
+            return;
+        }
+
+        $visibleIds = PageSection::query()
+            ->where('page_id', $pageId)
+            ->where('type', 'image')
+            ->where('is_active', true)
+            ->whereNotNull('media_id')
+            ->latest('id')
+            ->limit(12)
+            ->pluck('id');
+
+        PageSection::query()
+            ->where('page_id', $pageId)
+            ->where('type', 'image')
+            ->where('is_active', true)
+            ->whereNotNull('media_id')
+            ->whereNotIn('id', $visibleIds)
+            ->update(['is_active' => false]);
     }
 }

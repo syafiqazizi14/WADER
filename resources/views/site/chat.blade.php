@@ -17,7 +17,7 @@
 
     <header class="layout-header">
         <div class="layout-header-inner">
-            <a href="{{ route('site.home') }}" class="brand-lockup">
+            <a href="{{ route('site.home') }}" class="brand-lockup {{ request()->route()->getName() === 'site.page' && request()->route('slug') === 'statistik-mojokerto' ? 'active' : '' }}">
                 <img src="{{ $logoHeader }}" alt="BPS Kabupaten Mojokerto" class="brand-logo-header">
             </a>
 
@@ -26,7 +26,7 @@
                 <a href="{{ route('site.page', 'pst-center') }}" class="layout-nav-link">PST Center</a>
                 <a href="{{ route('site.chat') }}" class="layout-nav-link {{ ($requestCategory ?? 'pelayanan') === 'pelayanan' ? 'active' : '' }}">Jenis Pelayanan</a>
                 <a href="{{ route('site.complaints') }}" class="layout-nav-link {{ ($requestCategory ?? 'pelayanan') === 'pengaduan' ? 'active' : '' }}">Pengaduan</a>
-                <a href="{{ route('site.page', 'stimo-2-0') }}" class="layout-nav-link">STIMO 2.0</a>
+                <a href="{{ route('site.page', 'statistik-mojokerto') }}" class="layout-nav-link">STIMO 2.0</a>
                 <a href="{{ route('site.page', 'backend') }}" class="layout-nav-link">Backend</a>
                 @auth
                     <a href="{{ route('admin.dashboard') }}" class="layout-nav-link">Admin</a>

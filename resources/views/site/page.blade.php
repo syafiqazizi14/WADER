@@ -55,14 +55,14 @@
 
     <header class="layout-header">
         <div class="layout-header-inner">
-            <a href="{{ route('site.home') }}" class="brand-lockup">
+            <a href="{{ route('site.home') }}" class="brand-lockup {{ $page->slug === 'statistik-mojokerto' ? 'active' : '' }}">
                 <img src="{{ $logoHeader }}" alt="BPS Kabupaten Mojokerto" class="brand-logo-header">
             </a>
 
             <nav class="layout-nav">
                 <a href="{{ route('site.page', 'beranda') }}" class="layout-nav-link {{ $page->slug === 'beranda' ? 'active' : '' }}">Beranda</a>
                 <a href="{{ route('site.pst-center') }}" class="layout-nav-link {{ $page->slug === 'pst-center' ? 'active' : '' }}">PST Center</a>
-                <a href="{{ route('site.page', 'stimo-2-0') }}" class="layout-nav-link {{ $page->slug === 'stimo-2-0' ? 'active' : '' }}">STIMO 2.0</a>
+                <a href="{{ route('site.page', 'statistik-mojokerto') }}" class="layout-nav-link {{ $page->slug === 'statistik-mojokerto' ? 'active' : '' }}">STIMO 2.0</a>
                 <a href="{{ route('site.page', 'backend') }}" class="layout-nav-link {{ $page->slug === 'backend' ? 'active' : '' }}">Backend</a>
                 @auth
                     <a href="{{ route('admin.dashboard') }}" class="layout-nav-link">Admin</a>
@@ -91,7 +91,8 @@
 
         <section class="flex justify-center mt-10">
             <img src="{{ asset('asset/menu.png') }}" 
-                 class="w-[34px] h-auto rounded-2xl">
+                 class="h-auto rounded-2xl"
+                 style="width: clamp(220px, 30vw, 380px);">
         </section>
 
         <section class="service-blue-zone reveal-card" style="--delay: 140ms;">

@@ -13,9 +13,9 @@ class CreateStatistikMojokertoPage extends Seeder
     public function run(): void
     {
         Page::create([
-            'title' => 'Statistik Mojokerto',
+            'title' => 'STIMO',
             'slug' => 'statistik-mojokerto',
-            'meta_description' => 'Statistik Mojokerto',
+            'meta_description' => 'STIMO - Statistik Mojokerto',
             'is_published' => true,
         ]);
     }
