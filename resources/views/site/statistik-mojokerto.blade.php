@@ -334,14 +334,14 @@
             margin: 0;
             font-size: 1.15rem;
             font-weight: 700;
-            color: #0f3f75;
+            color: #000000;
             line-height: 1.5;
             word-break: break-word;
         }
 
         .stat-card-spotlight {
             margin: 0;
-            color: #1f9e59;
+            color: #000000;
             font-size: 0.9rem;
             line-height: 1.6;
             font-weight: 600;
