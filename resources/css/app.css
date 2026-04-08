@@ -2469,6 +2469,16 @@ body.auth-shell {
     color: var(--text-primary);
 }
 
+.activity-card-header {
+    padding: 1.05rem 1.5rem 0.9rem 1.5rem;
+    margin-bottom: 0;
+}
+
+.activity-card-title {
+    line-height: 1.3;
+    padding-top: 0.2rem;
+}
+
 /* Admin Shell Headings */
 .admin-shell h3 {
     font-family: 'Sora', 'Plus Jakarta Sans', sans-serif;
@@ -2563,6 +2573,7 @@ body.auth-shell {
 .sidebar-nav {
     width: 280px;
     height: 100vh;
+    min-height: 100vh;
     position: fixed;
     left: 0;
     top: 0;
@@ -2610,7 +2621,7 @@ body.auth-shell {
 }
 
 .sidebar-brand-logo {
-    height: 50px;
+    height: 64px;
     width: auto;
     object-fit: contain;
 }
@@ -2742,27 +2753,31 @@ body.auth-shell {
 
 .sidebar-actions {
     display: flex;
+    width: 100%;
     gap: 0.5rem;
 }
 
 .sidebar-action-btn {
-    flex: 1;
+    width: 100%;
+    min-height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.625rem;
-    border: 1px solid rgba(2, 132, 199, 0.2);
-    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    border: 1px solid rgba(220, 38, 38, 0.28);
+    border-radius: 12px;
     background: transparent;
-    color: var(--primary);
+    color: #dc2626;
     cursor: pointer;
     font-size: 1rem;
     transition: all var(--transition-fast);
 }
 
 .sidebar-action-btn:hover {
-    border-color: var(--primary);
-    background: rgba(2, 132, 199, 0.08);
+    border-color: #b91c1c;
+    background: rgba(220, 38, 38, 0.12);
+    color: #b91c1c;
+    transform: translateY(-1px);
 }
 
 /* Mobile Responsive */

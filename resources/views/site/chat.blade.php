@@ -12,7 +12,7 @@
 </head>
 <body class="site-shell page-{{ ($requestCategory ?? 'pelayanan') === 'pengaduan' ? 'pengaduan' : 'jenis-pelayanan' }}">
     @php
-        $logoHeader = asset('asset/Wader.png');
+        $logoHeader = asset('asset/logo bps.png');
     @endphp
 
     <header class="layout-header">
