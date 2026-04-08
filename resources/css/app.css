@@ -32,13 +32,31 @@ body.site-shell {
     color: var(--tone-ink);
 }
 
+.page-pst-center {
+    background: #ffffff;
+}
+
 .layout-header {
     position: sticky;
     top: 0;
     z-index: 40;
+    background: transparent;
+    backdrop-filter: none;
+    border-bottom: 1px solid transparent;
+    transition: background 200ms ease, backdrop-filter 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.page-beranda .layout-header {
+    position: fixed;
+    left: 0;
+    right: 0;
+}
+
+.layout-header.is-scrolled {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(6px);
-    border-bottom: 1px solid rgba(22, 22, 26, 0.08);
+    border-bottom-color: rgba(22, 22, 26, 0.08);
+    box-shadow: 0 2px 14px rgba(15, 23, 42, 0.08);
 }
 
 .layout-header-inner {
@@ -197,6 +215,23 @@ body.site-shell {
     background: #eceff1;
 }
 
+.page-beranda .hero-layout-stage {
+    min-height: clamp(540px, 60vh, 720px);
+    background: #ffffff url('/asset/beranda2.png') center top / 110% auto no-repeat;
+}
+
+.page-beranda .hero-layout-stage .corner-band {
+    display: none;
+}
+
+.page-beranda .hero-layout-center {
+    transform: none;
+}
+
+.page-beranda .hero-main-logo {
+    width: min(68vw, 500px);
+}
+
 .hero-layout-stage.hero-pst-center {
     background-repeat: no-repeat;
     background-position: center;
@@ -301,7 +336,11 @@ body.site-shell {
     position: relative;
     overflow: hidden;
     margin-top: 0;
-    border-top: 3px solid rgba(255, 255, 255, 0.55);
+    border-top: 0;
+}
+
+.page-beranda .service-blue-zone {
+    margin-top: -2px;
 }
 
 .service-grid-reference {
@@ -400,25 +439,25 @@ body.site-shell {
 .sparkle-left {
     left: 2.4rem;
     bottom: 2.1rem;
-    font-size: 3.3rem;
+    font-size: 5.8rem;
 }
 
 .sparkle-left-sm {
     left: 9.5rem;
     bottom: 4.7rem;
-    font-size: 2rem;
+    font-size: 3.8rem;
 }
 
 .sparkle-right {
-    right: 2.5rem;
-    top: 1.8rem;
-    font-size: 3.3rem;
+    right: 2.1rem;
+    top: 1.4rem;
+    font-size: 5.8rem;
 }
 
 .sparkle-right-sm {
-    right: 9.8rem;
-    top: 4.6rem;
-    font-size: 2rem;
+    right: 8.9rem;
+    top: 4.2rem;
+    font-size: 3.8rem;
 }
 
 .content-followup-wrap {
@@ -2486,6 +2525,16 @@ body.auth-shell {
     color: var(--text-primary);
 }
 
+.activity-card-header {
+    padding: 1.05rem 1.5rem 0.9rem 1.5rem;
+    margin-bottom: 0;
+}
+
+.activity-card-title {
+    line-height: 1.3;
+    padding-top: 0.2rem;
+}
+
 /* Admin Shell Headings */
 .admin-shell h3 {
     font-family: 'Sora', 'Plus Jakarta Sans', sans-serif;
@@ -2580,6 +2629,7 @@ body.auth-shell {
 .sidebar-nav {
     width: 280px;
     height: 100vh;
+    min-height: 100vh;
     position: fixed;
     left: 0;
     top: 0;
@@ -2627,7 +2677,7 @@ body.auth-shell {
 }
 
 .sidebar-brand-logo {
-    height: 50px;
+    height: 64px;
     width: auto;
     object-fit: contain;
 }
@@ -2759,27 +2809,31 @@ body.auth-shell {
 
 .sidebar-actions {
     display: flex;
+    width: 100%;
     gap: 0.5rem;
 }
 
 .sidebar-action-btn {
-    flex: 1;
+    width: 100%;
+    min-height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.625rem;
-    border: 1px solid rgba(2, 132, 199, 0.2);
-    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    border: 1px solid rgba(220, 38, 38, 0.28);
+    border-radius: 12px;
     background: transparent;
-    color: var(--primary);
+    color: #dc2626;
     cursor: pointer;
     font-size: 1rem;
     transition: all var(--transition-fast);
 }
 
 .sidebar-action-btn:hover {
-    border-color: var(--primary);
-    background: rgba(2, 132, 199, 0.08);
+    border-color: #b91c1c;
+    background: rgba(220, 38, 38, 0.12);
+    color: #b91c1c;
+    transform: translateY(-1px);
 }
 
 /* Mobile Responsive */

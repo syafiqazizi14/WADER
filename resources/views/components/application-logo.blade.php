@@ -1,1 +1,1 @@
-<img src="{{ asset('asset/Wader.png') }}" alt="WADER" {{ $attributes }}>
+<img src="{{ asset('asset/logo bps.png') }}" alt="BPS Kabupaten Mojokerto" {{ $attributes }}>

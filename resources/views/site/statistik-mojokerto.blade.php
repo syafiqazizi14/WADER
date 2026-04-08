@@ -14,7 +14,7 @@
     @php
         $logoMain = asset('asset/stimo.png');
         $heroBg = asset('asset/beranda2.png');
-        $logoHeader = asset('asset/Wader.png');
+        $logoHeader = asset('asset/logo bps.png');
         $items = $items ?? collect();
         $settings = $settings ?? [];
     @endphp

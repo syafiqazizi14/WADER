@@ -73,6 +73,13 @@ class SiteController extends Controller
             ]);
         }
 
+        // Halaman khusus PST Center
+        if ($slug === 'pst-center') {
+            return view('site.pst-center', [
+                'settings' => Setting::query()->pluck('value', 'key'),
+            ]);
+        }
+
         try {
             $page = Page::query()
                 ->where('slug', $slug)
