@@ -13,7 +13,7 @@
 <body class="site-shell page-{{ $page->slug }}">
     @php
         $logoMain = asset('asset/Wader.png');
-        $logoHeader = asset('asset/Wader.png');
+        $logoHeader = asset('asset/logo bps.png');
         $menuSignImage = asset('asset/menu.png');
         $menuIcon1 = asset('asset/jenis layanan.png');
         $menuIcon2 = asset('asset/pengaduan.png');
@@ -85,7 +85,6 @@
 
             <div class="hero-layout-center reveal-card" style="--delay: 0ms;">
                 <img src="{{ $logoMain }}" alt="WADER" class="hero-main-logo">
-                <p class="hero-subtitle">WARUNG DATA KABUPATEN MOJOKERTO</p>
             </div>
         </section>
 
@@ -111,31 +110,97 @@
             </div>
         </section>
 
-        <div class="h-8"></div>
-        <section class="max-w-7xl mx-auto px-4 mt-10">
-    
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div style="height: 110px; background: #8dc64f;"></div>
 
-        <!-- CARD 1 -->
-        <div class="bg-orange-500 rounded-2xl overflow-hidden h-[350px] shadow-lg">
-            <img src="{{ asset('asset/poster1.png') }}" class="w-full h-full object-cover">
-        </div>
+        <style>
+            .gallery-card {
+                transition: transform 220ms ease, box-shadow 220ms ease, filter 220ms ease;
+                cursor: pointer;
+            }
 
-        <!-- CARD 2 -->
-        <div class="bg-orange-500 rounded-2xl overflow-hidden h-[350px] shadow-lg">
-            <img src="{{ asset('asset/poster2.jpeg') }}" class="w-full h-full object-cover">
-        </div>
+            .gallery-card:hover,
+            .gallery-card:focus-within {
+                transform: translateY(-8px) scale(1.02);
+                box-shadow: 0 26px 52px rgba(15, 23, 42, 0.30) !important;
+                filter: saturate(1.05);
+            }
 
-        <!-- CARD 3 -->
-        <div class="bg-orange-500 rounded-2xl overflow-hidden h-[350px] shadow-lg">
-            <img src="{{ asset('asset/poster3.jpeg') }}" class="w-full h-full object-cover">
-        </div>
+            .gallery-card-image {
+                transition: transform 420ms ease;
+            }
 
-    </div>
+            .gallery-card:hover .gallery-card-image,
+            .gallery-card:focus-within .gallery-card-image {
+                transform: scale(1.07);
+            }
+        </style>
+
+        <section class="w-full mt-0 pt-0 pb-8 md:pb-10" style="background: #8dc64f;">
+            <div class="max-w-7xl mx-auto px-4 mt-0">
+                @php
+                    $berandaGalleryItems = $page->sections
+                        ->where('type', 'image')
+                        ->where('is_active', true)
+                        ->filter(fn ($section) => !empty(optional($section->media)->file_path))
+                        ->values();
+                @endphp
+
+                <div class="grid gap-6 md:gap-8 justify-center" style="grid-template-columns: repeat(auto-fit, minmax(260px, 320px));">
+                @forelse ($berandaGalleryItems as $item)
+                    <div class="gallery-card w-full bg-white p-2 md:p-3 border-[3px] border-white shadow-[0_12px_30px_rgba(15,23,42,0.10)]" style="border-radius: 48px; overflow: hidden;">
+                        <button
+                            type="button"
+                            class="gallery-open-btn block w-full text-left focus:outline-none focus:ring-0"
+                            style="border-radius: 40px; overflow: hidden;"
+                            data-image="{{ asset('storage/'.$item->media->file_path) }}"
+                            data-title="{{ $item->title ?: ($item->media->alt_text ?? 'Informasi Beranda') }}"
+                        >
+                            <div class="relative overflow-hidden w-full bg-[#8dc64f]" style="border-radius: 40px; aspect-ratio: 3 / 4;">
+                                <img src="{{ asset('storage/'.$item->media->file_path) }}" alt="{{ $item->title ?: ($item->media->alt_text ?? 'Gambar Section') }}" class="gallery-card-image" style="border-radius: 40px; display: block; width: 100%; height: 100%; object-fit: cover; object-position: center;">
+                            </div>
+                        </button>
+                    </div>
+                @empty
+                    <div class="gallery-card w-full bg-white p-2 md:p-3 border-[3px] border-white shadow-[0_12px_30px_rgba(15,23,42,0.10)]" style="border-radius: 48px; overflow: hidden;">
+                        <button type="button" class="gallery-open-btn block w-full text-left focus:outline-none focus:ring-0" style="border-radius: 40px; overflow: hidden;" data-image="{{ asset('asset/poster1.png') }}" data-title="Poster 1">
+                            <div class="relative overflow-hidden w-full bg-[#8dc64f]" style="border-radius: 40px; aspect-ratio: 3 / 4;">
+                                <img src="{{ asset('asset/poster1.png') }}" alt="Poster 1" class="gallery-card-image" style="border-radius: 40px; display: block; width: 100%; height: 100%; object-fit: cover; object-position: center;">
+                            </div>
+                        </button>
+                    </div>
+                    <div class="gallery-card w-full bg-white p-2 md:p-3 border-[3px] border-white shadow-[0_12px_30px_rgba(15,23,42,0.10)]" style="border-radius: 48px; overflow: hidden;">
+                        <button type="button" class="gallery-open-btn block w-full text-left focus:outline-none focus:ring-0" style="border-radius: 40px; overflow: hidden;" data-image="{{ asset('asset/poster2.jpeg') }}" data-title="Poster 2">
+                            <div class="relative overflow-hidden w-full bg-[#8dc64f]" style="border-radius: 40px; aspect-ratio: 3 / 4;">
+                                <img src="{{ asset('asset/poster2.jpeg') }}" alt="Poster 2" class="gallery-card-image" style="border-radius: 40px; display: block; width: 100%; height: 100%; object-fit: cover; object-position: center;">
+                            </div>
+                        </button>
+                    </div>
+                    <div class="gallery-card w-full bg-white p-2 md:p-3 border-[3px] border-white shadow-[0_12px_30px_rgba(15,23,42,0.10)]" style="border-radius: 48px; overflow: hidden;">
+                        <button type="button" class="gallery-open-btn block w-full text-left focus:outline-none focus:ring-0" style="border-radius: 40px; overflow: hidden;" data-image="{{ asset('asset/poster3.jpeg') }}" data-title="Poster 3">
+                            <div class="relative overflow-hidden w-full bg-[#8dc64f]" style="border-radius: 40px; aspect-ratio: 3 / 4;">
+                                <img src="{{ asset('asset/poster3.jpeg') }}" alt="Poster 3" class="gallery-card-image" style="border-radius: 40px; display: block; width: 100%; height: 100%; object-fit: cover; object-position: center;">
+                            </div>
+                        </button>
+                    </div>
+                @endforelse
+                </div>
+            </div>
 
         </section>
 
-        <section class="support-banner-wrap" style="margin-top: 1.25rem;">
+        <div id="beranda-gallery-modal" class="hidden" aria-hidden="true" style="position: fixed; inset: 0; z-index: 99999; isolation: isolate;">
+            <div class="gallery-modal-backdrop absolute inset-0 backdrop-blur-sm" style="background: rgba(2, 6, 23, 0.78);"></div>
+            <button id="beranda-gallery-modal-close" type="button" class="inline-flex h-10 w-10 items-center justify-center rounded-full text-white" style="position: fixed; top: 16px; right: 16px; z-index: 100010; background: rgba(255,255,255,0.2); pointer-events: auto;" aria-label="Tutup preview" onclick="const m=document.getElementById('beranda-gallery-modal'); if(m){m.classList.add('hidden'); m.setAttribute('aria-hidden','true'); document.body.classList.remove('overflow-hidden'); document.documentElement.classList.remove('overflow-hidden');}">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            <div class="relative z-10 h-full w-full overflow-auto p-4 md:p-8">
+                <img id="beranda-gallery-modal-image" src="" alt="Preview Gambar" class="block mx-auto h-auto w-auto object-contain" style="max-width: min(72vw, 760px); max-height: 70vh;">
+            </div>
+        </div>
+
+        <section class="support-banner-wrap" style="margin-top: 0;">
             <div class="support-banner-top" style="background: #8dc64f; padding: 1.45rem 1rem;">
                 <div class="support-banner-top-inner" style="max-width: 1220px; margin: 0 auto; display: flex; justify-content: space-around; align-items: center; gap: 4.3rem; flex-wrap: wrap;">
                     <div class="support-head-item" style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
@@ -201,5 +266,53 @@
 
 
     </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const modal = document.getElementById('beranda-gallery-modal');
+            const modalImage = document.getElementById('beranda-gallery-modal-image');
+            const closeButton = document.getElementById('beranda-gallery-modal-close');
+            const openButtons = document.querySelectorAll('.gallery-open-btn');
+
+            if (!modal || !modalImage || !closeButton || openButtons.length === 0) {
+                return;
+            }
+
+            const closeModal = function () {
+                modal.classList.add('hidden');
+                modal.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('overflow-hidden');
+                document.documentElement.classList.remove('overflow-hidden');
+            };
+
+            const openModal = function (imageSrc, imageTitle) {
+                modalImage.src = imageSrc;
+                modalImage.alt = imageTitle || 'Preview Gambar';
+                modal.classList.remove('hidden');
+                modal.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('overflow-hidden');
+                document.documentElement.classList.add('overflow-hidden');
+            };
+
+            openButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    openModal(button.dataset.image || '', button.dataset.title || 'Preview Gambar');
+                });
+            });
+
+            closeButton.addEventListener('click', closeModal);
+
+            modal.addEventListener('click', function (event) {
+                if (event.target.classList.contains('gallery-modal-backdrop')) {
+                    closeModal();
+                }
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
 </body>
 </html>

@@ -1,4 +1,57 @@
 <nav x-data="{ open: false }" class="sidebar-nav">
+    <style>
+        .sidebar-nav .sidebar-header {
+            position: relative !important;
+        }
+
+        .sidebar-nav .sidebar-brand {
+            position: absolute !important;
+            left: 50% !important;
+            top: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            flex: none !important;
+        }
+
+        .sidebar-nav .sidebar-brand:hover {
+            transform: translate(-50%, -50%) scale(1.02) !important;
+        }
+
+        .sidebar-nav .sidebar-brand-logo {
+            width: 170px !important;
+            max-width: 170px !important;
+            min-width: 170px !important;
+            height: auto !important;
+            display: block !important;
+            transform: none !important;
+            transform-origin: center center;
+        }
+
+        .sidebar-nav .sidebar-action-logout {
+            width: 100% !important;
+            min-height: 56px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 0.9rem 1rem !important;
+            border: 1px solid rgba(244, 114, 182, 0.35) !important;
+            border-radius: 12px !important;
+            background: rgba(244, 114, 182, 0.18) !important;
+            color: #be185d !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+        }
+
+        .sidebar-nav .sidebar-action-logout:hover {
+            background: #b91c1c !important;
+            border-color: #7f1d1d !important;
+            color: #ffffff !important;
+            transform: translateY(-1px) !important;
+        }
+
+        .sidebar-nav .sidebar-action-logout:hover svg {
+            stroke: #ffffff !important;
+        }
+    </style>
     <div class="sidebar-header">
         <a href="{{ route('dashboard') }}" class="sidebar-brand">
             <img src="{{ asset('asset/Wader.png') }}" alt="WADER" class="sidebar-brand-logo">
@@ -49,13 +102,14 @@
             </div>
         </div>
         <div class="sidebar-actions">
-            <a href="{{ route('profile.edit') }}" class="sidebar-action-btn" title="Profile">
-                <span>⚙️</span>
-            </a>
-            <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+            <form method="POST" action="{{ route('logout') }}" style="display: block; width: 100%;">
                 @csrf
-                <button type="submit" class="sidebar-action-btn" title="Logout">
-                    <span>🚪</span>
+                <button
+                    type="submit"
+                    class="sidebar-action-btn sidebar-action-logout"
+                    title="Logout"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/><path d="M21 3v18"/></svg>
                 </button>
             </form>
         </div>
