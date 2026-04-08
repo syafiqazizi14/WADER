@@ -11,8 +11,10 @@ class PageSection extends Model
         'page_id',
         'type',
         'title',
+        'spotlight_text',
         'content',
         'media_id',
+        'thumbnail_media_id',
         'button_label',
         'button_url',
         'sort_order',
@@ -34,5 +36,10 @@ class PageSection extends Model
     public function media(): BelongsTo
     {
         return $this->belongsTo(Medium::class, 'media_id');
+    }
+
+    public function thumbnailMedia(): BelongsTo
+    {
+        return $this->belongsTo(Medium::class, 'thumbnail_media_id');
     }
 }

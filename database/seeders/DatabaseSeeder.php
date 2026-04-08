@@ -56,11 +56,6 @@ class DatabaseSeeder extends Seeder
         );
 
         Page::firstOrCreate(
-            ['slug' => 'stimo-2-0'],
-            ['title' => 'STIMO 2.0', 'is_published' => true, 'published_at' => now()],
-        );
-
-        Page::firstOrCreate(
             ['slug' => 'backend'],
             ['title' => 'Backend', 'is_published' => true, 'published_at' => now()],
         );

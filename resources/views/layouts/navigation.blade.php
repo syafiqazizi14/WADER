@@ -74,10 +74,6 @@
                 <span class="sidebar-menu-icon">🔲</span>
                 <span class="sidebar-menu-label">Section</span>
             </a>
-            <a href="{{ route('admin.statistik-mojokerto.index') }}" :class="{'sidebar-menu-item-active': request()->routeIs('admin.statistik-mojokerto.*')}" class="sidebar-menu-item">
-                <span class="sidebar-menu-icon">📈</span>
-                <span class="sidebar-menu-label">Statistik Mojokerto</span>
-            </a>
             <a href="{{ route('admin.media.index') }}" :class="{'sidebar-menu-item-active': request()->routeIs('admin.media.*')}" class="sidebar-menu-item">
                 <span class="sidebar-menu-icon">🖼️</span>
                 <span class="sidebar-menu-label">Media</span>

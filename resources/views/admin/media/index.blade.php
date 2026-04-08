@@ -23,9 +23,19 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-upload-cloud"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m16 16-4-4-4 4"/></svg>
                     Upload Media Baru
                 </h3>
-                <form action="{{ route('admin.media.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.media.store') }}" method="POST" enctype="multipart/form-data" id="mediaUploadForm">
                     @csrf
                     <div class="grid md:grid-cols-3 gap-6 items-end">
+                        <div>
+                            <label class="form-label">Target Konten</label>
+                            <select name="content_target" id="contentTarget" class="form-input">
+                                <option value="general" {{ old('content_target', 'general') === 'general' ? 'selected' : '' }}>Umum (Media Library)</option>
+                                <option value="statistik_mojokerto" {{ old('content_target') === 'statistik_mojokerto' ? 'selected' : '' }}>Statistik Mojokerto</option>
+                            </select>
+                            @error('content_target')
+                                <p class="form-error-message">{{ $message }}</p>
+                            @enderror
+                        </div>
                         <div>
                             <label class="form-label">Pilih File</label>
                             <input type="file" name="file" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 border border-gray-300 rounded-md" required>
@@ -35,14 +45,39 @@
                         </div>
                         <div>
                             <label class="form-label">Alt Text (Opsional)</label>
-                            <input type="text" name="alt_text" placeholder="Deskripsi gambar..." class="form-input">
+                            <input type="text" name="alt_text" placeholder="Deskripsi gambar..." value="{{ old('alt_text') }}" class="form-input">
+                            @error('alt_text')
+                                <p class="form-error-message">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div id="statistikFields" class="mt-6 md:grid md:grid-cols-3 gap-6 items-end" style="display: none;">
+                        <div>
+                            <label class="form-label">Judul Statistik</label>
+                            <input type="text" name="section_title" value="{{ old('section_title') }}" class="form-input" placeholder="Contoh: Inflasi Kabupaten Mojokerto">
+                            @error('section_title')
+                                <p class="form-error-message">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-primary w-full md:w-auto flex justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-to-line"><path d="M5 3h14"/><path d="m18 13-6-6-6 6"/><path d="M12 7v14"/></svg>
-                                <span>Upload File</span>
-                            </button>
+                            <label class="form-label">Status Tampil</label>
+                            <label class="inline-flex items-center gap-2 mt-2">
+                                <input type="hidden" name="section_is_active" value="0">
+                                <input type="checkbox" name="section_is_active" value="1" {{ old('section_is_active', '1') ? 'checked' : '' }}>
+                                <span>Aktif</span>
+                            </label>
                         </div>
+                        <div>
+                            <p class="text-xs text-gray-500">Saat target ini dipilih, upload media otomatis membuat item section untuk halaman Statistik Mojokerto.</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-6">
+                        <button type="submit" class="btn btn-primary w-full md:w-auto flex justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-to-line"><path d="M5 3h14"/><path d="m18 13-6-6-6 6"/><path d="M12 7v14"/></svg>
+                            <span>Upload File</span>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -129,4 +164,23 @@
             @endif
         </div>
     </div>
+
+    <script>
+        (() => {
+            const targetSelect = document.getElementById('contentTarget');
+            const statistikFields = document.getElementById('statistikFields');
+
+            if (!targetSelect || !statistikFields) {
+                return;
+            }
+
+            const syncFields = () => {
+                const isStatistik = targetSelect.value === 'statistik_mojokerto';
+                statistikFields.style.display = isStatistik ? '' : 'none';
+            };
+
+            targetSelect.addEventListener('change', syncFields);
+            syncFields();
+        })();
+    </script>
 </x-app-layout>

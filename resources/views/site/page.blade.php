@@ -55,14 +55,14 @@
 
     <header class="layout-header">
         <div class="layout-header-inner">
-            <a href="{{ route('site.home') }}" class="brand-lockup">
+            <a href="{{ route('site.home') }}" class="brand-lockup {{ $page->slug === 'statistik-mojokerto' ? 'active' : '' }}">
                 <img src="{{ $logoHeader }}" alt="BPS Kabupaten Mojokerto" class="brand-logo-header">
             </a>
 
             <nav class="layout-nav">
                 <a href="{{ route('site.page', 'beranda') }}" class="layout-nav-link {{ $page->slug === 'beranda' ? 'active' : '' }}">Beranda</a>
                 <a href="{{ route('site.pst-center') }}" class="layout-nav-link {{ $page->slug === 'pst-center' ? 'active' : '' }}">PST Center</a>
-                <a href="{{ route('site.page', 'stimo-2-0') }}" class="layout-nav-link {{ $page->slug === 'stimo-2-0' ? 'active' : '' }}">STIMO 2.0</a>
+                <a href="{{ route('site.page', 'statistik-mojokerto') }}" class="layout-nav-link {{ $page->slug === 'statistik-mojokerto' ? 'active' : '' }}">STIMO 2.0</a>
                 <a href="{{ route('site.page', 'backend') }}" class="layout-nav-link {{ $page->slug === 'backend' ? 'active' : '' }}">Backend</a>
                 @auth
                     <a href="{{ route('admin.dashboard') }}" class="layout-nav-link">Admin</a>
@@ -87,7 +87,6 @@
                 <img src="{{ $logoMain }}" alt="WADER" class="hero-main-logo">
             </div>
         </section>
-
         <section class="relative -mt-72050 -mb-9 z-10 pointer-events-none">
             <div class="bg-white w-full py-0 shadow-sm flex justify-center leading-none">
                 <img src="{{ asset('asset/menuu.jpg') }}"

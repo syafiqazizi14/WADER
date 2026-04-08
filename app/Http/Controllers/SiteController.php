@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
+use App\Models\PageSection;
 use App\Models\Setting;
-use App\Models\StatistikMojokertoItem;
 use Illuminate\Database\QueryException;
 
 class SiteController extends Controller
@@ -35,14 +35,40 @@ class SiteController extends Controller
 
     public function show(string $slug)
     {
-        // Halaman khusus untuk statistik-mojokerto
         if ($slug === 'statistik-mojokerto') {
+            $items = PageSection::query()
+                ->whereHas('page', function ($query) {
+                    $query->where('slug', 'statistik-mojokerto');
+                })
+                ->where('is_active', true)
+                ->whereNotNull('media_id')
+                ->with(['media', 'thumbnailMedia'])
+                ->orderBy('sort_order')
+                ->limit(12)
+                ->get()
+                ->filter(function (PageSection $section) {
+                    return $section->media && str_starts_with((string) $section->media->mime_type, 'image/');
+                })
+                ->map(function (PageSection $section) {
+                    $media = $section->media;
+                    $thumbnailMedia = $section->thumbnailMedia;
+                    $mainImageUrl = $media ? asset('storage/'.$media->file_path) : '';
+                    $thumbnailImageUrl = ($thumbnailMedia && str_starts_with((string) $thumbnailMedia->mime_type, 'image/'))
+                        ? asset('storage/'.$thumbnailMedia->file_path)
+                        : $mainImageUrl;
+
+                    return (object) [
+                        'title' => $section->title
+                            ?: ($media?->alt_text ?: pathinfo((string) $media?->file_name, PATHINFO_FILENAME)),
+                        'spotlight_text' => $section->spotlight_text ?: 'Lihat statistik lengkap',
+                        'thumbnail_url' => $thumbnailImageUrl,
+                        'main_image_url' => $mainImageUrl,
+                    ];
+                })
+                ->values();
+
             return view('site.statistik-mojokerto', [
-                'items' => StatistikMojokertoItem::query()
-                    ->where('is_active', true)
-                    ->latest()
-                    ->limit(12)
-                    ->get(),
+                'items' => $items,
                 'settings' => Setting::query()->pluck('value', 'key'),
             ]);
         }
