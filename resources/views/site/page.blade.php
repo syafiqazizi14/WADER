@@ -79,19 +79,20 @@
     </header>
 
     <main>
-        <section class="hero-layout-stage">
+        <section class="hero-layout-stage" style="min-height: clamp(620px, 74vh, 900px); background-size: 118% auto;">
             <div class="corner-band corner-band-top-right"></div>
             <div class="corner-band corner-band-bottom-left"></div>
 
             <div class="hero-layout-center reveal-card" style="--delay: 0ms;">
                 <img src="{{ $logoMain }}" alt="WADER" class="hero-main-logo">
-                <p class="hero-subtitle">WARUNG DATA KABUPATEN MOJOKERTO</p>
             </div>
         </section>
 
-        <section class="flex justify-center mt-10">
-            <img src="{{ asset('asset/menu.png') }}" 
-                 class="w-[34px] h-auto rounded-2xl">
+        <section class="relative -mt-72050 -mb-9 z-10 pointer-events-none">
+            <div class="bg-white w-full py-0 shadow-sm flex justify-center leading-none">
+                <img src="{{ asset('asset/menuu.jpg') }}"
+                     class="block w-[92vw] max-w-[1280px] h-auto">
+            </div>
         </section>
 
         <section class="service-blue-zone reveal-card" style="--delay: 140ms;">

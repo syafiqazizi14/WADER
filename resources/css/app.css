@@ -32,13 +32,31 @@ body.site-shell {
     color: var(--tone-ink);
 }
 
+.page-pst-center {
+    background: #ffffff;
+}
+
 .layout-header {
     position: sticky;
     top: 0;
     z-index: 40;
+    background: transparent;
+    backdrop-filter: none;
+    border-bottom: 1px solid transparent;
+    transition: background 200ms ease, backdrop-filter 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.page-beranda .layout-header {
+    position: fixed;
+    left: 0;
+    right: 0;
+}
+
+.layout-header.is-scrolled {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(6px);
-    border-bottom: 1px solid rgba(22, 22, 26, 0.08);
+    border-bottom-color: rgba(22, 22, 26, 0.08);
+    box-shadow: 0 2px 14px rgba(15, 23, 42, 0.08);
 }
 
 .layout-header-inner {
@@ -180,6 +198,23 @@ body.site-shell {
     background: #eceff1;
 }
 
+.page-beranda .hero-layout-stage {
+    min-height: clamp(540px, 60vh, 720px);
+    background: #ffffff url('/asset/beranda2.png') center top / 110% auto no-repeat;
+}
+
+.page-beranda .hero-layout-stage .corner-band {
+    display: none;
+}
+
+.page-beranda .hero-layout-center {
+    transform: none;
+}
+
+.page-beranda .hero-main-logo {
+    width: min(68vw, 500px);
+}
+
 .hero-layout-stage.hero-pst-center {
     background-repeat: no-repeat;
     background-position: center;
@@ -284,7 +319,11 @@ body.site-shell {
     position: relative;
     overflow: hidden;
     margin-top: 0;
-    border-top: 3px solid rgba(255, 255, 255, 0.55);
+    border-top: 0;
+}
+
+.page-beranda .service-blue-zone {
+    margin-top: -2px;
 }
 
 .service-grid-reference {
@@ -383,25 +422,25 @@ body.site-shell {
 .sparkle-left {
     left: 2.4rem;
     bottom: 2.1rem;
-    font-size: 3.3rem;
+    font-size: 5.8rem;
 }
 
 .sparkle-left-sm {
     left: 9.5rem;
     bottom: 4.7rem;
-    font-size: 2rem;
+    font-size: 3.8rem;
 }
 
 .sparkle-right {
-    right: 2.5rem;
-    top: 1.8rem;
-    font-size: 3.3rem;
+    right: 2.1rem;
+    top: 1.4rem;
+    font-size: 5.8rem;
 }
 
 .sparkle-right-sm {
-    right: 9.8rem;
-    top: 4.6rem;
-    font-size: 2rem;
+    right: 8.9rem;
+    top: 4.2rem;
+    font-size: 3.8rem;
 }
 
 .content-followup-wrap {
