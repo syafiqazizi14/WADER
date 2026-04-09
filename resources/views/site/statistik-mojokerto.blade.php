@@ -13,7 +13,6 @@
 <body class="site-shell page-statistik-mojokerto">
     @php
         $logoMain = asset('asset/stimo.png');
-        $heroBg = asset('asset/beranda2.png');
         $logoHeader = asset('asset/logo bps.png');
         $items = $items ?? collect();
         $settings = $settings ?? [];
@@ -46,7 +45,9 @@
 
     <main>
         <!-- Hero Section -->
-        <section class="hero-layout-stage statistik-hero-custom" style="background-image: url('{{ $heroBg }}');">
+        <section class="hero-layout-stage statistik-hero-custom hero-dashboard-style">
+            <div class="corner-band corner-band-top-right"></div>
+            <div class="corner-band corner-band-bottom-left"></div>
             <div class="hero-layout-center reveal-card" style="--delay: 0ms;">
                 <img src="{{ $logoMain }}" alt="Statistik Mojokerto" class="hero-main-logo">
             </div>
@@ -158,16 +159,11 @@
         }
 
         .statistik-hero-custom {
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-            position: relative;
-            min-height: clamp(260px, 42vw, 420px) !important;
             height: auto;
         }
 
         .statistik-hero-custom .corner-band {
-            display: none;
+            display: block;
         }
 
         .statistik-hero-custom .hero-layout-center {

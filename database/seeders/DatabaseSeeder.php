@@ -60,6 +60,11 @@ class DatabaseSeeder extends Seeder
             ['title' => 'Backend', 'is_published' => true, 'published_at' => now()],
         );
 
+        Page::firstOrCreate(
+            ['slug' => 'footer'],
+            ['title' => 'Footer', 'is_published' => false, 'published_at' => null],
+        );
+
         Setting::updateOrCreate(['key' => 'contact_email'], ['group' => 'contact', 'value' => 'bps3516@bps.go.id']);
         Setting::updateOrCreate(['key' => 'contact_whatsapp'], ['group' => 'contact', 'value' => 'https://wa.me/628113693516']);
         Setting::updateOrCreate(['key' => 'contact_instagram'], ['group' => 'contact', 'value' => 'https://www.instagram.com/bpsmojokertokab']);

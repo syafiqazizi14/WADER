@@ -22,6 +22,11 @@ class PageSectionController extends Controller
 
     public function create()
     {
+        Page::firstOrCreate(
+            ['slug' => 'footer'],
+            ['title' => 'Footer', 'is_published' => false, 'published_at' => null],
+        );
+
         return view('admin.sections.create', [
             'pages' => Page::orderBy('title')->get(),
             'media' => Medium::latest()->limit(50)->get(),
@@ -48,6 +53,11 @@ class PageSectionController extends Controller
 
     public function edit(PageSection $section)
     {
+        Page::firstOrCreate(
+            ['slug' => 'footer'],
+            ['title' => 'Footer', 'is_published' => false, 'published_at' => null],
+        );
+
         return view('admin.sections.edit', [
             'section' => $section,
             'pages' => Page::orderBy('title')->get(),

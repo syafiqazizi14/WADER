@@ -28,7 +28,7 @@
 body.site-shell {
     margin: 0;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    background: var(--tone-soft);
+    background: #ffffff;
     color: var(--tone-ink);
 }
 
@@ -216,12 +216,12 @@ body.site-shell {
 }
 
 .page-beranda .hero-layout-stage {
-    min-height: clamp(540px, 60vh, 720px);
-    background: #ffffff url('/asset/beranda2.png') center top / 110% auto no-repeat;
+    min-height: clamp(620px, 74vh, 900px);
+    background: #ffffff;
 }
 
 .page-beranda .hero-layout-stage .corner-band {
-    display: none;
+    display: block;
 }
 
 .page-beranda .hero-layout-center {
@@ -230,6 +230,74 @@ body.site-shell {
 
 .page-beranda .hero-main-logo {
     width: min(68vw, 500px);
+}
+
+.hero-dashboard-style {
+    min-height: clamp(620px, 74vh, 900px) !important;
+    background: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-dashboard-style .corner-band {
+    width: min(44vw, 560px);
+    height: 118px;
+    border-radius: 16px;
+    transform: rotate(45deg);
+    background: #f49634;
+    box-shadow: 0 18px 34px rgba(31, 74, 109, 0.2);
+}
+
+.hero-dashboard-style .corner-band::before {
+    width: 120px;
+    height: 120px;
+    top: -1px;
+    background: #8bc34d;
+    border-radius: 999px;
+}
+
+.hero-dashboard-style .corner-band::after {
+    display: none;
+}
+
+.hero-dashboard-style .corner-band-top-right {
+    top: -76px;
+    right: -170px;
+}
+
+.hero-dashboard-style .corner-band-top-right::before {
+    right: -44px;
+}
+
+.hero-dashboard-style .corner-band-bottom-left {
+    bottom: -82px;
+    left: -170px;
+}
+
+.hero-dashboard-style .corner-band-bottom-left::before {
+    left: -44px;
+}
+
+@media (max-width: 768px) {
+    .hero-dashboard-style .corner-band {
+        width: min(58vw, 420px);
+        height: 92px;
+    }
+
+    .hero-dashboard-style .corner-band::before {
+        width: 92px;
+        height: 92px;
+    }
+
+    .hero-dashboard-style .corner-band-top-right {
+        top: -68px;
+        right: -150px;
+    }
+
+    .hero-dashboard-style .corner-band-bottom-left {
+        bottom: -74px;
+        left: -150px;
+    }
 }
 
 .hero-layout-stage.hero-pst-center {
