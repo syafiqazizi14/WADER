@@ -162,8 +162,8 @@
             background-position: center;
             background-size: 118% auto;
             position: relative;
-            min-height: clamp(620px, 74vh, 900px) !important;
-            height: auto;
+            height: 100vh;
+            overflow: hidden;
         }
 
         .statistik-hero-custom .corner-band {

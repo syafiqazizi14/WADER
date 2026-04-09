@@ -131,14 +131,26 @@
     </main>
 
     <style>
+        .pst-hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: #ffffff;
+            background-repeat: no-repeat;
+            background-position: center top;
+            background-size: cover;
+        }
+
         .pst-hero-title {
             margin: 0;
-            color: #000000;
+            color: #1b1f24;
             font-family: 'Sora', 'Plus Jakarta Sans', system-ui, sans-serif;
-            font-size: clamp(2rem, 6vw, 4.5rem);
+            font-size: clamp(2.8rem, 8vw, 5.2rem);
             font-weight: 800;
-            letter-spacing: 0.02em;
-            text-shadow: 0 1px 6px rgba(255, 255, 255, 0.45);
+            letter-spacing: -0.02em;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
         }
 
         .pst-center-section {

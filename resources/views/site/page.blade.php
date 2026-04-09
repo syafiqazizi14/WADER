@@ -79,16 +79,14 @@
     </header>
 
     <main>
-        <section class="hero-layout-stage hero-dashboard-style">
-            <div class="corner-band corner-band-top-right"></div>
-            <div class="corner-band corner-band-bottom-left"></div>
+        <section class="hero-layout-stage" style="min-height: 100vh; background: #ffffff url('{{ $heroBg }}') center top / cover no-repeat;">
 
             <div class="hero-layout-center reveal-card" style="--delay: 0ms;">
                 <img src="{{ $logoMain }}" alt="WADER" class="hero-main-logo">
             </div>
         </section>
         <section class="scroll-reveal menu-preview-section">
-            <div class="bg-white w-full py-0 shadow-sm flex justify-center leading-none">
+            <div class="bg-white w-full py-0 flex justify-center leading-none">
                 <img src="{{ asset('asset/menuu.jpg') }}"
                      class="block w-[92vw] max-w-[1280px] h-auto">
             </div>
