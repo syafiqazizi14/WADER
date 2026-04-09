@@ -20,9 +20,9 @@
         $backendCardUpload = asset('asset/unggah data.png');
         $backendFigure = asset('asset/kak anin.png');
         $backendOutputFormUrl = 'https://docs.google.com/spreadsheets/d/1wuMMNHJ7Wjm8vXG-_H0dX6VtTTA7gKH5p-xw_oUXAcg/edit?gid=472492380#gid=472492380';
-            $backendLetterUrl = 'https://drive.google.com/drive/folders/1WlBPzUyoxpCMBVuJmPvBcAqpFCtY6QKqvKaP-Bz-1ErHNfGoG-tKV1S_p9IhoDiociPA4sm1?usp=drive_link';
-            $backendMonitoringUrl = 'https://docs.google.com/spreadsheets/d/118_EQ_YEH0dYEs0qYz7JsdKmrRIPSiIwkQ2Aw3I8rbQ/edit?usp=drive_link';
-            $backendUploadUrl = 'https://drive.google.com/drive/folders/1StemcGfXWPAotcuLi9r-u7Bnq4j6prac?usp=drive_link';
+        $backendLetterUrl = 'https://drive.google.com/drive/folders/1WlBPzUyoxpCMBVuJmPvBcAqpFCtY6QKqvKaP-Bz-1ErHNfGoG-tKV1S_p9IhoDiociPA4sm1?usp=drive_link';
+        $backendMonitoringUrl = 'https://docs.google.com/spreadsheets/d/118_EQ_YEH0dYEs0qYz7JsdKmrRIPSiIwkQ2Aw3I8rbQ/edit?usp=drive_link';
+        $backendUploadUrl = 'https://drive.google.com/drive/folders/1StemcGfXWPAotcuLi9r-u7Bnq4j6prac?usp=drive_link';
         $semuaFileLogo = asset('asset/semua-file.png');
         $iconWeb = asset('asset/www.png');
         $iconEmail = asset('asset/email.png');
@@ -42,6 +42,33 @@
             : '#';
 
         $semuaFileLink = 'https://drive.google.com/drive/folders/140hYR77n-euXRJZWSNMCsK_bzur2vAOS?usp=sharing';
+
+        $backendCards = [
+            [
+                'url' => $backendOutputFormUrl,
+                'label' => 'Buka Output Form Permintaan Data dan Konsultasi',
+                'image' => $backendCardOutput,
+                'alt' => 'Output Form Permintaan Data dan Konsultasi',
+            ],
+            [
+                'url' => $backendLetterUrl,
+                'label' => 'Buka Surat yang Diunggah',
+                'image' => $backendCardLetter,
+                'alt' => 'Surat yang Diunggah',
+            ],
+            [
+                'url' => $backendMonitoringUrl,
+                'label' => 'Buka Monitoring Permintaan Data',
+                'image' => $backendCardMonitoring,
+                'alt' => 'Monitoring Permintaan Data',
+            ],
+            [
+                'url' => $backendUploadUrl,
+                'label' => 'Buka Unggah Data yang Sudah Ditindak Lanjuti',
+                'image' => $backendCardUpload,
+                'alt' => 'Unggah Data yang Sudah Ditindak Lanjuti',
+            ],
+        ];
     @endphp
 
     <header class="layout-header">
@@ -79,18 +106,11 @@
         <section class="backend-feature-zone">
             <div class="backend-feature-inner">
                 <div class="backend-feature-list">
-                    <a href="{{ $backendOutputFormUrl }}" target="_blank" rel="noopener noreferrer" aria-label="Buka Output Form Permintaan Data dan Konsultasi" title="Buka Output Form Permintaan Data dan Konsultasi">
-                        <img src="{{ $backendCardOutput }}" alt="Output Form Permintaan Data dan Konsultasi" class="backend-feature-pill">
-                    </a>
-                        <a href="{{ $backendLetterUrl }}" target="_blank" rel="noopener noreferrer" aria-label="Buka Surat yang Diunggah" title="Buka Surat yang Diunggah">
-                            <img src="{{ $backendCardLetter }}" alt="Surat yang Diunggah" class="backend-feature-pill">
+                    @foreach ($backendCards as $card)
+                        <a href="{{ $card['url'] }}" target="_blank" rel="noopener noreferrer" aria-label="{{ $card['label'] }}" title="{{ $card['label'] }}" class="backend-feature-link">
+                            <img src="{{ $card['image'] }}" alt="{{ $card['alt'] }}" class="backend-feature-pill">
                         </a>
-                        <a href="{{ $backendMonitoringUrl }}" target="_blank" rel="noopener noreferrer" aria-label="Buka Monitoring Permintaan Data" title="Buka Monitoring Permintaan Data">
-                            <img src="{{ $backendCardMonitoring }}" alt="Monitoring Permintaan Data" class="backend-feature-pill">
-                        </a>
-                        <a href="{{ $backendUploadUrl }}" target="_blank" rel="noopener noreferrer" aria-label="Buka Unggah Data yang Sudah Ditindak Lanjuti" title="Buka Unggah Data yang Sudah Ditindak Lanjuti">
-                            <img src="{{ $backendCardUpload }}" alt="Unggah Data yang Sudah Ditindak Lanjuti" class="backend-feature-pill">
-                        </a>
+                    @endforeach
                 </div>
                 <div class="backend-feature-figure-wrap">
                     <img src="{{ $backendFigure }}" alt="Petugas BPS" class="backend-feature-figure">

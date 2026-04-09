@@ -241,53 +241,56 @@ body.page-backend,
 }
 
 .page-backend .backend-feature-zone {
-    padding: clamp(1.4rem, 3vw, 2.4rem) 1rem 1rem;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(245, 247, 250, 1) 100%);
+    padding: clamp(1.2rem, 2.2vw, 1.8rem) 1rem 1.1rem;
+    background: #4b672f;
+    overflow: hidden;
 }
 
 .page-backend .backend-feature-inner {
-    max-width: 1280px;
-    gap: clamp(1rem, 2.6vw, 2rem);
-    align-items: center;
+    max-width: 1220px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.08fr 0.92fr;
+    gap: clamp(0.85rem, 2.2vw, 1.55rem);
+    align-items: end;
 }
 
 .page-backend .backend-feature-list {
     display: grid;
-    gap: 0.9rem;
+    gap: clamp(0.7rem, 2vw, 1.05rem);
+    padding: 0.25rem 0 0.35rem;
 }
 
-.page-backend .backend-feature-list a {
+.page-backend .backend-feature-link {
     display: block;
-    border-radius: 22px;
-    overflow: hidden;
-    background: #ffffff;
-    border: 1px solid rgba(11, 95, 174, 0.12);
-    box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
-    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+    text-decoration: none;
+    transition: transform 180ms ease, filter 180ms ease;
 }
 
-.page-backend .backend-feature-list a:hover {
-    transform: translateY(-4px);
-    border-color: rgba(11, 95, 174, 0.25);
-    box-shadow: 0 18px 32px rgba(15, 23, 42, 0.12);
+.page-backend .backend-feature-link:hover {
+    transform: translateY(-2px);
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.18));
 }
 
 .page-backend .backend-feature-pill {
     display: block;
-    width: 100%;
-    max-width: 100%;
+    width: min(100%, 560px);
     height: auto;
+    max-width: 100%;
 }
 
 .page-backend .backend-feature-figure-wrap {
-    justify-content: center;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
 .page-backend .backend-feature-figure {
-    width: min(100%, 540px);
+    width: min(100%, 470px);
     height: auto;
     object-fit: contain;
-    filter: drop-shadow(0 18px 28px rgba(15, 23, 42, 0.12));
+    transform: translate(1.2rem, 0.4rem);
+    filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.2));
 }
 
 .page-backend .backend-guide-panel {
@@ -1686,19 +1689,33 @@ body.js-ready .scroll-reveal.is-visible {
     .page-backend .backend-feature-inner,
     .page-backend .backend-guide-inner,
     .page-backend .backend-social-inner {
-        flex-direction: column;
         align-items: flex-start;
     }
 
     .page-backend .backend-feature-inner {
         display: grid;
+        grid-template-columns: 1fr;
+        align-items: start;
     }
 
     .page-backend .backend-feature-figure-wrap {
-        justify-content: flex-start;
+        justify-content: center;
+        align-items: flex-end;
+    }
+
+    .page-backend .backend-feature-figure {
+        transform: translate(0, 0);
+        width: min(92vw, 430px);
+    }
+
+    .page-backend .backend-guide-inner {
+        display: grid;
+        grid-template-columns: 1fr;
     }
 
     .page-backend .backend-social-inner {
+        display: flex;
+        flex-direction: column;
         gap: 1rem;
         align-items: flex-start;
     }
@@ -1726,7 +1743,7 @@ body.js-ready .scroll-reveal.is-visible {
     }
 
     .page-backend .backend-feature-figure {
-        width: min(100%, 460px);
+        width: min(92vw, 360px);
     }
 
     .page-backend .backend-social-icons {
@@ -2141,6 +2158,17 @@ body.auth-shell {
     color: #0f172a;
 }
 
+.auth-minimal-subtitle {
+    margin: 0.45rem 0 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #64748b;
+}
+
+.auth-register-card {
+    width: min(100%, 520px);
+}
+
 .auth-minimal-form {
     display: grid;
     gap: 1rem;
@@ -2202,6 +2230,26 @@ body.auth-shell {
 
 .auth-minimal-submit:active {
     transform: translateY(1px);
+}
+
+.auth-minimal-footer-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    margin-top: 0.9rem;
+    font-size: 0.92rem;
+    color: #475569;
+}
+
+.auth-minimal-footer-link a {
+    color: #0b5fae;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.auth-minimal-footer-link a:hover {
+    text-decoration: underline;
 }
 
 @media (max-width: 640px) {
