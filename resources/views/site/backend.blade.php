@@ -79,18 +79,30 @@
         <section class="backend-feature-zone">
             <div class="backend-feature-inner">
                 <div class="backend-feature-list">
-                    <a href="{{ $backendOutputFormUrl }}" target="_blank" rel="noopener noreferrer" aria-label="Buka Output Form Permintaan Data dan Konsultasi" title="Buka Output Form Permintaan Data dan Konsultasi">
-                        <img src="{{ $backendCardOutput }}" alt="Output Form Permintaan Data dan Konsultasi" class="backend-feature-pill">
+                    <a href="{{ $backendOutputFormUrl }}" target="_blank" rel="noopener noreferrer" class="backend-feature-pill backend-pill-yellow">
+                        <div class="backend-pill-content">
+                            <h3 class="backend-pill-title">OUTPUT FORM PERMINTAAN DATA & KONSULTASI</h3>
+                            <p class="backend-pill-subtitle">Lihat hasil dari Google Form Permintaan Data</p>
+                        </div>
                     </a>
-                        <a href="{{ $backendLetterUrl }}" target="_blank" rel="noopener noreferrer" aria-label="Buka Surat yang Diunggah" title="Buka Surat yang Diunggah">
-                            <img src="{{ $backendCardLetter }}" alt="Surat yang Diunggah" class="backend-feature-pill">
-                        </a>
-                        <a href="{{ $backendMonitoringUrl }}" target="_blank" rel="noopener noreferrer" aria-label="Buka Monitoring Permintaan Data" title="Buka Monitoring Permintaan Data">
-                            <img src="{{ $backendCardMonitoring }}" alt="Monitoring Permintaan Data" class="backend-feature-pill">
-                        </a>
-                        <a href="{{ $backendUploadUrl }}" target="_blank" rel="noopener noreferrer" aria-label="Buka Unggah Data yang Sudah Ditindak Lanjuti" title="Buka Unggah Data yang Sudah Ditindak Lanjuti">
-                            <img src="{{ $backendCardUpload }}" alt="Unggah Data yang Sudah Ditindak Lanjuti" class="backend-feature-pill">
-                        </a>
+                    <a href="{{ $backendLetterUrl }}" target="_blank" rel="noopener noreferrer" class="backend-feature-pill backend-pill-white">
+                        <div class="backend-pill-content">
+                            <h3 class="backend-pill-title">SURAT YANG DIUNGGAH</h3>
+                            <p class="backend-pill-subtitle">Jika ada</p>
+                        </div>
+                    </a>
+                    <a href="{{ $backendMonitoringUrl }}" target="_blank" rel="noopener noreferrer" class="backend-feature-pill backend-pill-yellow">
+                        <div class="backend-pill-content">
+                            <h3 class="backend-pill-title">MONITORING PERMINTAAN DATA</h3>
+                            <p class="backend-pill-subtitle">MONITORING - AKSES ADMIN</p>
+                        </div>
+                    </a>
+                    <a href="{{ $backendUploadUrl }}" target="_blank" rel="noopener noreferrer" class="backend-feature-pill backend-pill-white">
+                        <div class="backend-pill-content">
+                            <h3 class="backend-pill-title">UNGGAH DATA YANG SUDAH DITINDAK LANJUTI</h3>
+                            <p class="backend-pill-subtitle">Setelah dokumen selesai</p>
+                        </div>
+                    </a>
                 </div>
                 <div class="backend-feature-figure-wrap">
                     <img src="{{ $backendFigure }}" alt="Petugas BPS" class="backend-feature-figure">
