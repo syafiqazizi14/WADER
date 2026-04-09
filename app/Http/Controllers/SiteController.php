@@ -112,6 +112,13 @@ class SiteController extends Controller
             return view('welcome');
         }
 
+        if ($slug === 'backend') {
+            return view('site.backend', [
+                'page' => $page,
+                'settings' => Setting::query()->pluck('value', 'key'),
+            ]);
+        }
+
         return view('site.page', [
             'page' => $page,
             'settings' => Setting::query()->pluck('value', 'key'),
