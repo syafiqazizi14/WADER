@@ -24,7 +24,27 @@
                 </div>
             @endif
 
-            <div class="bg-white rounded-lg shadow-md">
+            <div class="mb-4">
+                <div class="px-1 pt-1 pb-2">
+                    <div>
+                        <h3 class="text-sm font-semibold text-gray-900">Filter Menu Halaman</h3>
+                    </div>
+
+                    <div class="mt-3 flex gap-2 overflow-x-auto pb-1">
+                        <a href="{{ route('admin.sections.index') }}" class="btn btn-sm whitespace-nowrap {{ $activePageSlug === null ? 'btn-primary' : 'btn-secondary' }}">
+                            Semua Menu
+                        </a>
+
+                        @foreach ($pageFilters as $pageFilter)
+                            <a href="{{ route('admin.sections.index', ['page' => $pageFilter->slug]) }}" class="btn btn-sm whitespace-nowrap {{ $activePageSlug === $pageFilter->slug ? 'btn-primary' : 'btn-secondary' }}">
+                                {{ $pageFilter->title }}
+                            </a>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50">
@@ -44,7 +64,7 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm font-medium text-gray-900">{{ $section->page?->title ?? '-' }}</div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td class="px-6 py-4">
                                         <div class="text-sm text-gray-900">{{ $section->title ?? '-' }}</div>
                                         <div class="text-xs text-gray-500 mt-1 uppercase tracking-widest font-semibold">{{ $section->type }}</div>
                                     </td>

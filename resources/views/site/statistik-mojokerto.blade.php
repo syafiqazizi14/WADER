@@ -46,7 +46,7 @@
 
     <main>
         <!-- Hero Section -->
-        <section class="hero-layout-stage statistik-hero-custom" style="background-image: url('{{ $heroBg }}');">
+        <section class="hero-layout-stage statistik-hero-custom" style="background-image: url('{{ $heroBg }}'); min-height: clamp(620px, 74vh, 900px); background-size: 118% auto;">
             <div class="hero-layout-center reveal-card" style="--delay: 0ms;">
                 <img src="{{ $logoMain }}" alt="Statistik Mojokerto" class="hero-main-logo">
             </div>
@@ -160,9 +160,9 @@
         .statistik-hero-custom {
             background-repeat: no-repeat;
             background-position: center;
-            background-size: cover;
+            background-size: 118% auto;
             position: relative;
-            min-height: clamp(260px, 42vw, 420px) !important;
+            min-height: clamp(620px, 74vh, 900px) !important;
             height: auto;
         }
 
@@ -176,8 +176,8 @@
         }
 
         .statistik-hero-custom .hero-main-logo {
-            width: clamp(250px, 40vw, 440px) !important;
-            max-width: 440px;
+            width: min(90vw, 620px) !important;
+            max-width: 620px;
             height: auto;
         }
 
@@ -413,12 +413,13 @@
             }
 
             .statistik-hero-custom {
-                min-height: clamp(220px, 52vw, 300px) !important;
+                min-height: clamp(280px, 52vw, 380px) !important;
+                background-size: cover;
             }
 
             .statistik-hero-custom .hero-main-logo {
-                width: clamp(220px, 68vw, 320px) !important;
-                max-width: 320px;
+                width: clamp(220px, 72vw, 360px) !important;
+                max-width: 360px;
             }
 
             .stat-card-label {
