@@ -13,10 +13,33 @@ use Illuminate\Validation\ValidationException;
 
 class PageSectionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $pageFilters = Page::query()
+            ->select(['id', 'title', 'slug'])
+            ->orderBy('title')
+            ->get();
+
+        $activePageSlug = trim((string) $request->query('page', ''));
+        if ($activePageSlug === '' || ! $pageFilters->contains('slug', $activePageSlug)) {
+            $activePageSlug = null;
+        }
+
+        $sectionsQuery = PageSection::query()
+            ->with('page')
+            ->orderBy('sort_order')
+            ->orderByDesc('id');
+
+        if ($activePageSlug) {
+            $sectionsQuery->whereHas('page', function ($query) use ($activePageSlug) {
+                $query->where('slug', $activePageSlug);
+            });
+        }
+
         return view('admin.sections.index', [
-            'sections' => PageSection::with('page')->orderBy('sort_order')->paginate(12),
+            'sections' => $sectionsQuery->paginate(12)->withQueryString(),
+            'pageFilters' => $pageFilters,
+            'activePageSlug' => $activePageSlug,
         ]);
     }
 
