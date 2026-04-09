@@ -13,7 +13,6 @@
 <body class="site-shell page-pst-center">
     @php
         $logoHeader = asset('asset/logo bps.png');
-        $heroBgPstCenter = asset('asset/beranda2.png');
         $iconWeb = asset('asset/www.png');
         $iconEmail = asset('asset/email.png');
         $iconWhatsapp = asset('asset/whatapp.png');
@@ -80,7 +79,9 @@
     </header>
 
     <main>
-        <section class="pst-hero" style="background-image: url('{{ $heroBgPstCenter }}');">
+        <section class="hero-layout-stage hero-dashboard-style pst-hero">
+            <div class="corner-band corner-band-top-right"></div>
+            <div class="corner-band corner-band-bottom-left"></div>
             <div class="hero-layout-center reveal-card" style="--delay: 0ms;">
                 <h1 class="pst-hero-title">PST Center</h1>
             </div>

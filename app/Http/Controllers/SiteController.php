@@ -35,6 +35,20 @@ class SiteController extends Controller
 
     public function show(string $slug)
     {
+        $footerPage = Page::query()
+            ->where('slug', 'footer')
+            ->with(['sections' => function ($query) {
+                $query->where('is_active', true)->orderBy('sort_order');
+            }, 'sections.media'])
+            ->first();
+
+        $footerSection = $footerPage?->sections
+            ?->first(function (PageSection $section) {
+                return $section->type === 'image'
+                    && $section->media
+                    && str_starts_with((string) $section->media->mime_type, 'image/');
+            });
+
         if ($slug === 'statistik-mojokerto') {
             $items = PageSection::query()
                 ->whereHas('page', function ($query) {
@@ -70,6 +84,7 @@ class SiteController extends Controller
             return view('site.statistik-mojokerto', [
                 'items' => $items,
                 'settings' => Setting::query()->pluck('value', 'key'),
+                'footerSection' => $footerSection,
             ]);
         }
 
@@ -77,6 +92,7 @@ class SiteController extends Controller
         if ($slug === 'pst-center') {
             return view('site.pst-center', [
                 'settings' => Setting::query()->pluck('value', 'key'),
+                'footerSection' => $footerSection,
             ]);
         }
 
@@ -106,6 +122,7 @@ class SiteController extends Controller
         return view('site.page', [
             'page' => $page,
             'settings' => Setting::query()->pluck('value', 'key'),
+            'footerSection' => $footerSection,
         ]);
     }
 }

@@ -26,7 +26,6 @@
         $supportLogo2 = asset('asset/pss.png');
         $supportLogo3 = asset('asset/pojok statistik.png');
         $supportLogo4 = asset('asset/RB-removebg-preview.png');
-        $familyBanner = asset('asset/keluarga-bps.png');
         $iconWeb = asset('asset/www.png');
         $iconEmail = asset('asset/email.png');
         $iconWhatsapp = asset('asset/whatapp.png');
@@ -225,11 +224,18 @@
             </div>
         </section>
 
-        <section class="scroll-reveal" style="background: #466633; padding: 1.2rem 0 0; --reveal-delay: 240ms;">
+        <section style="background: #466633; padding: 1.1rem 0 0; width: 100%;">
             <div style="max-width: 1280px; margin: 0 auto; padding: 0 1rem;">
-                <div style="background: #466633;">
-                    <img src="{{ $familyBanner }}" alt="Keluarga BPS Kabupaten Mojokerto" style="display: block; width: 93%; height: auto; object-fit: cover; margin: 0 auto;">
-                </div>
+                @php
+                    $footerImageSection = $footerSection ?? null;
+                    $footerImageAlt = $footerImageSection?->title ?? 'Keluarga BPS Kabupaten Mojokerto';
+                @endphp
+
+                @if ($footerImageSection && $footerImageSection->media)
+                    <div style="max-width: 1200px; margin: 0 auto; padding: 9px; background: rgba(255,255,255,0.12); border: 2px solid rgba(255,255,255,0.7); border-radius: 24px; box-shadow: 0 8px 20px rgba(0,0,0,0.14);">
+                        <img src="{{ asset('storage/'.$footerImageSection->media->file_path) }}" alt="{{ $footerImageAlt }}" style="display: block; width: 100%; height: auto; object-fit: cover; margin: 0; border-radius: 16px;">
+                    </div>
+                @endif
             </div>
 
             <div style="margin-top: 1rem;">
