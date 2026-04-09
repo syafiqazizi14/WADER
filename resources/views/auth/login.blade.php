@@ -70,6 +70,13 @@
                 </label>
 
                 <button type="submit" class="auth-minimal-submit">Log in</button>
+
+                @if (Route::has('register'))
+                    <div class="auth-minimal-footer-link">
+                        <span>Belum punya akun?</span>
+                        <a href="{{ route('register') }}">Daftar akun baru</a>
+                    </div>
+                @endif
             </form>
         </div>
     </div>
