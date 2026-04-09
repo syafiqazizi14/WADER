@@ -60,7 +60,7 @@
 
     <header class="layout-header">
         <div class="layout-header-inner">
-            <a href="{{ route('site.home') }}" class="brand-lockup {{ request()->route()->getName() === 'site.page' && request()->route('slug') === 'statistik-mojokerto' ? 'active' : '' }}">
+            <a href="{{ route('site.home') }}" class="brand-lockup">
                 <img src="{{ $logoHeader }}" alt="BPS Kabupaten Mojokerto" class="brand-logo-header">
             </a>
 
@@ -79,9 +79,7 @@
     </header>
 
     <main>
-        <section class="hero-layout-stage hero-dashboard-style pst-hero">
-            <div class="corner-band corner-band-top-right"></div>
-            <div class="corner-band corner-band-bottom-left"></div>
+        <section class="hero-layout-stage pst-hero" style="min-height: 100vh; background: #ffffff url('{{ asset('asset/beranda2.png') }}') center top / cover no-repeat;">
             <div class="hero-layout-center reveal-card" style="--delay: 0ms;">
                 <h1 class="pst-hero-title">PST Center</h1>
             </div>
@@ -137,20 +135,23 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            background-color: #ffffff;
-            background-repeat: no-repeat;
-            background-position: center top;
-            background-size: cover;
+            position: relative;
+            background: #ffffff;
+        }
+
+        .pst-hero .hero-layout-center {
+            position: relative;
+            z-index: 1;
         }
 
         .pst-hero-title {
             margin: 0;
-            color: #1b1f24;
+            color: #0b2e59;
             font-family: 'Sora', 'Plus Jakarta Sans', system-ui, sans-serif;
             font-size: clamp(2.8rem, 8vw, 5.2rem);
             font-weight: 800;
             letter-spacing: -0.02em;
-            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            text-shadow: 0 8px 22px rgba(11, 46, 89, 0.18);
         }
 
         .pst-center-section {
@@ -203,13 +204,6 @@
             width: 90%;
             height: 90%;
             object-fit: contain;
-        }
-
-        .pst-center-links {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 10px;
         }
 
         @media (max-width: 980px) {
