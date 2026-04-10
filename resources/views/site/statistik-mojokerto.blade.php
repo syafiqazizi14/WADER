@@ -8,9 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="{{ asset('asset/iconwader.png') }}">
-    <link rel="shortcut icon" href="{{ asset('asset/iconwader.png') }}">
-    <link rel="apple-touch-icon" href="{{ asset('asset/iconwader.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=20260410">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}?v=20260410">
+    <link rel="apple-touch-icon" href="{{ asset('favicon-preview.png') }}?v=20260410">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="site-shell page-statistik-mojokerto">
