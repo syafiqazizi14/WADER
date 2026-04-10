@@ -9,11 +9,190 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        .page-backend .layout-header {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            z-index: 60 !important;
+            background: transparent !important;
+            backdrop-filter: none !important;
+            border-bottom-color: transparent !important;
+            box-shadow: none !important;
+        }
+
+        .page-backend .layout-header.is-scrolled {
+            background: rgba(255, 255, 255, 0.96) !important;
+            backdrop-filter: blur(10px) !important;
+            border-bottom: 1px solid rgba(15, 23, 42, 0.08) !important;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.1) !important;
+        }
+
+        .page-backend .layout-header.is-at-top {
+            background: transparent !important;
+            backdrop-filter: none !important;
+            border-bottom-color: transparent !important;
+            box-shadow: none !important;
+        }
+
+        .page-backend .hero-layout-stage {
+            min-height: 100vh !important;
+            background: #ffffff url('{{ asset('asset/beranda2.png') }}') center top / cover no-repeat !important;
+        }
+
+        .page-backend .hero-layout-center {
+            transform: none !important;
+            padding: 0 !important;
+            border-radius: 0 !important;
+        }
+
+        .page-backend .backend-hero-title {
+            margin: 0 !important;
+            color: #0b2e59 !important;
+            font-family: 'Sora', 'Plus Jakarta Sans', system-ui, sans-serif !important;
+            font-size: clamp(2.8rem, 8vw, 5.2rem) !important;
+            font-weight: 800 !important;
+            letter-spacing: -0.02em !important;
+            text-shadow: 0 8px 22px rgba(11, 46, 89, 0.18) !important;
+            line-height: 1 !important;
+        }
+
+        .page-backend .backend-hero-title::after {
+            content: none !important;
+        }
+
+        .page-backend .backend-guide-panel {
+            background: linear-gradient(180deg, #eff1f3 0%, #e7e9ec 100%) !important;
+            padding: clamp(1.2rem, 2.2vw, 2rem) clamp(0.9rem, 2vw, 1.4rem) !important;
+        }
+
+        .page-backend .backend-guide-inner {
+            max-width: 1540px !important;
+            margin: 0 auto !important;
+            display: grid !important;
+            grid-template-columns: minmax(0, 1fr) minmax(180px, 280px) !important;
+            gap: clamp(1rem, 2.2vw, 1.8rem) !important;
+            align-items: center !important;
+        }
+
+        .page-backend .backend-guide-text {
+            background: #ffffff;
+            border-radius: 22px;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+            padding: clamp(1.1rem, 2.1vw, 1.8rem) clamp(1.2rem, 2.4vw, 2rem);
+        }
+
+        .page-backend .backend-guide-note {
+            margin: 0;
+            color: #0f1721;
+            font-size: clamp(1rem, 1.2vw, 1.45rem);
+            line-height: 1.45;
+            text-shadow: none;
+        }
+
+        .page-backend .backend-guide-note-chip {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.5rem;
+            padding: 0.2rem 0.55rem;
+            border-radius: 999px;
+            background: #0f6a3d;
+            color: #ffffff;
+            font-size: 0.82em;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .page-backend .backend-guide-title {
+            margin: clamp(0.85rem, 1.4vw, 1.15rem) 0 clamp(0.4rem, 0.7vw, 0.6rem);
+            color: #0f1721;
+            font-size: clamp(1.12rem, 1.25vw, 1.5rem);
+            font-weight: 700;
+            text-shadow: none;
+        }
+
+        .page-backend .backend-guide-list {
+            margin: 0;
+            padding-left: clamp(1.3rem, 1.8vw, 1.9rem);
+            color: #0f1721;
+            font-size: clamp(1rem, 1.22vw, 1.42rem);
+            line-height: 1.5;
+            list-style: decimal;
+            text-shadow: none;
+        }
+
+        .page-backend .backend-guide-list li {
+            margin-bottom: clamp(0.45rem, 0.7vw, 0.72rem);
+            color: #0f1721;
+        }
+
+        .page-backend .backend-guide-list li::marker {
+            color: #0f1721;
+            font-weight: 400;
+        }
+
+        .page-backend .backend-guide-file {
+            display: flex;
+            justify-content: center;
+            align-self: stretch;
+        }
+
+        .page-backend .backend-guide-file-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            width: 100%;
+            background: linear-gradient(165deg, #ffffff 0%, #f8fbff 100%);
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            border-radius: 22px;
+            box-shadow: 0 16px 30px rgba(15, 23, 42, 0.1);
+            padding: clamp(1rem, 1.6vw, 1.5rem) clamp(0.8rem, 1.3vw, 1rem);
+            text-decoration: none;
+            transition: transform 180ms ease, box-shadow 180ms ease;
+        }
+
+        .page-backend .backend-guide-file-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 22px 34px rgba(15, 23, 42, 0.13);
+        }
+
+        .page-backend .backend-guide-file-logo {
+            width: min(100%, 138px);
+        }
+
+        .page-backend .backend-guide-file-label {
+            color: #111827;
+            font-size: clamp(1.45rem, 1.95vw, 1.95rem);
+            font-weight: 700;
+            letter-spacing: 0;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 980px) {
+            .page-backend .backend-guide-inner {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+
+            .page-backend .backend-guide-file {
+                justify-content: stretch;
+            }
+
+            .page-backend .backend-guide-file-label {
+                font-size: clamp(1.55rem, 7vw, 2.2rem);
+            }
+        }
+    </style>
 </head>
 <body class="site-shell page-backend">
     @php
         $logoHeader = asset('asset/logo bps.png');
-        $heroBg = asset('asset/beranda2.png');
         $backendCardOutput = asset('asset/output-form-perminataan.png');
         $backendCardLetter = asset('asset/surat-yang-diunggah.png');
         $backendCardMonitoring = asset('asset/monitoring-perminataan.png');
@@ -97,7 +276,7 @@
     </header>
 
     <main>
-        <section class="hero-layout-stage" style="min-height: calc(100vh - 88px); background: #ffffff url('{{ $heroBg }}') center top / cover no-repeat;">
+        <section class="hero-layout-stage">
             <div class="hero-layout-center reveal-card" style="--delay: 0ms;">
                 <h1 class="backend-hero-title">BACKEND</h1>
             </div>
@@ -121,7 +300,7 @@
         <section class="backend-guide-panel">
             <div class="backend-guide-inner">
                 <div class="backend-guide-text">
-                    <p class="backend-guide-note">NB : File di akses menggunakan gmail BPS Kabupaten Mojokerto</p>
+                    <p class="backend-guide-note"><span class="backend-guide-note-chip">NB</span>File di akses menggunakan gmail BPS Kabupaten Mojokerto</p>
                     <p class="backend-guide-title">Langkah :</p>
                     <ol class="backend-guide-list">
                         <li>Cek <strong><em>Output Permintaan Data &amp; Konsultasi</em></strong> serta cek <strong><em>Surat yang di Upload</em></strong></li>

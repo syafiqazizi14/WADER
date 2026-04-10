@@ -160,8 +160,8 @@
 
         .statistik-hero-custom {
             background-repeat: no-repeat;
-            background-position: center;
-            background-size: 118% auto;
+            background-position: center top;
+            background-size: cover;
             position: relative;
             height: 100vh;
             overflow: hidden;
@@ -177,8 +177,8 @@
         }
 
         .statistik-hero-custom .hero-main-logo {
-            width: min(90vw, 620px) !important;
-            max-width: 620px;
+            width: min(58vw, 380px) !important;
+            max-width: 380px;
             height: auto;
         }
 
@@ -419,8 +419,8 @@
             }
 
             .statistik-hero-custom .hero-main-logo {
-                width: clamp(220px, 72vw, 360px) !important;
-                max-width: 360px;
+                width: clamp(150px, 44vw, 220px) !important;
+                max-width: 220px;
             }
 
             .stat-card-label {
