@@ -96,10 +96,10 @@
         </section>
 
         <section class="service-blue-zone scroll-reveal" style="--reveal-delay: 80ms;">
-            <span class="sparkle sparkle-left">âœ¦</span>
-            <span class="sparkle sparkle-left-sm">âœ¦</span>
-            <span class="sparkle sparkle-right">âœ¦</span>
-            <span class="sparkle sparkle-right-sm">âœ¦</span>
+            <span class="sparkle sparkle-left">&#10022;</span>
+            <span class="sparkle sparkle-left-sm">&#10022;</span>
+            <span class="sparkle sparkle-right">&#10022;</span>
+            <span class="sparkle sparkle-right-sm">&#10022;</span>
             <div class="service-grid-reference">
                 @foreach ($menuCards as $card)
                     <a href="{{ $card['url'] }}" @if($card['external']) target="_blank" rel="noopener noreferrer" @endif class="service-ref-card">

@@ -199,6 +199,7 @@
             width: min(58vw, 380px) !important;
             max-width: 380px;
             height: auto;
+            filter: drop-shadow(0 14px 18px rgba(15, 63, 117, 0.32)) drop-shadow(0 26px 36px rgba(15, 63, 117, 0.22));
         }
 
         .statistik-hero-custom .reveal-card {
