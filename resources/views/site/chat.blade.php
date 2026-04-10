@@ -12,6 +12,7 @@
     <link rel="shortcut icon" href="{{ asset('asset/iconwader.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('asset/iconwader.png') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @include('site.partials.topbar-transparent')
 </head>
 <body class="site-shell page-{{ ($requestCategory ?? 'pelayanan') === 'pengaduan' ? 'pengaduan' : 'jenis-pelayanan' }}">
     @php

@@ -66,10 +66,7 @@ body.site-shell {
     box-shadow: 0 2px 14px rgba(15, 23, 42, 0.08);
 }
 
-.page-beranda .layout-header.is-at-top,
-.page-pst-center .layout-header.is-at-top,
-.page-statistik-mojokerto .layout-header.is-at-top,
-.page-backend .layout-header.is-at-top {
+.layout-header.is-at-top {
     background: transparent;
     backdrop-filter: none;
     border-bottom-color: transparent;

@@ -12,6 +12,7 @@
     <link rel="shortcut icon" href="{{ asset('asset/iconwader.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('asset/iconwader.png') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @include('site.partials.topbar-transparent')
 </head>
 <body class="site-shell page-statistik-mojokerto">
     @php
@@ -199,7 +200,7 @@
             width: min(58vw, 380px) !important;
             max-width: 380px;
             height: auto;
-            filter: drop-shadow(0 14px 18px rgba(15, 63, 117, 0.32)) drop-shadow(0 26px 36px rgba(15, 63, 117, 0.22));
+            filter: none;
         }
 
         .statistik-hero-custom .reveal-card {
