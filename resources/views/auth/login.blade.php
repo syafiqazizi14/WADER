@@ -1,6 +1,6 @@
-<x-guest-layout>
+﻿<x-guest-layout>
     @php
-        $logoHeader = asset('asset/logo bps.png');
+        $logoHeader = asset('asset/iconwader.png');
     @endphp
 
     <div class="auth-minimal-shell">
@@ -8,8 +8,8 @@
 
         <div class="auth-minimal-card">
             <div class="auth-minimal-brand">
-                <img src="{{ $logoHeader }}" alt="BPS Kabupaten Mojokerto" class="auth-minimal-logo">
-                <h1 class="auth-minimal-title">BPS Kabupaten Mojokerto</h1>
+                <img src="{{ $logoHeader }}" alt="WADER" class="auth-minimal-logo">
+                <h1 class="auth-minimal-title">ADMIN WADER</h1>
             </div>
 
             <x-auth-session-status class="mb-3" :status="session('status')" />
@@ -74,3 +74,4 @@
         </div>
     </div>
 </x-guest-layout>
+
