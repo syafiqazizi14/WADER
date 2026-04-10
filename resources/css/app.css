@@ -209,29 +209,27 @@ body.page-backend,
     position: relative;
     z-index: 1;
     transform: translateY(-1.5vh);
-    padding: clamp(1rem, 2vw, 1.5rem) clamp(1.1rem, 2.5vw, 2rem);
-    border-radius: 28px;
+    padding: 0;
+    border-radius: 0;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
 }
 
 .page-backend .backend-hero-title {
     margin: 0;
-    color: #0b2e59;
-    font-size: clamp(2.4rem, 8vw, 5.8rem);
-    line-height: 0.95;
-    text-shadow: 0 8px 22px rgba(11, 46, 89, 0.18);
+    color: #ffffff;
+    font-family: 'Sora', 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: clamp(2.8rem, 8vw, 5.2rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 0.98;
+    text-shadow: 0 8px 22px rgba(0, 0, 0, 0.32);
 }
 
 .page-backend .hero-layout-stage::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    width: min(72vw, 940px);
-    height: 150px;
-    transform: translateX(-50%);
-    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.04) 56%, transparent 74%);
-    filter: blur(8px);
-    pointer-events: none;
+    display: none;
 }
 
 .page-backend .backend-feature-zone {
@@ -1717,8 +1715,8 @@ body.js-ready .scroll-reveal.is-visible {
 
 @media (max-width: 620px) {
     .page-backend .hero-layout-center {
-        padding: 0.9rem 1rem;
-        border-radius: 22px;
+        padding: 0;
+        border-radius: 0;
     }
 
     .page-backend .backend-hero-title {
