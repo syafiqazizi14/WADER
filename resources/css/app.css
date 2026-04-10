@@ -217,8 +217,12 @@ body.page-backend,
     position: relative;
     z-index: 1;
     transform: translateY(-1.5vh);
-    padding: clamp(1rem, 2vw, 1.5rem) clamp(1.1rem, 2.5vw, 2rem);
-    border-radius: 28px;
+    padding: 0;
+    border-radius: 0;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
 }
 
 .page-backend .backend-hero-title {
@@ -1802,8 +1806,8 @@ body.js-ready .scroll-reveal.is-visible {
 
 @media (max-width: 620px) {
     .page-backend .hero-layout-center {
-        padding: 0.9rem 1rem;
-        border-radius: 22px;
+        padding: 0;
+        border-radius: 0;
     }
 
     .page-backend .backend-hero-title {
