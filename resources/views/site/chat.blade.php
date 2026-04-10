@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -8,6 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{ asset('asset/iconwader.png') }}">
+    <link rel="shortcut icon" href="{{ asset('asset/iconwader.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('asset/iconwader.png') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="site-shell page-{{ ($requestCategory ?? 'pelayanan') === 'pengaduan' ? 'pengaduan' : 'jenis-pelayanan' }}">
@@ -49,14 +52,14 @@
                     <template x-for="(message, idx) in messages" :key="idx">
                         <div class="chat-row" :class="message.from === 'bot' ? 'chat-row-bot' : 'chat-row-user'" :style="`--bubble-delay: ${idx * 70}ms`">
                             <template x-if="message.from === 'bot'">
-                                <span class="chat-avatar">🤖</span>
+                                <span class="chat-avatar">ðŸ¤–</span>
                             </template>
                             <div class="chat-bubble" :class="message.from === 'bot' ? 'chat-bubble-bot' : 'chat-bubble-user'" x-text="message.text"></div>
                         </div>
                     </template>
 
                     <div class="chat-row chat-row-bot chat-row-typing" x-show="isTyping">
-                        <span class="chat-avatar">🤖</span>
+                        <span class="chat-avatar">ðŸ¤–</span>
                         <div class="chat-bubble chat-bubble-bot chat-bubble-typing">
                             <span></span>
                             <span></span>
@@ -430,3 +433,4 @@
     </script>
 </body>
 </html>
+
