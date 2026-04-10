@@ -176,7 +176,146 @@
             text-decoration: underline;
         }
 
+        .page-backend .backend-feature-zone {
+            background: #4f6f35;
+            padding: 1.2rem 32px 0.8rem 32px;
+            min-height: auto;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .page-backend .backend-feature-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 2rem;
+            align-items: flex-end;
+        }
+
+        .page-backend .backend-feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+            padding-right: 0;
+            padding-left: 0;
+            max-width: 100%;
+            margin-right: 0;
+        }
+
+        .page-backend .backend-feature-link {
+            display: block;
+            text-decoration: none;
+            transition: transform 220ms ease, box-shadow 220ms ease;
+            border-radius: 18px;
+            overflow: hidden;
+        }
+
+        .page-backend .backend-feature-link:hover {
+            transform: translateY(-2px);
+        }
+
+        .page-backend .backend-feature-pill {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            border-radius: 16px;
+            object-fit: cover;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+        }
+
+        .page-backend .backend-feature-figure-wrap {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            width: 100%;
+            height: auto;
+            margin-bottom: -1.2rem;
+            padding-right: 0;
+        }
+
+        .page-backend .backend-feature-figure {
+            display: block;
+            width: 75%;
+            height: auto;
+            object-fit: contain;
+            max-width: 100%;
+        }
+
+        .page-backend .backend-social-strip {
+            background: #4f6f35;
+            padding: clamp(1rem, 1.6vw, 1.5rem) 0;
+        }
+
+        .page-backend .backend-social-inner {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 clamp(0.8rem, 1.4vw, 1.6rem);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .page-backend .backend-social-text {
+            margin: 0;
+            color: #ffffff;
+            font-family: "Brush Script MT", "Segoe Script", cursive;
+            font-size: clamp(1.7rem, 2.4vw, 2.7rem);
+            line-height: 1.2;
+        }
+
+        .page-backend .backend-social-icons {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.55rem;
+            flex-wrap: nowrap;
+        }
+
+        .page-backend .backend-social-icon-link {
+            width: 46px;
+            height: 46px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            transition: transform 180ms ease;
+        }
+
+        .page-backend .backend-social-icon-link:hover {
+            transform: translateY(-2px);
+        }
+
+        .page-backend .backend-social-icon {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+            display: block;
+        }
+
         @media (max-width: 980px) {
+            .page-backend .backend-feature-inner {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .page-backend .backend-feature-list {
+                order: 2;
+            }
+
+            .page-backend .backend-feature-figure-wrap {
+                order: 1;
+                max-height: 300px;
+            }
+
             .page-backend .backend-guide-inner {
                 display: grid;
                 grid-template-columns: 1fr;
@@ -189,6 +328,23 @@
 
             .page-backend .backend-guide-file-label {
                 font-size: clamp(1.55rem, 7vw, 2.2rem);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .page-backend .backend-feature-zone {
+                padding: 1.5rem 12px;
+                min-height: auto;
+            }
+
+            .page-backend .backend-social-inner {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .page-backend .backend-social-icons {
+                justify-content: center;
+                flex-wrap: wrap;
             }
         }
     </style>
