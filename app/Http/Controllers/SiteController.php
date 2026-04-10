@@ -33,6 +33,13 @@ class SiteController extends Controller
         ]);
     }
 
+    public function dataWebsite()
+    {
+        return view('site.data-website', [
+            'settings' => Setting::query()->pluck('value', 'key'),
+        ]);
+    }
+
     public function show(string $slug)
     {
         $footerPage = Page::query()
@@ -85,6 +92,12 @@ class SiteController extends Controller
                 'items' => $items,
                 'settings' => Setting::query()->pluck('value', 'key'),
                 'footerSection' => $footerSection,
+            ]);
+        }
+
+        if ($slug === 'data-website') {
+            return view('site.data-website', [
+                'settings' => Setting::query()->pluck('value', 'key'),
             ]);
         }
 

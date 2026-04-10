@@ -203,7 +203,15 @@
             <div class="support-banner-top" style="background: #8dc64f; padding: 1.45rem 1rem;">
                 <div class="support-banner-top-inner" style="max-width: 1220px; margin: 0 auto; display: flex; justify-content: space-around; align-items: center; gap: 4.3rem; flex-wrap: wrap;">
                     <div class="support-head-item" style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
-                        <img src="{{ $iconWebsite }}" alt="Data Website" class="support-head-icon" style="width: clamp(255px, 32vw, 500px); height: auto; object-fit: contain;">
+                        <a
+                            href="{{ route('site.data-website') }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Buka Data Website di halaman baru"
+                            style="display: inline-flex; align-items: center; justify-content: center;"
+                        >
+                            <img src="{{ $iconWebsite }}" alt="Data Website" class="support-head-icon" style="width: clamp(255px, 32vw, 500px); height: auto; object-fit: contain;">
+                        </a>
                     </div>
                     <div class="support-head-item" style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
                         <img src="{{ $logoZonaIntegritas }}" alt="Zona Integritas" class="support-head-icon support-head-icon-badge" style="width: clamp(245px, 31vw, 485px); height: auto; object-fit: contain; transform: translateY(8px);">
