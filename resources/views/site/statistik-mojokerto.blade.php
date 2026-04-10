@@ -14,9 +14,25 @@
     @php
         $logoMain = asset('asset/stimo.png');
         $logoHeader = asset('asset/logo bps.png');
+        $iconWeb = asset('asset/www.png');
+        $iconEmail = asset('asset/email.png');
+        $iconWhatsapp = asset('asset/whatapp.png');
+        $iconInstagram = asset('asset/instagram.png');
+        $iconFacebook = asset('asset/facebook.png');
+        $iconX = asset('asset/x.png');
+        $iconYoutube = asset('asset/yt.png');
         $heroBg = $heroBg ?? asset('asset/beranda2.png');
         $items = $items ?? collect();
         $settings = $settings ?? [];
+
+        $rawWhatsapp = (string) ($settings['contact_whatsapp'] ?? '');
+        $whatsappDigits = preg_replace('/\D+/', '', $rawWhatsapp);
+        if ($whatsappDigits && str_starts_with($whatsappDigits, '0')) {
+            $whatsappDigits = '62'.substr($whatsappDigits, 1);
+        }
+        $whatsappLink = $whatsappDigits
+            ? 'https://api.whatsapp.com/send/?phone='.$whatsappDigits.'&text&type=phone_number&app_absent=0'
+            : '#';
     @endphp
 
     <header class="layout-header">
@@ -93,29 +109,29 @@
     <footer class="statistik-info-strip">
         <div class="statistik-info-inner">
             <p class="statistik-info-title">Jangan Lewatkan Informasi Terbaru Kami</p>
-            <div class="statistik-social-row">
-                <a href="{{ $settings['instansi_link'] ?? '#' }}" target="_blank" class="social-icon-link" aria-label="Website">
-                    <img src="{{ asset('asset/www.png') }}" alt="Website" class="social-icon">
-                </a>
-                <a href="mailto:{{ $settings['contact_email'] ?? '' }}" class="social-icon-link" aria-label="Email">
-                    <img src="{{ asset('asset/email.png') }}" alt="Email" class="social-icon">
-                </a>
-                <a href="{{ $settings['contact_whatsapp'] ?? '#' }}" target="_blank" class="social-icon-link" aria-label="WhatsApp">
-                    <img src="{{ asset('asset/whatapp.png') }}" alt="WhatsApp" class="social-icon">
-                </a>
-                <a href="{{ $settings['contact_instagram'] ?? '#' }}" target="_blank" class="social-icon-link" aria-label="Instagram">
-                    <img src="{{ asset('asset/instagram.png') }}" alt="Instagram" class="social-icon">
-                </a>
-                <a href="#" class="social-icon-link" aria-label="X">
-                    <img src="{{ asset('asset/x.png') }}" alt="X" class="social-icon">
-                </a>
-                <a href="{{ $settings['contact_facebook'] ?? '#' }}" target="_blank" class="social-icon-link" aria-label="Facebook">
-                    <img src="{{ asset('asset/facebook.png') }}" alt="Facebook" class="social-icon">
-                </a>
-                <a href="#" class="social-icon-link" aria-label="YouTube">
-                    <img src="{{ asset('asset/yt.png') }}" alt="YouTube" class="social-icon">
-                </a>
-            </div>
+            <div style="display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap;">
+                    <a href="{{ $settings['instansi_link'] ?? '#' }}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+                        <img src="{{ $iconWeb }}" alt="Website" style="width: 42px; height: 42px; object-fit: contain;">
+                    </a>
+                    <a href="mailto:{{ $settings['contact_email'] ?? '' }}" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+                        <img src="{{ $iconEmail }}" alt="Email" style="width: 42px; height: 42px; object-fit: contain;">
+                    </a>
+                    <a href="{{ $whatsappLink }}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+                        <img src="{{ $iconWhatsapp }}" alt="WhatsApp" style="width: 42px; height: 42px; object-fit: contain;">
+                    </a>
+                    <a href="{{ $settings['contact_instagram'] ?? '#' }}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+                        <img src="{{ $iconInstagram }}" alt="Instagram" style="width: 42px; height: 42px; object-fit: contain;">
+                    </a>
+                    <a href="{{ $settings['contact_facebook'] ?? '#' }}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+                        <img src="{{ $iconFacebook }}" alt="Facebook" style="width: 42px; height: 42px; object-fit: contain;">
+                    </a>
+                    <a href="https://x.com/bpsmojokerto" target="_blank" rel="noopener noreferrer" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+                        <img src="{{ $iconX }}" alt="X" style="width: 42px; height: 42px; object-fit: contain;">
+                    </a>
+                    <a href="#" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+                        <img src="{{ $iconYoutube }}" alt="YouTube" style="width: 42px; height: 42px; object-fit: contain;">
+                    </a>
+                </div>
         </div>
     </footer>
 

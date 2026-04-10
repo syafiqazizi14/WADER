@@ -405,10 +405,8 @@ body.page-backend,
     color: #ffffff;
     margin: 0;
     font-family: "Brush Script MT", "Segoe Script", cursive;
-    font-size: clamp(2rem, 2.6vw, 3rem);
-    font-weight: 600;
-    line-height: 1;
-    letter-spacing: 0.01em;
+    font-size: clamp(1.9rem, 2.8vw, 3rem);
+    font-weight: 400;
     text-shadow: none;
 }
 
