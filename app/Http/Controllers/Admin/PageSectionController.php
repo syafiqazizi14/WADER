@@ -124,7 +124,7 @@ class PageSectionController extends Controller
     {
         $pageId = (int) $request->input('page_id');
         $page = Page::query()->find($pageId);
-        $isStatistikPage = $page && $page->slug === 'statistik-mojokerto';
+        $isStatistikPage = $this->isStatistikPage($page);
 
         $validated = $request->validate([
             'page_id' => ['required', 'exists:pages,id'],
@@ -205,7 +205,7 @@ class PageSectionController extends Controller
     private function enforceMaxActiveStatistikItems(int $pageId): void
     {
         $page = Page::query()->find($pageId);
-        if (! $page || $page->slug !== 'statistik-mojokerto') {
+        if (! $this->isStatistikPage($page)) {
             return;
         }
 
@@ -225,5 +225,21 @@ class PageSectionController extends Controller
             ->whereNotNull('media_id')
             ->whereNotIn('id', $visibleIds)
             ->update(['is_active' => false]);
+    }
+
+    private function isStatistikPage(?Page $page): bool
+    {
+        if (! $page) {
+            return false;
+        }
+
+        $slug = strtolower(trim((string) $page->slug));
+        $title = strtolower(trim((string) $page->title));
+
+        if (in_array($slug, ['statistik-mojokerto', 'stimo', 'stimo-2-0'], true)) {
+            return true;
+        }
+
+        return $title === 'stimo' || str_contains($title, 'statistik mojokerto');
     }
 }

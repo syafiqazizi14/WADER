@@ -132,9 +132,17 @@
             return;
         }
 
+        const normalize = (value) => (value || '').toString().trim().toLowerCase();
+        const statistikSlugs = new Set(['statistik-mojokerto', 'stimo', 'stimo-2-0']);
+
         const syncMode = () => {
             const selected = pageSelect.options[pageSelect.selectedIndex];
-            const isStatistik = (selected?.dataset?.pageSlug || '') === 'statistik-mojokerto';
+            const selectedSlug = normalize(selected?.dataset?.pageSlug);
+            const selectedTitle = normalize(selected?.textContent);
+            const isStatistik =
+                statistikSlugs.has(selectedSlug)
+                || selectedTitle === 'stimo'
+                || selectedTitle.includes('statistik mojokerto');
 
             statistikFields.style.display = isStatistik ? '' : 'none';
             generalFields.style.display = isStatistik ? 'none' : '';
