@@ -8,15 +8,31 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="{{ asset('asset/iconwader.png') }}">
-    <link rel="shortcut icon" href="{{ asset('asset/iconwader.png') }}">
-    <link rel="apple-touch-icon" href="{{ asset('asset/iconwader.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('asset/favicon-wader.png') }}">
+    <link rel="shortcut icon" href="{{ asset('asset/favicon-wader.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('asset/favicon-wader.png') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @include('site.partials.topbar-transparent')
 </head>
 <body class="site-shell page-{{ ($requestCategory ?? 'pelayanan') === 'pengaduan' ? 'pengaduan' : 'jenis-pelayanan' }}">
     @php
         $logoHeader = asset('asset/logo bps.png');
+        $iconWeb = asset('asset/www.png');
+        $iconEmail = asset('asset/email.png');
+        $iconWhatsapp = asset('asset/whatapp.png');
+        $iconInstagram = asset('asset/instagram.png');
+        $iconFacebook = asset('asset/facebook.png');
+        $iconX = asset('asset/x.png');
+        $iconYoutube = asset('asset/yt.png');
+
+        $rawWhatsapp = (string) ($settings['contact_whatsapp'] ?? '');
+        $whatsappDigits = preg_replace('/\D+/', '', $rawWhatsapp);
+        if ($whatsappDigits && str_starts_with($whatsappDigits, '0')) {
+            $whatsappDigits = '62'.substr($whatsappDigits, 1);
+        }
+        $whatsappLink = $whatsappDigits
+            ? 'https://api.whatsapp.com/send/?phone='.$whatsappDigits.'&text&type=phone_number&app_absent=0'
+            : '#';
     @endphp
 
     <header class="layout-header">
@@ -28,8 +44,6 @@
             <nav class="layout-nav">
                 <a href="{{ route('site.page', 'beranda') }}" class="layout-nav-link">Beranda</a>
                 <a href="{{ route('site.page', 'pst-center') }}" class="layout-nav-link">PST Center</a>
-                <a href="{{ route('site.chat') }}" class="layout-nav-link {{ ($requestCategory ?? 'pelayanan') === 'pelayanan' ? 'active' : '' }}">Jenis Pelayanan</a>
-                <a href="{{ route('site.complaints') }}" class="layout-nav-link {{ ($requestCategory ?? 'pelayanan') === 'pengaduan' ? 'active' : '' }}">Pengaduan</a>
                 <a href="{{ route('site.page', 'statistik-mojokerto') }}" class="layout-nav-link">STIMO 2.0</a>
                 <a href="{{ route('site.page', 'backend') }}" class="layout-nav-link">Backend</a>
                 @auth
@@ -53,14 +67,14 @@
                     <template x-for="(message, idx) in messages" :key="idx">
                         <div class="chat-row" :class="message.from === 'bot' ? 'chat-row-bot' : 'chat-row-user'" :style="`--bubble-delay: ${idx * 70}ms`">
                             <template x-if="message.from === 'bot'">
-                                <span class="chat-avatar">ðŸ¤–</span>
+                                <span class="chat-avatar">&#129302;</span>
                             </template>
                             <div class="chat-bubble" :class="message.from === 'bot' ? 'chat-bubble-bot' : 'chat-bubble-user'" x-text="message.text"></div>
                         </div>
                     </template>
 
                     <div class="chat-row chat-row-bot chat-row-typing" x-show="isTyping">
-                        <span class="chat-avatar">ðŸ¤–</span>
+                        <span class="chat-avatar">&#129302;</span>
                         <div class="chat-bubble chat-bubble-bot chat-bubble-typing">
                             <span></span>
                             <span></span>
@@ -106,18 +120,35 @@
         </section>
     </main>
 
-    <footer class="site-footer-wrap">
-        <div class="site-footer-inner">
-            <p class="site-footer-title">WADER 3516</p>
-            <p class="site-footer-meta">Email: {{ $settings['contact_email'] ?? '-' }}</p>
-            <div class="site-footer-links">
-                @if (!empty($settings['contact_whatsapp']))<a href="{{ $settings['contact_whatsapp'] }}" target="_blank" class="footer-link-chip">WhatsApp</a>@endif
-                @if (!empty($settings['contact_instagram']))<a href="{{ $settings['contact_instagram'] }}" target="_blank" class="footer-link-chip">Instagram</a>@endif
-                @if (!empty($settings['contact_facebook']))<a href="{{ $settings['contact_facebook'] }}" target="_blank" class="footer-link-chip">Facebook</a>@endif
-                @if (!empty($settings['instansi_link']))<a href="{{ $settings['instansi_link'] }}" target="_blank" class="footer-link-chip">Website Instansi</a>@endif
+    <section style="background: #466633; padding: 0.9rem 0;">
+        <div style="max-width: 1280px; margin: 0 auto; padding: 0.9rem 1rem 1rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;">
+            <p style="margin: 0; color: #ffffff; font-family: 'Brush Script MT', 'Segoe Script', cursive; font-size: clamp(1.9rem, 2.8vw, 3rem); font-weight: 400;">Jangan Lewatkan Informasi Terbaru Kami</p>
+
+            <div style="display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap;">
+                <a href="{{ $settings['instansi_link'] ?? '#' }}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+                    <img src="{{ $iconWeb }}" alt="Website" style="width: 42px; height: 42px; object-fit: contain;">
+                </a>
+                <a href="mailto:{{ $settings['contact_email'] ?? '' }}" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+                    <img src="{{ $iconEmail }}" alt="Email" style="width: 42px; height: 42px; object-fit: contain;">
+                </a>
+                <a href="{{ $whatsappLink }}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+                    <img src="{{ $iconWhatsapp }}" alt="WhatsApp" style="width: 42px; height: 42px; object-fit: contain;">
+                </a>
+                <a href="{{ $settings['contact_instagram'] ?? '#' }}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+                    <img src="{{ $iconInstagram }}" alt="Instagram" style="width: 42px; height: 42px; object-fit: contain;">
+                </a>
+                <a href="{{ $settings['contact_facebook'] ?? '#' }}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+                    <img src="{{ $iconFacebook }}" alt="Facebook" style="width: 42px; height: 42px; object-fit: contain;">
+                </a>
+                <a href="https://x.com/bpsmojokerto" target="_blank" rel="noopener noreferrer" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+                    <img src="{{ $iconX }}" alt="X" style="width: 42px; height: 42px; object-fit: contain;">
+                </a>
+                <a href="#" style="display: inline-flex; width: 52px; height: 52px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); align-items: center; justify-content: center; text-decoration: none;">
+                    <img src="{{ $iconYoutube }}" alt="YouTube" style="width: 42px; height: 42px; object-fit: contain;">
+                </a>
             </div>
         </div>
-    </footer>
+    </section>
 
     <script>
         function pstCenterChatbot() {

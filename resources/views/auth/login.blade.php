@@ -1,6 +1,6 @@
 ﻿<x-guest-layout>
     @php
-        $logoHeader = asset('asset/iconwader.png');
+        $logoHeader = asset('asset/favicon-wader.png');
     @endphp
 
     <div class="auth-minimal-shell">
