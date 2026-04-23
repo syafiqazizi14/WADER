@@ -1,9 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="dashboard-header">
-            <div>
-                <h2 class="font-bold text-3xl text-gray-800">🖼️ Media Library</h2>
-                <p class="mt-1 text-sm text-gray-500">Kelola dan unggah aset gambar atau file lainnya.</p>
+            <div class="flex items-start gap-3">
+                <div class="rounded-xl section-icon-wrap" style="padding: 0.7rem; background-color: #dbeafe; margin-top: -55px;">
+                    <img src="{{ asset('asset/media.png') }}" alt="Media" class="object-contain section-header-icon" style="width: 29px; height: 29px; max-width: 29px; max-height: 29px;">
+                    <span class="section-icon-underline" aria-hidden="true"></span>
+                </div>
+                <div>
+                    <h2 class="font-bold text-3xl text-gray-800">Media Library</h2>
+                    <p class="mt-1 text-sm text-gray-500">Kelola dan unggah aset gambar atau file lainnya.</p>
+                </div>
             </div>
         </div>
     </x-slot>

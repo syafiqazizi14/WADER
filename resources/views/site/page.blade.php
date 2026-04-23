@@ -244,8 +244,8 @@
                 @endphp
 
                 @if ($footerImageSection && $footerImageSection->media)
-                    <div style="max-width: 1200px; margin: 0 auto; padding: 9px; background: rgba(255,255,255,0.12); border: 2px solid rgba(255,255,255,0.7); border-radius: 24px; box-shadow: 0 8px 20px rgba(0,0,0,0.14);">
-                        <img src="{{ asset('storage/'.$footerImageSection->media->file_path) }}" alt="{{ $footerImageAlt }}" style="display: block; width: 100%; height: auto; object-fit: cover; margin: 0; border-radius: 16px;">
+                    <div style="max-width: 1200px; margin: 0 auto;">
+                        <img src="{{ asset('storage/'.$footerImageSection->media->file_path) }}" alt="{{ $footerImageAlt }}" style="display: block; width: 100%; height: auto; object-fit: cover; margin: 0;">
                     </div>
                 @endif
             </div>
