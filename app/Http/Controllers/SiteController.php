@@ -35,8 +35,25 @@ class SiteController extends Controller
 
     public function dataWebsite()
     {
+        $footerPage = Page::query()
+            ->where('slug', 'footer')
+            ->with(['sections' => function ($query) {
+                $query->where('is_active', true)->orderBy('sort_order');
+            }, 'sections.media', 'sections.thumbnailMedia'])
+            ->first();
+
+        $footerSection = $footerPage?->sections
+            ?->first(function (PageSection $section) {
+                $footerMedia = $section->media ?? $section->thumbnailMedia;
+
+                return $section->type === 'image'
+                    && $footerMedia
+                    && str_starts_with((string) $footerMedia->mime_type, 'image/');
+            });
+
         return view('site.data-website', [
             'settings' => Setting::query()->pluck('value', 'key'),
+            'footerSection' => $footerSection,
         ]);
     }
 

@@ -95,6 +95,18 @@
         </section>
 
         <footer class="data-website-footer">
+            @php
+                $footerImageSection = $footerSection ?? null;
+                $footerImageMedia = $footerImageSection?->media ?? $footerImageSection?->thumbnailMedia;
+                $footerImageAlt = $footerImageSection?->title ?? 'Keluarga BPS Kabupaten Mojokerto';
+            @endphp
+
+            @if ($footerImageSection && $footerImageMedia)
+                <div class="data-website-footer-image-wrap">
+                    <img src="{{ asset('storage/'.$footerImageMedia->file_path) }}" alt="{{ $footerImageAlt }}" class="data-website-footer-image" loading="lazy">
+                </div>
+            @endif
+
             <div class="data-website-footer-inner">
                 <h2 class="data-website-footer-text">Jangan Lewatkan Informasi Terbaru Kami</h2>
                 <div class="data-website-footer-socials">
@@ -279,6 +291,20 @@
         .data-website-footer {
             background: #4f6f35;
             padding: clamp(10px, 1.4vw, 16px) 16px;
+        }
+
+        .data-website-footer-image-wrap {
+            max-width: 1200px;
+            margin: 0 auto 14px;
+            padding: 0 8px;
+        }
+
+        .data-website-footer-image {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            margin: 0;
         }
 
         .data-website-footer-inner {
