@@ -1,22 +1,30 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="dashboard-header">
-            <div>
-                <h2 class="font-bold text-3xl text-gray-800">🔲 Section Halaman</h2>
-                <p class="mt-1 text-sm text-gray-500">Kelola komponen section pada setiap halaman.</p>
+            <div class="dashboard-header-content w-full">
+                <div class="flex items-start gap-4">
+                    <div class="rounded-xl section-icon-wrap" style="padding: 0.7rem; background-color: #dbeafe; margin-top: -55px; margin-left: 1.2rem;">
+                        <img src="{{ asset('asset/section.png') }}" alt="Section" class="object-contain section-header-icon" style="width: 29px; height: 29px; max-width: 29px; max-height: 29px;">
+                        <span class="section-icon-underline" aria-hidden="true"></span>
+                    </div>
+                    <div>
+                        <h2 class="dashboard-title text-3xl font-bold text-gray-800 tracking-tight">Section Halaman</h2>
+                        <p class="dashboard-welcome text-gray-500 mt-1">Kelola komponen section pada setiap halaman.</p>
+                        <a href="{{ route('admin.sections.create') }}" class="btn btn-primary mt-4 inline-flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus">
+                                <path d="M5 12h14"/>
+                                <path d="M12 5v14"/>
+                            </svg>
+                            <span>Tambah Section</span>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <a href="{{ route('admin.sections.create') }}" class="btn btn-primary">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus">
-                    <path d="M5 12h14"/>
-                    <path d="M12 5v14"/>
-                </svg>
-                <span>Tambah Section</span>
-            </a>
         </div>
     </x-slot>
 
-    <div class="py-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="admin-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div>
             @if (session('status'))
                 <div class="alert alert-success mb-6">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -24,22 +32,24 @@
                 </div>
             @endif
 
-            <div class="mb-4">
+            <div class="mb-6">
                 <div class="px-1 pt-1 pb-2">
                     <div>
                         <h3 class="text-sm font-semibold text-gray-900">Filter Menu Halaman</h3>
                     </div>
 
-                    <div class="mt-3 flex gap-2 overflow-x-auto pb-1">
-                        <a href="{{ route('admin.sections.index') }}" class="btn btn-sm whitespace-nowrap {{ $activePageSlug === null ? 'btn-primary' : 'btn-secondary' }}">
-                            Semua Menu
-                        </a>
-
-                        @foreach ($pageFilters as $pageFilter)
-                            <a href="{{ route('admin.sections.index', ['page' => $pageFilter->slug]) }}" class="btn btn-sm whitespace-nowrap {{ $activePageSlug === $pageFilter->slug ? 'btn-primary' : 'btn-secondary' }}">
-                                {{ $pageFilter->title }}
+                    <div class="mt-3 rounded-xl border border-sky-100 bg-sky-50/40 p-2">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <a href="{{ route('admin.sections.index') }}" class="btn btn-sm whitespace-nowrap {{ $activePageSlug === null ? 'btn-primary' : 'btn-secondary' }}">
+                                Semua Menu
                             </a>
-                        @endforeach
+
+                            @foreach ($pageFilters as $pageFilter)
+                                <a href="{{ route('admin.sections.index', ['page' => $pageFilter->slug]) }}" class="btn btn-sm whitespace-nowrap {{ $activePageSlug === $pageFilter->slug ? 'btn-primary' : 'btn-secondary' }}">
+                                    {{ $pageFilter->title }}
+                                </a>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>

@@ -51,7 +51,43 @@
         .sidebar-nav .sidebar-action-logout:hover svg {
             stroke: #ffffff !important;
         }
+
+        .sidebar-nav .sidebar-menu-icon-image {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .sidebar-nav .sidebar-menu-item-active .sidebar-menu-icon-image {
+            transform: scale(1.05);
+        }
+
+        .sidebar-nav .sidebar-active-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #0284c7;
+            box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.18);
+            margin-left: 0.35rem;
+            flex-shrink: 0;
+        }
     </style>
+
+    @php
+        $isDashboardActive = request()->routeIs('dashboard') || request()->routeIs('admin.dashboard');
+        $isSectionsActive = request()->routeIs('admin.sections.*');
+        $isMediaActive = request()->routeIs('admin.media.*');
+        $isChatActive = request()->routeIs('admin.chat-requests.*');
+        $isSettingsActive = request()->routeIs('admin.settings.*');
+
+        $hasAnyActive = $isDashboardActive || $isSectionsActive || $isMediaActive || $isChatActive || $isSettingsActive;
+
+        if (! $hasAnyActive) {
+            $isDashboardActive = true;
+        }
+    @endphp
+
     <div class="sidebar-header">
         <a href="{{ route('dashboard') }}" class="sidebar-brand">
             <img src="{{ asset('asset/Wader.png') }}" alt="WADER" class="sidebar-brand-logo">
@@ -66,25 +102,46 @@
 
     <div :class="{'block': open, 'hidden': !open}" class="hidden md:block">
         <div class="sidebar-menu">
-            <a href="{{ route('dashboard') }}" :class="{'sidebar-menu-item-active': request()->routeIs('dashboard')}" class="sidebar-menu-item">
-                <span class="sidebar-menu-icon">📊</span>
+            <a href="{{ route('dashboard') }}" class="sidebar-menu-item {{ $isDashboardActive ? 'sidebar-menu-item-active' : '' }}">
+                <span class="sidebar-menu-icon">
+                    <img src="{{ asset('asset/dashboard.png') }}" alt="Dashboard" class="sidebar-menu-icon-image">
+                </span>
                 <span class="sidebar-menu-label">Dashboard</span>
+                @if ($isDashboardActive)
+                    <span class="sidebar-active-dot" aria-hidden="true"></span>
+                @endif
             </a>
-            <a href="{{ route('admin.sections.index') }}" :class="{'sidebar-menu-item-active': request()->routeIs('admin.sections.*')}" class="sidebar-menu-item">
-                <span class="sidebar-menu-icon">🔲</span>
+            <a href="{{ route('admin.sections.index') }}" class="sidebar-menu-item {{ $isSectionsActive ? 'sidebar-menu-item-active' : '' }}">
+                <span class="sidebar-menu-icon">
+                    <img src="{{ asset('asset/section.png') }}" alt="Section" class="sidebar-menu-icon-image">
+                </span>
                 <span class="sidebar-menu-label">Section</span>
+                @if ($isSectionsActive)
+                    <span class="sidebar-active-dot" aria-hidden="true"></span>
+                @endif
             </a>
-            <a href="{{ route('admin.media.index') }}" :class="{'sidebar-menu-item-active': request()->routeIs('admin.media.*')}" class="sidebar-menu-item">
-                <span class="sidebar-menu-icon">🖼️</span>
+            <a href="{{ route('admin.media.index') }}" class="sidebar-menu-item {{ $isMediaActive ? 'sidebar-menu-item-active' : '' }}">
+                <span class="sidebar-menu-icon">
+                    <img src="{{ asset('asset/media.png') }}" alt="Media" class="sidebar-menu-icon-image">
+                </span>
                 <span class="sidebar-menu-label">Media</span>
+                @if ($isMediaActive)
+                    <span class="sidebar-active-dot" aria-hidden="true"></span>
+                @endif
             </a>
-            <a href="{{ route('admin.chat-requests.index') }}" :class="{'sidebar-menu-item-active': request()->routeIs('admin.chat-requests.*')}" class="sidebar-menu-item">
+            <a href="{{ route('admin.chat-requests.index') }}" class="sidebar-menu-item {{ $isChatActive ? 'sidebar-menu-item-active' : '' }}">
                 <span class="sidebar-menu-icon">💬</span>
                 <span class="sidebar-menu-label">Histori Chat</span>
+                @if ($isChatActive)
+                    <span class="sidebar-active-dot" aria-hidden="true"></span>
+                @endif
             </a>
-            <a href="{{ route('admin.settings.index') }}" :class="{'sidebar-menu-item-active': request()->routeIs('admin.settings.*')}" class="sidebar-menu-item">
+            <a href="{{ route('admin.settings.index') }}" class="sidebar-menu-item {{ $isSettingsActive ? 'sidebar-menu-item-active' : '' }}">
                 <span class="sidebar-menu-icon">⚙️</span>
                 <span class="sidebar-menu-label">Pengaturan (Segera)</span>
+                @if ($isSettingsActive)
+                    <span class="sidebar-active-dot" aria-hidden="true"></span>
+                @endif
             </a>
         </div>
     </div>
