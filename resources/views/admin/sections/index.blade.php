@@ -61,6 +61,7 @@
                             <tr>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Halaman</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipe / Judul</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Preview</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Urutan</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                                 <th scope="col" class="relative px-6 py-3">
@@ -79,7 +80,21 @@
                                         <div class="text-xs text-gray-500 mt-1 uppercase tracking-widest font-semibold">{{ $section->type }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-500 font-mono">{{ $section->sort_order }}</div>
+                                        @if ($section->media && str_starts_with((string) $section->media->mime_type, 'image/'))
+                                            <div class="flex items-center gap-2">
+                                                <img src="{{ asset('storage/'.$section->media->file_path) }}" alt="{{ $section->title }}" class="h-10 w-10 object-cover rounded border border-gray-200">
+                                                <span class="text-xs text-gray-500">{{ $section->media->file_name }}</span>
+                                            </div>
+                                        @else
+                                            <span class="text-xs text-gray-400">-</span>
+                                        @endif
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        @if ($section->page?->slug !== 'footer')
+                                            <div class="text-sm text-gray-500 font-mono">{{ $section->sort_order }}</div>
+                                        @else
+                                            <span class="text-xs text-gray-400">-</span>
+                                        @endif
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         @if($section->is_active)

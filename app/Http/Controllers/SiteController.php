@@ -9,6 +9,39 @@ use Illuminate\Database\QueryException;
 
 class SiteController extends Controller
 {
+    /**
+     * Get the latest footer section with the most recently uploaded media.
+     * This ensures the footer always displays the newest image without manual updates.
+     */
+    private function getLatestFooterSection(): ?PageSection
+    {
+        // Get the footer page
+        $footerPage = Page::query()
+            ->where('slug', 'footer')
+            ->first();
+
+        if (!$footerPage) {
+            return null;
+        }
+
+        // Get the section from footer page with the newest media
+        $section = PageSection::query()
+            ->where('page_id', $footerPage->id)
+            ->where('is_active', true)
+            ->where('type', 'image')
+            ->whereNotNull('media_id')
+            ->with('media')
+            ->orderByDesc('id')
+            ->first();
+
+        // Verify the media is an image
+        if ($section && $section->media && str_starts_with((string) $section->media->mime_type, 'image/')) {
+            return $section;
+        }
+
+        return null;
+    }
+
     public function home()
     {
         return $this->show('beranda');
@@ -35,43 +68,15 @@ class SiteController extends Controller
 
     public function dataWebsite()
     {
-        $footerPage = Page::query()
-            ->where('slug', 'footer')
-            ->with(['sections' => function ($query) {
-                $query->where('is_active', true)->orderBy('sort_order');
-            }, 'sections.media', 'sections.thumbnailMedia'])
-            ->first();
-
-        $footerSection = $footerPage?->sections
-            ?->first(function (PageSection $section) {
-                $footerMedia = $section->media ?? $section->thumbnailMedia;
-
-                return $section->type === 'image'
-                    && $footerMedia
-                    && str_starts_with((string) $footerMedia->mime_type, 'image/');
-            });
-
         return view('site.data-website', [
             'settings' => Setting::query()->pluck('value', 'key'),
-            'footerSection' => $footerSection,
+            'footerSection' => $this->getLatestFooterSection(),
         ]);
     }
 
     public function show(string $slug)
     {
-        $footerPage = Page::query()
-            ->where('slug', 'footer')
-            ->with(['sections' => function ($query) {
-                $query->where('is_active', true)->orderBy('sort_order');
-            }, 'sections.media'])
-            ->first();
-
-        $footerSection = $footerPage?->sections
-            ?->first(function (PageSection $section) {
-                return $section->type === 'image'
-                    && $section->media
-                    && str_starts_with((string) $section->media->mime_type, 'image/');
-            });
+        $footerSection = $this->getLatestFooterSection();
 
         if ($slug === 'statistik-mojokerto') {
             $items = PageSection::query()

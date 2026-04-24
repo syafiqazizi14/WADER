@@ -101,10 +101,33 @@
             </div>
         </div>
 
-        <div>
+        <div id="footerSortOrderField">
             <label class="block text-sm font-medium text-gray-700">Urutan</label>
             <input type="number" min="0" name="sort_order" value="{{ old('sort_order', optional($section)->sort_order ?? 0) }}" class="mt-1 w-full border rounded p-2">
         </div>
+    </div>
+
+    <div id="footerFields" class="space-y-4" style="display: none;">
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Media Footer</label>
+            <select id="sectionFooterMediaId" name="media_id" class="mt-1 w-full border rounded p-2" required>
+                <option value="">Pilih gambar</option>
+                @foreach ($media as $item)
+                    <option value="{{ $item->id }}" {{ (string) old('media_id', optional($section)->media_id) === (string) $item->id ? 'selected' : '' }}>
+                        {{ $item->file_name }} (ID: {{ $item->id }})
+                    </option>
+                @endforeach
+            </select>
+            @error('media_id')<p class="text-sm text-red-600">{{ $message }}</p>@enderror
+        </div>
+
+        @if (isset($section) && $section->media && str_starts_with((string) $section->media->mime_type, 'image/'))
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Gambar Saat Ini</label>
+                <img src="{{ asset('storage/'.$section->media->file_path) }}" alt="{{ $section->title }}" class="h-40 w-auto rounded border border-gray-300 shadow-sm">
+                <p class="text-xs text-gray-500 mt-2">{{ $section->media->file_name }}</p>
+            </div>
+        @endif
     </div>
 
     <label class="inline-flex items-center gap-2">
@@ -127,6 +150,9 @@
         const generalFields = document.getElementById('sectionGeneralFields');
         const generalTypeWrap = document.getElementById('sectionGeneralTypeWrap');
         const mediaSelect = document.getElementById('sectionMediaId');
+        const footerFields = document.getElementById('footerFields');
+        const footerMediaSelect = document.getElementById('sectionFooterMediaId');
+        const footerSortOrderField = document.getElementById('footerSortOrderField');
 
         if (!pageSelect || !typeSelect || !statistikType || !statistikFields || !generalFields || !generalTypeWrap || !mediaSelect) {
             return;
@@ -134,18 +160,32 @@
 
         const syncMode = () => {
             const selected = pageSelect.options[pageSelect.selectedIndex];
-            const isStatistik = (selected?.dataset?.pageSlug || '') === 'statistik-mojokerto';
+            const pageSlug = selected?.dataset?.pageSlug || '';
+            const isStatistik = pageSlug === 'statistik-mojokerto';
+            const isFooter = pageSlug === 'footer';
 
+            // Statistik mode
             statistikFields.style.display = isStatistik ? '' : 'none';
-            generalFields.style.display = isStatistik ? 'none' : '';
-            generalTypeWrap.style.display = isStatistik ? 'none' : '';
+            
+            // Footer mode (simplified)
+            footerFields.style.display = isFooter ? '' : 'none';
+            
+            // General mode
+            generalFields.style.display = (isStatistik || isFooter) ? 'none' : '';
+            generalTypeWrap.style.display = (isStatistik || isFooter) ? 'none' : '';
 
-            typeSelect.disabled = isStatistik;
-            mediaSelect.disabled = isStatistik;
+            typeSelect.disabled = isStatistik || isFooter;
+            mediaSelect.disabled = isStatistik || isFooter;
             statistikType.disabled = !isStatistik;
+            
+            // Hide sort_order for footer
+            if (footerSortOrderField) {
+                footerSortOrderField.style.display = isFooter ? 'none' : '';
+            }
         };
 
         pageSelect.addEventListener('change', syncMode);
         syncMode();
     })();
+
 </script>

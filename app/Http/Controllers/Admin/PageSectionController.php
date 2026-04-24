@@ -63,6 +63,7 @@ class PageSectionController extends Controller
         $section = PageSection::create($validated);
 
         $this->enforceMaxActiveStatistikItems($section->page_id);
+        $this->enforceFooterSingleActiveSection($section->page_id);
 
         ActivityLog::create([
             'user_id' => $request->user()->id,
@@ -94,6 +95,7 @@ class PageSectionController extends Controller
         $section->update($this->validated($request, $section));
 
         $this->enforceMaxActiveStatistikItems($section->page_id);
+        $this->enforceFooterSingleActiveSection($section->page_id);
 
         ActivityLog::create([
             'user_id' => $request->user()->id,
@@ -125,24 +127,34 @@ class PageSectionController extends Controller
         $pageId = (int) $request->input('page_id');
         $page = Page::query()->find($pageId);
         $isStatistikPage = $page && $page->slug === 'statistik-mojokerto';
+        $isFooterPage = $page && $page->slug === 'footer';
 
         $validated = $request->validate([
             'page_id' => ['required', 'exists:pages,id'],
-            'type' => [$isStatistikPage ? 'nullable' : 'required', Rule::in($this->types())],
+            'type' => [$isStatistikPage || $isFooterPage ? 'nullable' : 'required', Rule::in($this->types())],
             'title' => [$isStatistikPage ? 'required' : 'nullable', 'string', 'max:255'],
             'spotlight_text' => [$isStatistikPage ? 'required' : 'nullable', 'string', 'max:255'],
             'content' => ['nullable', 'string'],
-            'media_id' => ['nullable', 'exists:media,id'],
+            'media_id' => [$isFooterPage ? 'required' : 'nullable', 'exists:media,id'],
             'thumbnail_media_id' => ['nullable', 'exists:media,id'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
             'thumbnail_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
             'button_label' => ['nullable', 'string', 'max:120'],
             'button_url' => ['nullable', 'url', 'max:255'],
-            'sort_order' => ['nullable', 'integer', 'min:0'],
+            'sort_order' => [$isFooterPage ? 'nullable' : 'nullable', 'integer', 'min:0'],
             'is_active' => ['nullable', 'boolean'],
         ]);
 
-        if ($isStatistikPage) {
+        if ($isFooterPage) {
+            $validated['type'] = 'image';
+            $validated['title'] = 'Keluarga BPS Kabupaten Mojokerto';
+            $validated['content'] = null;
+            $validated['button_label'] = null;
+            $validated['button_url'] = null;
+            $validated['spotlight_text'] = null;
+            $validated['thumbnail_media_id'] = null;
+            $validated['sort_order'] = 0;
+        } elseif ($isStatistikPage) {
             $validated['type'] = 'image';
             $validated['content'] = null;
             $validated['button_label'] = null;
@@ -224,6 +236,34 @@ class PageSectionController extends Controller
             ->where('is_active', true)
             ->whereNotNull('media_id')
             ->whereNotIn('id', $visibleIds)
+            ->update(['is_active' => false]);
+    }
+
+    private function enforceFooterSingleActiveSection(int $pageId): void
+    {
+        // Get the page and check if it's the footer page
+        $page = Page::query()->find($pageId);
+        if (! $page || $page->slug !== 'footer') {
+            return;
+        }
+
+        // Get the latest active section in footer (by ID, assuming newest sections have higher IDs)
+        $latestActiveSection = PageSection::query()
+            ->where('page_id', $pageId)
+            ->where('is_active', true)
+            ->where('type', 'image')
+            ->whereNotNull('media_id')
+            ->latest('id')
+            ->first();
+
+        if (! $latestActiveSection) {
+            return;
+        }
+
+        // Deactivate all other sections in footer page
+        PageSection::query()
+            ->where('page_id', $pageId)
+            ->where('id', '!=', $latestActiveSection->id)
             ->update(['is_active' => false]);
     }
 }
