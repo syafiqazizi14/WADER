@@ -130,14 +130,18 @@
                 @endif
             </a>
             <a href="{{ route('admin.chat-requests.index') }}" class="sidebar-menu-item {{ $isChatActive ? 'sidebar-menu-item-active' : '' }}">
-                <span class="sidebar-menu-icon">💬</span>
+                <span class="sidebar-menu-icon">
+                    <img src="{{ asset('asset/history chat.png') }}" alt="Histori Chat" class="sidebar-menu-icon-image">
+                </span>
                 <span class="sidebar-menu-label">Histori Chat</span>
                 @if ($isChatActive)
                     <span class="sidebar-active-dot" aria-hidden="true"></span>
                 @endif
             </a>
             <a href="{{ route('admin.settings.index') }}" class="sidebar-menu-item {{ $isSettingsActive ? 'sidebar-menu-item-active' : '' }}">
-                <span class="sidebar-menu-icon">⚙️</span>
+                <span class="sidebar-menu-icon">
+                    <img src="{{ asset('asset/settings.png') }}" alt="Pengaturan" class="sidebar-menu-icon-image">
+                </span>
                 <span class="sidebar-menu-label">Pengaturan (Segera)</span>
                 @if ($isSettingsActive)
                     <span class="sidebar-active-dot" aria-hidden="true"></span>
@@ -148,7 +152,7 @@
 
     <div class="sidebar-footer">
         <div class="sidebar-user">
-            <span>👤</span>
+            <img src="{{ asset('asset/admin.png') }}" alt="Admin" class="sidebar-menu-icon-image">
             <div class="sidebar-user-info">
                 <div class="text-xs font-semibold text-slate-700">{{ Auth::user()->name }}</div>
                 <div class="text-xs text-slate-500">{{ Auth::user()->email }}</div>
@@ -162,7 +166,7 @@
                     class="sidebar-action-btn sidebar-action-logout"
                     title="Logout"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/><path d="M21 3v18"/></svg>
+                    <img src="{{ asset('asset/logout.png') }}" alt="Logout" class="sidebar-menu-icon-image">
                 </button>
             </form>
         </div>

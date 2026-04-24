@@ -27,7 +27,6 @@
         $iconYoutube = asset('asset/yt.png');
         $heroBg = $heroBg ?? asset('asset/beranda2.png');
         $items = $items ?? collect();
-        $settings = $settings ?? [];
 
         $rawWhatsapp = (string) ($settings['contact_whatsapp'] ?? '');
         $whatsappDigits = preg_replace('/\D+/', '', $rawWhatsapp);

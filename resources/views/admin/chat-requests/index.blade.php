@@ -1,13 +1,23 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex items-center justify-between flex-wrap gap-4">
-            <div>
-                <h2 class="font-bold text-3xl bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">💬 Histori Permintaan Chat</h2>
-                <p class="mt-1 text-sm text-gray-500">Kelola semua permintaan chat dari pengunjung</p>
+        <div class="dashboard-header">
+            <div class="chat-header-shell" style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: 100%; flex-wrap: wrap;">
+                <div class="chat-header-row" style="display: flex; align-items: center; justify-content: flex-start; gap: 1.1rem; padding-left: 0.75rem;">
+                    <div class="rounded-xl section-icon-wrap" style="padding: 0.7rem; background-color: #dbeafe; margin-top: 0;">
+                        <img src="{{ asset('asset/history chat.png') }}" alt="Histori Chat" class="object-contain section-header-icon" style="width: 29px; height: 29px; max-width: 29px; max-height: 29px;">
+                        <span class="section-icon-underline" aria-hidden="true"></span>
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-3xl text-gray-800">Histori Permintaan Chat</h2>
+                        <p class="mt-1 text-sm text-gray-500">Kelola semua permintaan chat dari pengunjung.</p>
+                    </div>
+                </div>
+
+                <a href="{{ route('admin.chat-requests.export') }}" class="btn btn-primary inline-flex items-center gap-2 px-5 py-2.5">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    <span>Export Excel</span>
+                </a>
             </div>
-            <a href="{{ route('admin.chat-requests.export') }}" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-sm hover:shadow active:scale-95">
-                <i data-lucide="download" class="w-4 h-4"></i> Export Excel
-            </a>
         </div>
     </x-slot>
 
