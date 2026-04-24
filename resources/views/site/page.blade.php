@@ -85,18 +85,18 @@
     <main>
         <section class="hero-layout-stage" style="min-height: 100vh; background: #ffffff url('{{ $heroBg }}') center top / cover no-repeat;">
 
-            <div class="hero-layout-center reveal-card" style="--delay: 0ms;">
+            <div class="hero-layout-center">
                 <img src="{{ $logoMain }}" alt="WADER" class="hero-main-logo">
             </div>
         </section>
-        <section class="scroll-reveal menu-preview-section">
+        <section class="menu-preview-section">
             <div class="bg-white w-full py-0 flex justify-center leading-none">
                 <img src="{{ asset('asset/menuu.jpg') }}"
                      class="block w-[92vw] max-w-[1280px] h-auto">
             </div>
         </section>
 
-        <section class="service-blue-zone scroll-reveal" style="--reveal-delay: 80ms;">
+        <section class="service-blue-zone">
             <span class="sparkle sparkle-left">&#10022;</span>
             <span class="sparkle sparkle-left-sm">&#10022;</span>
             <span class="sparkle sparkle-right">&#10022;</span>
@@ -113,7 +113,7 @@
             </div>
         </section>
 
-        <div class="scroll-reveal" style="height: 110px; background: #8dc64f; --reveal-delay: 120ms;"></div>
+        <div style="height: 110px; background: #8dc64f;"></div>
 
         <style>
             .gallery-card {
@@ -138,7 +138,7 @@
             }
         </style>
 
-        <section class="scroll-reveal w-full mt-0 pt-0 pb-8 md:pb-10" style="background: #8dc64f; --reveal-delay: 160ms;">
+        <section class="w-full mt-0 pt-0 pb-8 md:pb-10" style="background: #8dc64f;">
             <div class="max-w-7xl mx-auto px-4 mt-0">
                 @php
                     $berandaGalleryItems = $page->sections
@@ -203,7 +203,7 @@
             </div>
         </div>
 
-        <section class="support-banner-wrap scroll-reveal" style="margin-top: 0; --reveal-delay: 200ms;">
+        <section class="support-banner-wrap" style="margin-top: 0;">
             <div class="support-banner-top" style="background: #8dc64f; padding: 1.45rem 1rem;">
                 <div class="support-banner-top-inner" style="max-width: 1220px; margin: 0 auto; display: flex; justify-content: space-around; align-items: center; gap: 4.3rem; flex-wrap: wrap;">
                     <div class="support-head-item" style="display: flex; align-items: center; justify-content: center; gap: 1rem;">

@@ -2447,6 +2447,11 @@ body.auth-shell {
     animation: section-underline-flow 1.8s ease-in-out infinite;
 }
 
+.media-header .section-icon-wrap,
+.media-header .section-header-icon {
+    animation: none;
+}
+
 @keyframes section-icon-pulse {
     0%,
     100% {

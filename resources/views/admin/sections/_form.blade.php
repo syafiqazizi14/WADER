@@ -110,7 +110,7 @@
     <div id="footerFields" class="space-y-4" style="display: none;">
         <div>
             <label class="block text-sm font-medium text-gray-700">Media Footer</label>
-            <select id="sectionFooterMediaId" name="media_id" class="mt-1 w-full border rounded p-2" required>
+            <select id="sectionFooterMediaId" name="media_id" class="mt-1 w-full border rounded p-2">
                 <option value="">Pilih gambar</option>
                 @foreach ($media as $item)
                     <option value="{{ $item->id }}" {{ (string) old('media_id', optional($section)->media_id) === (string) $item->id ? 'selected' : '' }}>
@@ -169,6 +169,10 @@
             
             // Footer mode (simplified)
             footerFields.style.display = isFooter ? '' : 'none';
+            if (footerMediaSelect) {
+                footerMediaSelect.disabled = !isFooter;
+                footerMediaSelect.required = isFooter;
+            }
             
             // General mode
             generalFields.style.display = (isStatistik || isFooter) ? 'none' : '';
